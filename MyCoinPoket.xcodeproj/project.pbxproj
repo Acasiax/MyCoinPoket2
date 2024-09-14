@@ -45,6 +45,7 @@
 		AAD0A1662C946B3A00910ABF /* Home_CoinSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1652C946B3A00910ABF /* Home_CoinSearchView.swift */; };
 		AAD0A1682C951B1F00910ABF /* CoinSearchFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1672C951B1F00910ABF /* CoinSearchFunction.swift */; };
 		AAD0A16A2C95280300910ABF /* CoinListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1692C95280300910ABF /* CoinListView.swift */; };
+		AAD0A16D2C952DE500910ABF /* HeaderNamedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A16C2C952DE500910ABF /* HeaderNamedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		AAD0A1652C946B3A00910ABF /* Home_CoinSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home_CoinSearchView.swift; sourceTree = "<group>"; };
 		AAD0A1672C951B1F00910ABF /* CoinSearchFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSearchFunction.swift; sourceTree = "<group>"; };
 		AAD0A1692C95280300910ABF /* CoinListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListView.swift; sourceTree = "<group>"; };
+		AAD0A16C2C952DE500910ABF /* HeaderNamedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderNamedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,7 +227,7 @@
 				AAD0A1422C94698300910ABF /* TabBar */,
 				AAD0A1432C94698C00910ABF /* Resource */,
 				AAD0A1442C94699500910ABF /* Model */,
-				AAD0A1462C9469A600910ABF /* HomeView */,
+				AAD0A1462C9469A600910ABF /* CoinSearchView */,
 			);
 			path = MainCoinView;
 			sourceTree = "<group>";
@@ -289,15 +291,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		AAD0A1462C9469A600910ABF /* HomeView */ = {
+		AAD0A1462C9469A600910ABF /* CoinSearchView */ = {
 			isa = PBXGroup;
 			children = (
 				AAD0A1652C946B3A00910ABF /* Home_CoinSearchView.swift */,
-				AAD0A15B2C946AD500910ABF /* Detail_CoinChartView.swift */,
 				AAD0A1482C9469B900910ABF /* View */,
 				AAD0A1472C9469AF00910ABF /* GraphVeiw */,
 			);
-			path = HomeView;
+			path = CoinSearchView;
 			sourceTree = "<group>";
 		};
 		AAD0A1472C9469AF00910ABF /* GraphVeiw */ = {
@@ -316,8 +317,26 @@
 			children = (
 				AAD0A1672C951B1F00910ABF /* CoinSearchFunction.swift */,
 				AAD0A1692C95280300910ABF /* CoinListView.swift */,
+				AAD0A16E2C952E1000910ABF /* Detail_CoinChart */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		AAD0A16B2C952DC600910ABF /* Detail_view */ = {
+			isa = PBXGroup;
+			children = (
+				AAD0A16C2C952DE500910ABF /* HeaderNamedView.swift */,
+			);
+			path = Detail_view;
+			sourceTree = "<group>";
+		};
+		AAD0A16E2C952E1000910ABF /* Detail_CoinChart */ = {
+			isa = PBXGroup;
+			children = (
+				AAD0A15B2C946AD500910ABF /* Detail_CoinChartView.swift */,
+				AAD0A16B2C952DC600910ABF /* Detail_view */,
+			);
+			path = Detail_CoinChart;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,6 +445,7 @@
 				AAD0A14E2C946A2300910ABF /* CryptoModel.swift in Sources */,
 				AAD0A12B2C9467D700910ABF /* NaverNewsTargetType.swift in Sources */,
 				AAD0A15E2C946AF000910ABF /* GraphView.swift in Sources */,
+				AAD0A16D2C952DE500910ABF /* HeaderNamedView.swift in Sources */,
 				AAD0A13A2C94684F00910ABF /* NewsDetailView.swift in Sources */,
 				AAD0A1212C94676A00910ABF /* NewsTab.swift in Sources */,
 				AAD0A1232C94677C00910ABF /* TabViewModel.swift in Sources */,
