@@ -12,6 +12,7 @@ struct MyCoinPoketApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+          //  Home_NewsView()
         }
     }
 }

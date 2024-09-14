@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var tabBarVM = TabBarViewModel()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            switch tabBarVM.currentTab {
+            case .Home:
+                CoinSearchView(appModel: AppViewModel())
+            case .Wallet:
+                CoinSearchView(appModel: AppViewModel())
+            case .News:
+                Home_NewsView()
+            case .Person:
+                CoinSearchView(appModel: AppViewModel())
+            }
+            
+            //탭바 아래에 배치
+            TabBarView(tabBarVM: tabBarVM)
         }
-        .padding()
     }
 }
 
