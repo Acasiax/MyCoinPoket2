@@ -1,75 +1,11 @@
 //
-//  CoinSearchView.swift
+//  CoinSearchFunction.swift
 //  MyCoinPoket
 //
-//  Created by 이윤지 on 9/13/24.
+//  Created by 이윤지 on 9/14/24.
 //
 
 import SwiftUI
-
-// MARK: - 배너
-struct CoinSearchView: View {
-    @State private var text = ""
-    @State var market: [UpBitMarket] = []
-    @State var isStarred = false
-    @ObservedObject var appModel: AppViewModel
-    @State private var selectedItem: UpBitMarket? = nil
-    
-    // 카테고리 상태 변수 추가 (기본 값은 전체로 설정)
-    @State private var selectedCategory: String = "KRW"
-    
-    // 코인 필터링 로직 수정: 선택한 카테고리에 따라 필터링
-    var filterCoinName: [UpBitMarket] {
-        let filteredByCategory = selectedCategory == "전체" ? market : market.filter { $0.market.hasPrefix(selectedCategory) }
-        return text.isEmpty ? filteredByCategory : filteredByCategory.filter { $0.koreanName.contains(text) }
-    }
-    
-    var body: some View {
-        ZStack {
-        
-          //  Color.pink.ignoresSafeArea(.all)
-            NavigationView {
-               
-                VStack {
-                    // 카테고리 버튼 추가
-                    categoryButtonsView()
-                    
-                    ScrollView {
-                        listView()
-                    }
-                    .foregroundStyle(.black)
-                    .navigationTitle("Search")
-                    .navigationBarTitleTextColor(.black)
-                    .searchable(text: $text, placement: .navigationBarDrawer, prompt: "코인 이름을 검색해보세요")
-                    
-                    .background(Color(CustomColors.lightGray)
-                        .ignoresSafeArea()) //스크롤 배경색
-                    
-                    
-                   
-                } .background(Color(CustomColors.lightGray)
-                    .ignoresSafeArea()) //전체 배경색
-               
-            }
-            
-            .task {
-                do {
-                    let result = try await UpbitAPIManager.fetchMarket()
-                    market = result
-                } catch {
-                    print("Error fetching market: \(error)")
-                }
-            }
-        }
-    }
-    
-    
-    // 주간 시세 데이터를 가져오는 함수
-    func fetchGraphData(for item: UpBitMarket) async {
-        await appModel.fetchWeeklyCandles(for: item.market)
-        print(item.market)
-    }
-}
 
 extension CoinSearchView {
 
@@ -104,7 +40,7 @@ extension CoinSearchView {
        func listView() -> some View {
            LazyVStack {
                ForEach(filterCoinName, id: \.id) { item in
-                   NavigationLink(destination: Home(coin88: item)) {
+                   NavigationLink(destination: Home_CoinChartView(coin88: item)) {
                        rowView(item)
                            .onAppear {
                                selectedItem = item
@@ -117,48 +53,48 @@ extension CoinSearchView {
        }
     
 
-    func horizontalBannerView() -> some View {
-        ScrollView(.horizontal) {
-            HStack {
-                ForEach(filterCoinName, id: \.id) { item in
-                    bannerView(item)
-                }
-            }
-            .scrollTargetLayout()
-        }
-        .scrollTargetBehavior(.viewAligned)
-        .scrollIndicators(.hidden)
-    }
-    
-    func bannerView(_ banner: UpBitMarket) -> some View {
-        VStack{
-            ZStack {
-                RoundedRectangle(cornerRadius: 25)
-                    .fill(banner.color)
-                    .overlay(alignment: .leading) {
-                        Circle()
-                            .fill(.white.opacity(0.3))
-                            .scaleEffect(2)
-                            .offset(x: -60, y: 10.0)
-                    }
-                    .clipShape(RoundedRectangle(cornerRadius: 25))
-                    .frame(height: 150)
-                    .padding()
-                
-                VStack(alignment: .leading) {
-                    Spacer()
-                    Text(banner.koreanName)
-                        .font(.callout)
-                    Text(banner.market)
-                        .font(.title).bold()
-                }
-                .foregroundStyle(.white)
-                .padding(40)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            }
-        }
-    }
-    
+//    func horizontalBannerView() -> some View {
+//        ScrollView(.horizontal) {
+//            HStack {
+//                ForEach(filterCoinName, id: \.id) { item in
+//                    bannerView(item)
+//                }
+//            }
+//            .scrollTargetLayout()
+//        }
+//        .scrollTargetBehavior(.viewAligned)
+//        .scrollIndicators(.hidden)
+//    }
+//    
+//    func bannerView(_ banner: UpBitMarket) -> some View {
+//        VStack{
+//            ZStack {
+//                RoundedRectangle(cornerRadius: 25)
+//                    .fill(banner.color)
+//                    .overlay(alignment: .leading) {
+//                        Circle()
+//                            .fill(.white.opacity(0.3))
+//                            .scaleEffect(2)
+//                            .offset(x: -60, y: 10.0)
+//                    }
+//                    .clipShape(RoundedRectangle(cornerRadius: 25))
+//                    .frame(height: 150)
+//                    .padding()
+//                
+//                VStack(alignment: .leading) {
+//                    Spacer()
+//                    Text(banner.koreanName)
+//                        .font(.callout)
+//                    Text(banner.market)
+//                        .font(.title).bold()
+//                }
+//                .foregroundStyle(.white)
+//                .padding(40)
+//                .frame(maxWidth: .infinity, alignment: .leading)
+//            }
+//        }
+//    }
+//    
     func rowView(_ item: UpBitMarket) -> some View {
         HStack {
        
@@ -218,12 +154,12 @@ extension CoinSearchView {
     // item.change 값에 따라 색상 반환
     func colorForChange(_ change: String?) -> Color {
         switch change {
-        case "EVEN":
-            return Color.gray // 보합
-        case "RISE":
-            return Color.green // 상승
-        case "FALL":
-            return Color.red // 하락
+        case "EVEN": // 보합
+            return Color.gray
+        case "RISE": //상승
+            return Color.green
+        case "FALL": // 하락
+            return Color.red
         default:
             return Color.gray // 기본 값
         }
@@ -255,12 +191,3 @@ extension CoinSearchView {
 
 
 }
-
-
-
-#Preview {
-    CoinSearchView(appModel: AppViewModel())
-       // .preferredColorScheme(.dark)
-
-}
-

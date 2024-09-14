@@ -37,12 +37,13 @@
 		AAD0A1562C946A7D00910ABF /* MainTapEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1552C946A7D00910ABF /* MainTapEnum.swift */; };
 		AAD0A1582C946A9300910ABF /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1572C946A9300910ABF /* Resource.swift */; };
 		AAD0A15A2C946AAB00910ABF /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1592C946AAB00910ABF /* AppViewModel.swift */; };
-		AAD0A15C2C946AD500910ABF /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A15B2C946AD500910ABF /* Home.swift */; };
+		AAD0A15C2C946AD500910ABF /* Home_CoinChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A15B2C946AD500910ABF /* Home_CoinChartView.swift */; };
 		AAD0A15E2C946AF000910ABF /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A15D2C946AF000910ABF /* GraphView.swift */; };
 		AAD0A1602C946B0300910ABF /* LineGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A15F2C946B0300910ABF /* LineGraph.swift */; };
 		AAD0A1622C946B1600910ABF /* LineGraph2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1612C946B1600910ABF /* LineGraph2.swift */; };
 		AAD0A1642C946B2600910ABF /* GraphView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1632C946B2600910ABF /* GraphView2.swift */; };
 		AAD0A1662C946B3A00910ABF /* CoinSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1652C946B3A00910ABF /* CoinSearchView.swift */; };
+		AAD0A1682C951B1F00910ABF /* CoinSearchFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1672C951B1F00910ABF /* CoinSearchFunction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,12 +76,13 @@
 		AAD0A1552C946A7D00910ABF /* MainTapEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTapEnum.swift; sourceTree = "<group>"; };
 		AAD0A1572C946A9300910ABF /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		AAD0A1592C946AAB00910ABF /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
-		AAD0A15B2C946AD500910ABF /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		AAD0A15B2C946AD500910ABF /* Home_CoinChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home_CoinChartView.swift; sourceTree = "<group>"; };
 		AAD0A15D2C946AF000910ABF /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		AAD0A15F2C946B0300910ABF /* LineGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineGraph.swift; sourceTree = "<group>"; };
 		AAD0A1612C946B1600910ABF /* LineGraph2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineGraph2.swift; sourceTree = "<group>"; };
 		AAD0A1632C946B2600910ABF /* GraphView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView2.swift; sourceTree = "<group>"; };
 		AAD0A1652C946B3A00910ABF /* CoinSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSearchView.swift; sourceTree = "<group>"; };
+		AAD0A1672C951B1F00910ABF /* CoinSearchFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSearchFunction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,7 +290,8 @@
 		AAD0A1462C9469A600910ABF /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				AAD0A15B2C946AD500910ABF /* Home.swift */,
+				AAD0A1652C946B3A00910ABF /* CoinSearchView.swift */,
+				AAD0A15B2C946AD500910ABF /* Home_CoinChartView.swift */,
 				AAD0A1482C9469B900910ABF /* View */,
 				AAD0A1472C9469AF00910ABF /* GraphVeiw */,
 			);
@@ -309,7 +312,7 @@
 		AAD0A1482C9469B900910ABF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AAD0A1652C946B3A00910ABF /* CoinSearchView.swift */,
+				AAD0A1672C951B1F00910ABF /* CoinSearchFunction.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				AAD0A15A2C946AAB00910ABF /* AppViewModel.swift in Sources */,
 				AAD0A1272C9467B200910ABF /* NaverNewsHeader.swift in Sources */,
 				AAD0A1052C94666800910ABF /* ContentView.swift in Sources */,
+				AAD0A1682C951B1F00910ABF /* CoinSearchFunction.swift in Sources */,
 				AAD0A1152C9466D400910ABF /* NewsExt.swift in Sources */,
 				AAD0A1292C9467C400910ABF /* NaverNewsRouter.swift in Sources */,
 				AAD0A1502C946A4500910ABF /* UpbitAPIManager.swift in Sources */,
@@ -421,7 +425,7 @@
 				AAD0A13A2C94684F00910ABF /* NewsDetailView.swift in Sources */,
 				AAD0A1212C94676A00910ABF /* NewsTab.swift in Sources */,
 				AAD0A1232C94677C00910ABF /* TabViewModel.swift in Sources */,
-				AAD0A15C2C946AD500910ABF /* Home.swift in Sources */,
+				AAD0A15C2C946AD500910ABF /* Home_CoinChartView.swift in Sources */,
 				AAD0A1522C946A5900910ABF /* TabBarView.swift in Sources */,
 				AAD0A1662C946B3A00910ABF /* CoinSearchView.swift in Sources */,
 				AAD0A1032C94666800910ABF /* MyCoinPoketApp.swift in Sources */,

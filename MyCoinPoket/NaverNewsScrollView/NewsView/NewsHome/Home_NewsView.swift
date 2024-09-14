@@ -22,6 +22,7 @@ struct Home_NewsView: View {
             .onAppear {
                 viewModel.fetchNews(for: tabViewModel.activeTab.rawValue)
             }
+            .navigationTitle("뉴스")
         }
     }
 

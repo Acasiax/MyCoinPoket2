@@ -20,7 +20,7 @@ struct GraphView2: View {
                 // 사용자 정의 라인 그래프 (이익 여부에 따라 그래프 색상 설정)
                 LineGraph2(data: prices, profit: profit)
                   //  .background(Color.gray)
-                   // .scaleEffect(x: 1, y: -1)  // Y축 반전
+                   // .scaleEffect(x: 1, y: -1) 
             }
             .padding(.vertical, 15)
             .padding(.top, 10)
