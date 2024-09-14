@@ -44,6 +44,7 @@
 		AAD0A1642C946B2600910ABF /* GraphView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1632C946B2600910ABF /* GraphView2.swift */; };
 		AAD0A1662C946B3A00910ABF /* CoinSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1652C946B3A00910ABF /* CoinSearchView.swift */; };
 		AAD0A1682C951B1F00910ABF /* CoinSearchFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1672C951B1F00910ABF /* CoinSearchFunction.swift */; };
+		AAD0A16A2C95280300910ABF /* CoinListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1692C95280300910ABF /* CoinListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		AAD0A1632C946B2600910ABF /* GraphView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView2.swift; sourceTree = "<group>"; };
 		AAD0A1652C946B3A00910ABF /* CoinSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSearchView.swift; sourceTree = "<group>"; };
 		AAD0A1672C951B1F00910ABF /* CoinSearchFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSearchFunction.swift; sourceTree = "<group>"; };
+		AAD0A1692C95280300910ABF /* CoinListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				AAD0A1672C951B1F00910ABF /* CoinSearchFunction.swift */,
+				AAD0A1692C95280300910ABF /* CoinListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				AAD0A1582C946A9300910ABF /* Resource.swift in Sources */,
 				AAD0A13C2C94686B00910ABF /* Home_NewsView.swift in Sources */,
 				AAD0A1622C946B1600910ABF /* LineGraph2.swift in Sources */,
+				AAD0A16A2C95280300910ABF /* CoinListView.swift in Sources */,
 				AAD0A1362C94682800910ABF /* NewsSearchListView.swift in Sources */,
 				AAD0A11F2C94674A00910ABF /* NewsSearchViewModel.swift in Sources */,
 				AAD0A14C2C946A0C00910ABF /* UpbitTargetType.swift in Sources */,

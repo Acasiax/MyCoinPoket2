@@ -9,13 +9,13 @@ import SwiftUI
 
 // MARK: - 배너
 struct CoinSearchView: View {
+    
     @State private var text = ""
     @State var market: [UpBitMarket] = []
     @State var isStarred = false
     @ObservedObject var appModel: AppViewModel
     @State var selectedItem: UpBitMarket? = nil
-    
-    // 카테고리 상태 변수 추가 (기본 값은 전체로 설정)
+
     @State var selectedCategory: String = "KRW"
     
     // 코인 필터링 로직 수정: 선택한 카테고리에 따라 필터링
@@ -26,16 +26,18 @@ struct CoinSearchView: View {
     
     var body: some View {
         ZStack {
-        
-          //  Color.pink.ignoresSafeArea(.all)
             NavigationView {
-               
+                
                 VStack {
-                    // 카테고리 버튼 추가
                     categoryButtonsView()
                     
                     ScrollView {
-                        listView()
+                        CoinListView(
+                            filterCoinName: filterCoinName,
+                            selectedItem: $selectedItem,
+                            appModel: appModel,
+                            loadCoinPrice: loadCoinPrice
+                        )
                     }
                     .foregroundStyle(.black)
                     .navigationTitle("시세")
@@ -46,10 +48,10 @@ struct CoinSearchView: View {
                         .ignoresSafeArea())
                     
                     
-                   
+                    
                 } .background(Color(CustomColors.lightGray)
                     .ignoresSafeArea())
-               
+                
             }
             
             .task {
@@ -76,7 +78,7 @@ struct CoinSearchView: View {
 
 #Preview {
     CoinSearchView(appModel: AppViewModel())
-       // .preferredColorScheme(.dark)
-
+    // .preferredColorScheme(.dark)
+    
 }
 
