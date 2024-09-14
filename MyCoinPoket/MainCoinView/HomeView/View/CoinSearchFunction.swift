@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension CoinSearchView {
+extension Home_CoinSearchView {
 
        func categoryButtonsView() -> some View {
            HStack {

@@ -251,7 +251,7 @@ struct AnimatedGraphPath: Shape{
 
 
 #Preview {
-    CoinSearchView(appModel: AppViewModel())
+    Home_CoinSearchView(appModel: AppViewModel())
 }
 
 

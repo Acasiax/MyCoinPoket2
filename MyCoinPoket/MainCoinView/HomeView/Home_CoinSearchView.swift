@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - 배너
-struct CoinSearchView: View {
+struct Home_CoinSearchView: View {
     
     @State private var text = ""
     @State var market: [UpBitMarket] = []
@@ -77,7 +77,7 @@ struct CoinSearchView: View {
 
 
 #Preview {
-    CoinSearchView(appModel: AppViewModel())
+    Home_CoinSearchView(appModel: AppViewModel())
     // .preferredColorScheme(.dark)
     
 }

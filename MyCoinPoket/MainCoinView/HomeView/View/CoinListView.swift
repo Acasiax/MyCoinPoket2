@@ -17,7 +17,7 @@ struct CoinListView: View {
     var body: some View {
         LazyVStack {
             ForEach(filterCoinName, id: \.id) { item in
-                NavigationLink(destination: Home_CoinChartView(coin88: item)) {
+                NavigationLink(destination: Detail_CoinChartView(coin88: item)) {
                     rowView(item)
                         .onAppear {
                             selectedItem = item

@@ -14,13 +14,13 @@ struct ContentView: View {
         VStack {
             switch tabBarVM.currentTab {
             case .Home:
-                CoinSearchView(appModel: AppViewModel())
+                Home_CoinSearchView(appModel: AppViewModel())
             case .Wallet:
-                CoinSearchView(appModel: AppViewModel())
+                Home_CoinSearchView(appModel: AppViewModel())
             case .News:
                 Home_NewsView()
             case .Person:
-                CoinSearchView(appModel: AppViewModel())
+                Home_CoinSearchView(appModel: AppViewModel())
             }
             
             //탭바 아래에 배치

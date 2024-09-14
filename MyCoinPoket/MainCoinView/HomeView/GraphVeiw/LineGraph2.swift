@@ -185,7 +185,7 @@ struct LineGraph2: View {
 }
 
 #Preview {
-    CoinSearchView(appModel: AppViewModel())
+    Home_CoinSearchView(appModel: AppViewModel())
         .preferredColorScheme(.dark)
 }
 
