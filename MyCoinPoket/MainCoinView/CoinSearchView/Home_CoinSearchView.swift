@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - 배너
 struct Home_CoinSearchView: View {
-    
+
     @State private var text = ""
     @State var market: [UpBitMarket] = []
     @State var isStarred = false
@@ -18,7 +18,7 @@ struct Home_CoinSearchView: View {
 
     @State var selectedCategory: String = "KRW"
     
-    // 코인 필터링 로직 수정: 선택한 카테고리에 따라 필터링
+    // 코인 필터링 로직: 선택한 카테고리에 따라 필터링
     var filterCoinName: [UpBitMarket] {
         let filteredByCategory = selectedCategory == "전체" ? market : market.filter { $0.market.hasPrefix(selectedCategory) }
         return text.isEmpty ? filteredByCategory : filteredByCategory.filter { $0.koreanName.contains(text) }
@@ -43,17 +43,11 @@ struct Home_CoinSearchView: View {
                     .navigationTitle("시세")
                     .navigationBarTitleTextColor(.black)
                     .searchable(text: $text, placement: .navigationBarDrawer, prompt: "코인 이름을 검색해보세요")
-                    
                     .background(Color(CustomColors.lightGray)
                         .ignoresSafeArea())
-                    
-                    
-                    
                 } .background(Color(CustomColors.lightGray)
                     .ignoresSafeArea())
-                
             }
-            
             .task {
                 do {
                     let result = try await UpbitAPIManager.fetchMarket()
@@ -64,8 +58,7 @@ struct Home_CoinSearchView: View {
             }
         }
     }
-    
-    
+
     // 주간 시세 데이터를 가져오는 함수
     func fetchGraphData(for item: UpBitMarket) async {
         await appModel.fetchWeeklyCandles(for: item.market)

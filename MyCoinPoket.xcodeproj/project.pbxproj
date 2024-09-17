@@ -46,6 +46,9 @@
 		AAD0A1682C951B1F00910ABF /* CoinSearchFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1672C951B1F00910ABF /* CoinSearchFunction.swift */; };
 		AAD0A16A2C95280300910ABF /* CoinListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1692C95280300910ABF /* CoinListView.swift */; };
 		AAD0A16D2C952DE500910ABF /* HeaderNamedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A16C2C952DE500910ABF /* HeaderNamedView.swift */; };
+		AAD0A2E92C9984B900910ABF /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A2E82C9984B900910ABF /* WebSocketManager.swift */; };
+		AAD0A2EB2C9984D500910ABF /* SocketViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A2EA2C9984D500910ABF /* SocketViewModel.swift */; };
+		AAD0A2ED2C9984F200910ABF /* MarketPrice33.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A2EC2C9984F200910ABF /* MarketPrice33.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +90,9 @@
 		AAD0A1672C951B1F00910ABF /* CoinSearchFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSearchFunction.swift; sourceTree = "<group>"; };
 		AAD0A1692C95280300910ABF /* CoinListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListView.swift; sourceTree = "<group>"; };
 		AAD0A16C2C952DE500910ABF /* HeaderNamedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderNamedView.swift; sourceTree = "<group>"; };
+		AAD0A2E82C9984B900910ABF /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketManager.swift; sourceTree = "<group>"; };
+		AAD0A2EA2C9984D500910ABF /* SocketViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketViewModel.swift; sourceTree = "<group>"; };
+		AAD0A2EC2C9984F200910ABF /* MarketPrice33.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPrice33.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				AAD0A13D2C9468DD00910ABF /* Info.plist */,
+				AAD0A2E72C9984A200910ABF /* SocketNetwork */,
 				AAD0A13E2C94694500910ABF /* MainCoinView */,
 				AAD0A1122C9466AC00910ABF /* NaverNewsScrollView */,
 				AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */,
@@ -339,6 +346,16 @@
 			path = Detail_CoinChart;
 			sourceTree = "<group>";
 		};
+		AAD0A2E72C9984A200910ABF /* SocketNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				AAD0A2E82C9984B900910ABF /* WebSocketManager.swift */,
+				AAD0A2EA2C9984D500910ABF /* SocketViewModel.swift */,
+				AAD0A2EC2C9984F200910ABF /* MarketPrice33.swift */,
+			);
+			path = SocketNetwork;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -433,6 +450,7 @@
 				AAD0A1582C946A9300910ABF /* Resource.swift in Sources */,
 				AAD0A13C2C94686B00910ABF /* Home_NewsView.swift in Sources */,
 				AAD0A1622C946B1600910ABF /* LineGraph2.swift in Sources */,
+				AAD0A2E92C9984B900910ABF /* WebSocketManager.swift in Sources */,
 				AAD0A16A2C95280300910ABF /* CoinListView.swift in Sources */,
 				AAD0A1362C94682800910ABF /* NewsSearchListView.swift in Sources */,
 				AAD0A11F2C94674A00910ABF /* NewsSearchViewModel.swift in Sources */,
@@ -453,6 +471,8 @@
 				AAD0A1522C946A5900910ABF /* TabBarView.swift in Sources */,
 				AAD0A1662C946B3A00910ABF /* Home_CoinSearchView.swift in Sources */,
 				AAD0A1032C94666800910ABF /* MyCoinPoketApp.swift in Sources */,
+				AAD0A2EB2C9984D500910ABF /* SocketViewModel.swift in Sources */,
+				AAD0A2ED2C9984F200910ABF /* MarketPrice33.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
