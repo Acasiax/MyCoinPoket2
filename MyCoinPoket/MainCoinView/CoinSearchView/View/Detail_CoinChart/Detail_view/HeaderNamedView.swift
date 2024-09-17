@@ -42,24 +42,27 @@ struct HeaderNamedView: View {
 struct MainPriceInfoView: View {
     
     var coin88: UpBitMarket
+    @ObservedObject var socketViewModel: SocketViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(coin88.market)
             
-            // price 옵셔널 바인딩 (price가 있으면 통화 형식으로 변환, 없으면 "가격 없음" 표시)
-            if let price = coin88.price {
+            // 실시간 가격 표시
+            if let coin = socketViewModel.coins.first(where: { $0.code == coin88.market }) {
+                Text("\(coin.trade_price)")
+                    .font(.largeTitle.bold())
+            } else if let price = coin88.price {
                 Text(price.convertToCurrency())
                     .font(.largeTitle.bold())
             } else {
-                Text("가격 없음")  // 가격이 nil일 경우 표시
+                Text("가격 없음")
                     .font(.largeTitle.bold())
             }
 
-            // change_price 옵셔널 바인딩 (변화액이 있는지 확인)
+            // change_price 변동액 표시
             if let changePrice = coin88.change_price {
-                // 이익/손실 표시
-                Text("\(changePrice > 0 ? "+" : "")\(String(format: "%.2f", changePrice))")  // 가격 변동 표시
+                Text("\(changePrice > 0 ? "+" : "")\(String(format: "%.2f", changePrice))")
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(changePrice < 0 ? .white : .black)
@@ -70,14 +73,14 @@ struct MainPriceInfoView: View {
                             .fill(changePrice < 0 ? .red : Color("LightGreen"))
                     }
             } else {
-                Text("변동 없음")  // 변화액이 nil일 경우 표시
+                Text("변동 없음")
                     .font(.caption)
                     .fontWeight(.semibold)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 5)
                     .background {
                         Capsule()
-                            .fill(Color.gray)  // 변화 정보가 없을 때 배경 색상 설정
+                            .fill(Color.gray)
                     }
             }
         }

@@ -4,7 +4,7 @@
 //
 //  Created by 이윤지 on 9/14/24.
 //
-//["KRW-BTC", "KRW-ETH", "KRW-NEO", "KRW-MTL", "KRW-XRP", "KRW-ETC", "KRW-SNT", "KRW-WAVES", "KRW-XEM", "KRW-QTUM", "KRW-LSK", "KRW-STEEM", "KRW-XLM", "KRW-ARDR", "KRW-ARK", "KRW-STORJ", "KRW-GRS"]
+
 import SwiftUI
 
 struct CoinListView: View {
@@ -14,12 +14,13 @@ struct CoinListView: View {
     @ObservedObject var appModel: AppViewModel
     let loadCoinPrice: (UpBitMarket) async -> Void
     
-    @StateObject var viewModel = SocketViewModel()
+    @StateObject var socketViewModel = SocketViewModel()
+    @State private var showBorder = false
     
     var body: some View {
         LazyVStack {
             ForEach(filterCoinName, id: \.id) { item in
-                NavigationLink(destination: Detail_CoinChartView(coin88: item)) {
+                NavigationLink(destination: Detail_CoinChartView(coin88: item, socketViewModel: socketViewModel)) {
                     rowView(item)
                 }
                 Divider()
@@ -27,14 +28,15 @@ struct CoinListView: View {
             }
             .task {
                 print("==")
-                // 모든 코인의 market 값을 배열로 수집하여 한 번에 WebSocketManager로 전달
                 let marketCodes = filterCoinName.map { $0.market }
                 WebSocketManager.shared.send(marketCodes: marketCodes)
             }
         }
     }
+    
 
-    @State private var showBorder = false
+
+
 
     func rowView(_ item: UpBitMarket) -> some View {
         HStack {
@@ -62,7 +64,7 @@ struct CoinListView: View {
             
             VStack(alignment: .trailing) {
                 // 가격 및 변동률 표시
-                if let coin = viewModel.coins.first(where: { $0.code == item.market }) {
+                if let coin = socketViewModel.coins.first(where: { $0.code == item.market }) {
                     let price = coin.trade_price
                     let prevPrice = coin.prev_closing_price
 
@@ -96,7 +98,7 @@ struct CoinListView: View {
                 }
 
                 // 변동률 텍스트
-                if let changeRate = viewModel.coins.first(where: { $0.code == item.market })?.signed_change_rate {
+                if let changeRate = socketViewModel.coins.first(where: { $0.code == item.market })?.signed_change_rate {
                     Text("주간변동율: \(changeRate, specifier: "%.2f")%")
                         .font(.caption)
                         .foregroundStyle(.green)

@@ -10,33 +10,33 @@ import SDWebImageSwiftUI
 
 struct Detail_CoinChartView: View {
     var coin88: UpBitMarket
+    @ObservedObject var socketViewModel: SocketViewModel
     
     @State var currentCoin: String = "BTC"
 
     @Namespace var animation
     @StateObject var appModel: AppViewModel = AppViewModel()
+    
     var body: some View {
         VStack{
             HeaderNamedView(coin88: coin88)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            MainPriceInfoView(coin88: coin88)
+            // MainPriceInfoView에 socketViewModel 전달
+            MainPriceInfoView(coin88: coin88, socketViewModel: socketViewModel)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            // MARK: 라인 그래프
+            // 라인 그래프
             GraphView(market: coin88.market, appModel: appModel)
-                Controls()  // 구매/판매 버튼
-
+            Controls()  // 구매/판매 버튼
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
-                    appModel.fetchWeeklyCandles(for: coin88.market)  // 화면이 나타날 때 주간 시세 데이터 가져오기
-                }
+            appModel.fetchWeeklyCandles(for: coin88.market)  // 화면이 나타날 때 주간 시세 데이터 가져오기
+        }
     }
-    
- 
-    // MARK: 컨트롤 (구매/판매 버튼)
+
     @ViewBuilder
     func Controls() -> some View {
         HStack(spacing: 20) {
@@ -53,7 +53,7 @@ struct Detail_CoinChartView: View {
             }
             
             Button {} label: {
-                Text("Buy")  // 구매 버튼
+                Text("Buy")
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity)
@@ -66,7 +66,6 @@ struct Detail_CoinChartView: View {
         }
     }
 }
-
 
 
 
