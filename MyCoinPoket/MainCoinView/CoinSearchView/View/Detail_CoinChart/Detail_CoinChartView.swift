@@ -41,7 +41,7 @@ struct Detail_CoinChartView: View {
     func Controls() -> some View {
         HStack(spacing: 20) {
             Button {} label: {
-                Text("Sell")
+                Text("관심목록 추가")
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity)
@@ -53,7 +53,7 @@ struct Detail_CoinChartView: View {
             }
             
             Button {} label: {
-                Text("Buy")
+                Text("포폴 추가")
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity)

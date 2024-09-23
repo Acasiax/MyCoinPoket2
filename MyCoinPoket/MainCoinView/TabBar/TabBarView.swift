@@ -68,25 +68,25 @@ extension TabBarView {
     
    
     @ViewBuilder
-    func AddButton() -> some View {
-        Button(action: {
-          
-        }) {
-            Image(systemName: "plus")
-                .resizable()
-                .renderingMode(.template)
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 26, height: 26)
-                .foregroundColor(.white)
-                .offset(x: -1)
-                .padding(18)
-                .background(Color.blue)
-                .clipShape(Circle())
-                .shadow(color: Color.black.opacity(0.04), radius: 5, x: 5, y: 5)
-                .shadow(color: Color.black.opacity(0.04), radius: 5, x: -5, y: -5)
-        }
-    }
-}
+       func AddButton() -> some View {
+           // Home_AddAssetView로 이동하는 네비게이션 링크 추가
+           NavigationLink(destination: Home_AddAssetView(tabBarVM: tabBarVM)) {
+               Image(systemName: "plus")
+                   .resizable()
+                   .renderingMode(.template)
+                   .aspectRatio(contentMode: .fit)
+                   .frame(width: 26, height: 26)
+                   .foregroundColor(.white)
+                   .offset(x: -1)
+                   .padding(18)
+                   .background(Color.blue)
+                   .clipShape(Circle())
+                   .shadow(color: Color.black.opacity(0.04), radius: 5, x: 5, y: 5)
+                   .shadow(color: Color.black.opacity(0.04), radius: 5, x: -5, y: -5)
+           }
+       }
+   }
+
 
 
 

@@ -9,22 +9,25 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var tabBarVM = TabBarViewModel()
+    @StateObject private var newExpenseViewModel = NewExpenseViewModel()
     
     var body: some View {
-        VStack {
-            switch tabBarVM.currentTab {
-            case .Home:
-                Home_CoinSearchView(appModel: AppViewModel())
-            case .Wallet:
-                Home_CoinSearchView(appModel: AppViewModel())
-            case .News:
-                Home_NewsView()
-            case .Person:
-                Home_CoinSearchView(appModel: AppViewModel())
+        NavigationStack {
+            VStack {
+                switch tabBarVM.currentTab {
+                case .Home:
+                    Home_CoinSearchView(appModel: AppViewModel())
+                case .Wallet:
+                    ExpenseListView(newExpenseViewModel: newExpenseViewModel)
+                case .News:
+                    Home_NewsView()
+                case .Person:
+                    Home_CoinSearchView(appModel: AppViewModel())
+                }
+                
+                // 탭바는 항상 아래에 배치
+                TabBarView(tabBarVM: tabBarVM)
             }
-            
-            //탭바 아래에 배치
-            TabBarView(tabBarVM: tabBarVM)
         }
     }
 }
