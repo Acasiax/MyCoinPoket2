@@ -26,7 +26,7 @@ struct ContentView: View {
                 }
                 
                 // 탭바는 항상 아래에 배치
-                TabBarView(tabBarVM: tabBarVM)
+                TabBarView(tabBarVM: tabBarVM, newExpenseViewModel: newExpenseViewModel)
             }
         }
     }

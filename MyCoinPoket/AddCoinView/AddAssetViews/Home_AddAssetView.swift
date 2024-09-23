@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Home_AddAssetView: View {
-    @StateObject var newExpenseViewModel = NewExpenseViewModel()
+    @ObservedObject var newExpenseViewModel : NewExpenseViewModel
     @ObservedObject var tabBarVM: TabBarViewModel
     
     @State private var isShowingCoinSearch = false // 코인 리스트 Sheet 표시 여부
@@ -79,9 +79,9 @@ struct Home_AddAssetView: View {
             .navigationTitle("자산 추가하기")
             .navigationBarTitleDisplayMode(.inline)
             
-            NavigationLink(destination: ExpenseListView(newExpenseViewModel: newExpenseViewModel), isActive: $newExpenseViewModel.isNavigate) {
-                EmptyView()
-            }
+//            NavigationLink(destination: ExpenseListView(newExpenseViewModel: newExpenseViewModel), isActive: $newExpenseViewModel.isNavigate) {
+//                EmptyView()
+//            }
         }
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TabBarView: View {
     @ObservedObject var tabBarVM: TabBarViewModel
-   
+    @ObservedObject var newExpenseViewModel : NewExpenseViewModel
     
     var body: some View {
         HStack(spacing: 0) {
@@ -70,7 +70,7 @@ extension TabBarView {
     @ViewBuilder
        func AddButton() -> some View {
            // Home_AddAssetView로 이동하는 네비게이션 링크 추가
-           NavigationLink(destination: Home_AddAssetView(tabBarVM: tabBarVM)) {
+           NavigationLink(destination: Home_AddAssetView(newExpenseViewModel: newExpenseViewModel, tabBarVM: tabBarVM)) {
                Image(systemName: "plus")
                    .resizable()
                    .renderingMode(.template)

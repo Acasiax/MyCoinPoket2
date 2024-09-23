@@ -242,7 +242,7 @@ class NewExpenseViewModel: ObservableObject {
 
         // 배열에 추가
         self.expenses.append(newExpense)
-      //  print(newExpense)
+        print(newExpense.coinMarketName)
         resetFields()
        
         
