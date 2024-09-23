@@ -65,9 +65,6 @@ struct Home_AddAssetView: View {
                                 selectedType: newExpenseViewModel.selectedType
                             )
                             
-                            // Wallet 탭으로 전환
-                            tabBarVM.currentTab = .Wallet
-                            
                             // 네비게이션 상태 변경
                             newExpenseViewModel.isNavigate = true
                         }
@@ -82,7 +79,7 @@ struct Home_AddAssetView: View {
             .navigationTitle("자산 추가하기")
             .navigationBarTitleDisplayMode(.inline)
             
-            NavigationLink(destination: ExpenseListView(newExpenseViewModel: newExpenseViewModel)) {
+            NavigationLink(destination: ExpenseListView(newExpenseViewModel: newExpenseViewModel), isActive: $newExpenseViewModel.isNavigate) {
                 EmptyView()
             }
         }
