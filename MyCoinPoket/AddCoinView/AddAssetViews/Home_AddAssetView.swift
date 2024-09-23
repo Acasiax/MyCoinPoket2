@@ -26,6 +26,8 @@ struct Home_AddAssetView: View {
     
     @State var selectedCategory: String = "KRW"
     
+    @Environment(\.dismiss) var dismiss // 뷰를 닫기 위한 dismiss
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -67,6 +69,9 @@ struct Home_AddAssetView: View {
                             
                             // 네비게이션 상태 변경
                             newExpenseViewModel.isNavigate = true
+                            
+                            // 뷰 닫기
+                            dismiss()
                         }
                     
                 }
