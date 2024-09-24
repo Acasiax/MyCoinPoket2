@@ -15,6 +15,23 @@
 		AA56B31C2CA1C8F000B68816 /* ExpenseCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B31B2CA1C8F000B68816 /* ExpenseCalculator.swift */; };
 		AA56B31F2CA1C93300B68816 /* ExpenseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B31E2CA1C93300B68816 /* ExpenseListView.swift */; };
 		AA56B3212CA1C94500B68816 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3202CA1C94500B68816 /* ChartView.swift */; };
+		AA56B3252CA254F800B68816 /* OpenAiDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3242CA254F800B68816 /* OpenAiDTO.swift */; };
+		AA56B3272CA2550E00B68816 /* OpenAIHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3262CA2550E00B68816 /* OpenAIHeader.swift */; };
+		AA56B3292CA2552000B68816 /* OpenAIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3282CA2552000B68816 /* OpenAIRouter.swift */; };
+		AA56B32C2CA2555100B68816 /* Home_GPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B32B2CA2555100B68816 /* Home_GPTView.swift */; };
+		AA56B32E2CA2556100B68816 /* BitcoinFortuneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B32D2CA2556100B68816 /* BitcoinFortuneView.swift */; };
+		AA56B3312CA2557C00B68816 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3302CA2557C00B68816 /* ChatViewModel.swift */; };
+		AA56B3362CA255E100B68816 /* ForturnHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3352CA255E100B68816 /* ForturnHeaderView.swift */; };
+		AA56B3382CA255F600B68816 /* ForturnActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3372CA255F600B68816 /* ForturnActionView.swift */; };
+		AA56B33A2CA2560C00B68816 /* Neon.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3392CA2560C00B68816 /* Neon.swift */; };
+		AA56B33C2CA2562400B68816 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B33B2CA2562400B68816 /* Server.swift */; };
+		AA56B33E2CA2563400B68816 /* ServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B33D2CA2563400B68816 /* ServerViewModel.swift */; };
+		AA56B3402CA256C300B68816 /* ForturnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B33F2CA256C300B68816 /* ForturnView.swift */; };
+		AA56B3422CA256D400B68816 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3412CA256D400B68816 /* BlurView.swift */; };
+		AA56B3442CA256E200B68816 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3432CA256E200B68816 /* BottomSheet.swift */; };
+		AA56B3462CA256F200B68816 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3452CA256F200B68816 /* CardView.swift */; };
+		AA56B3482CA2580B00B68816 /* CustomCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3472CA2580B00B68816 /* CustomCorner.swift */; };
+		AA56B34A2CA2581C00B68816 /* CustomShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3492CA2581C00B68816 /* CustomShape.swift */; };
 		AAD0A1032C94666800910ABF /* MyCoinPoketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */; };
 		AAD0A1052C94666800910ABF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1042C94666800910ABF /* ContentView.swift */; };
 		AAD0A1072C94666A00910ABF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAD0A1062C94666A00910ABF /* Assets.xcassets */; };
@@ -68,6 +85,23 @@
 		AA56B31B2CA1C8F000B68816 /* ExpenseCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCalculator.swift; sourceTree = "<group>"; };
 		AA56B31E2CA1C93300B68816 /* ExpenseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListView.swift; sourceTree = "<group>"; };
 		AA56B3202CA1C94500B68816 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		AA56B3242CA254F800B68816 /* OpenAiDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAiDTO.swift; sourceTree = "<group>"; };
+		AA56B3262CA2550E00B68816 /* OpenAIHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIHeader.swift; sourceTree = "<group>"; };
+		AA56B3282CA2552000B68816 /* OpenAIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIRouter.swift; sourceTree = "<group>"; };
+		AA56B32B2CA2555100B68816 /* Home_GPTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home_GPTView.swift; sourceTree = "<group>"; };
+		AA56B32D2CA2556100B68816 /* BitcoinFortuneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinFortuneView.swift; sourceTree = "<group>"; };
+		AA56B3302CA2557C00B68816 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		AA56B3352CA255E100B68816 /* ForturnHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForturnHeaderView.swift; sourceTree = "<group>"; };
+		AA56B3372CA255F600B68816 /* ForturnActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForturnActionView.swift; sourceTree = "<group>"; };
+		AA56B3392CA2560C00B68816 /* Neon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neon.swift; sourceTree = "<group>"; };
+		AA56B33B2CA2562400B68816 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		AA56B33D2CA2563400B68816 /* ServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerViewModel.swift; sourceTree = "<group>"; };
+		AA56B33F2CA256C300B68816 /* ForturnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForturnView.swift; sourceTree = "<group>"; };
+		AA56B3412CA256D400B68816 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		AA56B3432CA256E200B68816 /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
+		AA56B3452CA256F200B68816 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		AA56B3472CA2580B00B68816 /* CustomCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCorner.swift; sourceTree = "<group>"; };
+		AA56B3492CA2581C00B68816 /* CustomShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShape.swift; sourceTree = "<group>"; };
 		AAD0A0FF2C94666800910ABF /* MyCoinPoket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCoinPoket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoinPoketApp.swift; sourceTree = "<group>"; };
 		AAD0A1042C94666800910ABF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -164,6 +198,78 @@
 			path = ExpenseList;
 			sourceTree = "<group>";
 		};
+		AA56B3222CA254D300B68816 /* GptView */ = {
+			isa = PBXGroup;
+			children = (
+				AA56B32F2CA2557100B68816 /* ChatViewModels */,
+				AA56B32A2CA2554100B68816 /* GPTView */,
+				AA56B3232CA254E900B68816 /* OpenAINetwork */,
+				AA56B3322CA255A600B68816 /* BitcoinButtonUI */,
+			);
+			path = GptView;
+			sourceTree = "<group>";
+		};
+		AA56B3232CA254E900B68816 /* OpenAINetwork */ = {
+			isa = PBXGroup;
+			children = (
+				AA56B3242CA254F800B68816 /* OpenAiDTO.swift */,
+				AA56B3262CA2550E00B68816 /* OpenAIHeader.swift */,
+				AA56B3282CA2552000B68816 /* OpenAIRouter.swift */,
+			);
+			path = OpenAINetwork;
+			sourceTree = "<group>";
+		};
+		AA56B32A2CA2554100B68816 /* GPTView */ = {
+			isa = PBXGroup;
+			children = (
+				AA56B32B2CA2555100B68816 /* Home_GPTView.swift */,
+				AA56B32D2CA2556100B68816 /* BitcoinFortuneView.swift */,
+			);
+			path = GPTView;
+			sourceTree = "<group>";
+		};
+		AA56B32F2CA2557100B68816 /* ChatViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AA56B3302CA2557C00B68816 /* ChatViewModel.swift */,
+			);
+			path = ChatViewModels;
+			sourceTree = "<group>";
+		};
+		AA56B3322CA255A600B68816 /* BitcoinButtonUI */ = {
+			isa = PBXGroup;
+			children = (
+				AA56B3332CA255BD00B68816 /* BitView */,
+				AA56B33B2CA2562400B68816 /* Server.swift */,
+				AA56B33D2CA2563400B68816 /* ServerViewModel.swift */,
+				AA56B33F2CA256C300B68816 /* ForturnView.swift */,
+				AA56B3412CA256D400B68816 /* BlurView.swift */,
+				AA56B3432CA256E200B68816 /* BottomSheet.swift */,
+				AA56B3452CA256F200B68816 /* CardView.swift */,
+				AA56B3472CA2580B00B68816 /* CustomCorner.swift */,
+				AA56B3492CA2581C00B68816 /* CustomShape.swift */,
+			);
+			path = BitcoinButtonUI;
+			sourceTree = "<group>";
+		};
+		AA56B3332CA255BD00B68816 /* BitView */ = {
+			isa = PBXGroup;
+			children = (
+				AA56B3342CA255CD00B68816 /* GView */,
+				AA56B3392CA2560C00B68816 /* Neon.swift */,
+			);
+			path = BitView;
+			sourceTree = "<group>";
+		};
+		AA56B3342CA255CD00B68816 /* GView */ = {
+			isa = PBXGroup;
+			children = (
+				AA56B3352CA255E100B68816 /* ForturnHeaderView.swift */,
+				AA56B3372CA255F600B68816 /* ForturnActionView.swift */,
+			);
+			path = GView;
+			sourceTree = "<group>";
+		};
 		AAD0A0F62C94666800910ABF = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				AAD0A13D2C9468DD00910ABF /* Info.plist */,
+				AA56B3222CA254D300B68816 /* GptView */,
 				AA56B30E2CA1C81000B68816 /* AddCoinView */,
 				AAD0A2E72C9984A200910ABF /* SocketNetwork */,
 				AAD0A13E2C94694500910ABF /* MainCoinView */,
@@ -493,6 +600,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA56B3362CA255E100B68816 /* ForturnHeaderView.swift in Sources */,
 				AAD0A1252C9467A100910ABF /* NaverNewsAPI.swift in Sources */,
 				AAD0A14A2C9469FA00910ABF /* UpbitRouter.swift in Sources */,
 				AA56B31C2CA1C8F000B68816 /* ExpenseCalculator.swift in Sources */,
@@ -507,35 +615,51 @@
 				AAD0A1292C9467C400910ABF /* NaverNewsRouter.swift in Sources */,
 				AAD0A1502C946A4500910ABF /* UpbitAPIManager.swift in Sources */,
 				AAD0A1542C946A6B00910ABF /* CustomCurveShape.swift in Sources */,
+				AA56B3382CA255F600B68816 /* ForturnActionView.swift in Sources */,
 				AA56B3132CA1C86400B68816 /* CoinSelectionView.swift in Sources */,
 				AAD0A1582C946A9300910ABF /* Resource.swift in Sources */,
 				AA56B3112CA1C85000B68816 /* Home_AddAssetView.swift in Sources */,
 				AAD0A13C2C94686B00910ABF /* Home_NewsView.swift in Sources */,
 				AAD0A1622C946B1600910ABF /* LineGraph2.swift in Sources */,
+				AA56B3482CA2580B00B68816 /* CustomCorner.swift in Sources */,
 				AAD0A2E92C9984B900910ABF /* WebSocketManager.swift in Sources */,
 				AAD0A16A2C95280300910ABF /* CoinListView.swift in Sources */,
 				AAD0A1362C94682800910ABF /* NewsSearchListView.swift in Sources */,
+				AA56B3442CA256E200B68816 /* BottomSheet.swift in Sources */,
 				AAD0A11F2C94674A00910ABF /* NewsSearchViewModel.swift in Sources */,
 				AAD0A14C2C946A0C00910ABF /* UpbitTargetType.swift in Sources */,
 				AAD0A1642C946B2600910ABF /* GraphView2.swift in Sources */,
 				AAD0A1382C94683B00910ABF /* NewsView.swift in Sources */,
+				AA56B33A2CA2560C00B68816 /* Neon.swift in Sources */,
 				AA56B31F2CA1C93300B68816 /* ExpenseListView.swift in Sources */,
 				AAD0A1562C946A7D00910ABF /* MainTapEnum.swift in Sources */,
 				AAD0A1602C946B0300910ABF /* LineGraph.swift in Sources */,
 				AAD0A11D2C94673000910ABF /* NewModelDTO.swift in Sources */,
+				AA56B33E2CA2563400B68816 /* ServerViewModel.swift in Sources */,
 				AAD0A14E2C946A2300910ABF /* CryptoModel.swift in Sources */,
+				AA56B3422CA256D400B68816 /* BlurView.swift in Sources */,
+				AA56B33C2CA2562400B68816 /* Server.swift in Sources */,
 				AA56B31A2CA1C8D200B68816 /* NewExpenseViewModel.swift in Sources */,
 				AAD0A12B2C9467D700910ABF /* NaverNewsTargetType.swift in Sources */,
+				AA56B3292CA2552000B68816 /* OpenAIRouter.swift in Sources */,
 				AAD0A15E2C946AF000910ABF /* GraphView.swift in Sources */,
 				AAD0A16D2C952DE500910ABF /* HeaderNamedView.swift in Sources */,
 				AAD0A13A2C94684F00910ABF /* NewsDetailView.swift in Sources */,
 				AAD0A1212C94676A00910ABF /* NewsTab.swift in Sources */,
+				AA56B3312CA2557C00B68816 /* ChatViewModel.swift in Sources */,
 				AAD0A1232C94677C00910ABF /* TabViewModel.swift in Sources */,
 				AAD0A15C2C946AD500910ABF /* Detail_CoinChartView.swift in Sources */,
 				AAD0A1522C946A5900910ABF /* TabBarView.swift in Sources */,
+				AA56B3402CA256C300B68816 /* ForturnView.swift in Sources */,
+				AA56B3462CA256F200B68816 /* CardView.swift in Sources */,
 				AAD0A1662C946B3A00910ABF /* Home_CoinSearchView.swift in Sources */,
+				AA56B34A2CA2581C00B68816 /* CustomShape.swift in Sources */,
 				AAD0A1032C94666800910ABF /* MyCoinPoketApp.swift in Sources */,
+				AA56B32C2CA2555100B68816 /* Home_GPTView.swift in Sources */,
 				AAD0A2EB2C9984D500910ABF /* SocketViewModel.swift in Sources */,
+				AA56B3252CA254F800B68816 /* OpenAiDTO.swift in Sources */,
+				AA56B32E2CA2556100B68816 /* BitcoinFortuneView.swift in Sources */,
+				AA56B3272CA2550E00B68816 /* OpenAIHeader.swift in Sources */,
 				AAD0A2ED2C9984F200910ABF /* MarketPrice33.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

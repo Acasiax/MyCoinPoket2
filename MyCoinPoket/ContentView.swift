@@ -22,7 +22,9 @@ struct ContentView: View {
                 case .News:
                     Home_NewsView()
                 case .Person:
-                    Home_CoinSearchView(appModel: AppViewModel())
+                   // Home_CoinSearchView(appModel: AppViewModel())
+                    ForturnView()
+                  
                 }
                 
                 // 탭바는 항상 아래에 배치
