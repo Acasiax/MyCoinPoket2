@@ -11,7 +11,8 @@ enum MainTab: String {
     case Home = "house.fill"
     case Wallet = "creditcard.fill"
     case News = "newspaper.fill"
-    case Person = "person.fill"
+    case GPTForturn = "person.fill"
+    case greed = "star"
 }
 
 class TabBarViewModel: ObservableObject {

@@ -21,10 +21,14 @@ struct ContentView: View {
                     ExpenseListView(newExpenseViewModel: newExpenseViewModel)
                 case .News:
                     Home_NewsView()
-                case .Person:
-                   // Home_CoinSearchView(appModel: AppViewModel())
-                    ForturnView()
+                case .GPTForturn:
+                    SettingListView()
+                   // FearGreedHomeView()
+                  //  ForturnView()
                   
+                case .greed:
+                    FearGreedHomeView()
+                 //   ForturnView()
                 }
                 
                 // 탭바는 항상 아래에 배치

@@ -23,14 +23,16 @@ struct ForturnView: View {
         
         NavigationStack {
             ZStack {
-                VStack {
-                    ForturnHeaderView(serverData: serverData)
-                    .frame(height: UIScreen.main.bounds.height / 3.3)
+                ScrollView{
+                    VStack {
+                        ForturnHeaderView(serverData: serverData)
+                        .frame(height: UIScreen.main.bounds.height / 3.3)
+                        
+                        ForturnActionView(rotationAngle: $rotationAngle, statusText: $statusText, startProcess: startProcess)
+                        .padding(.top, 60)
+                    }
                     
-                    ForturnActionView(rotationAngle: $rotationAngle, statusText: $statusText, startProcess: startProcess)
-                    .padding(.top, 60)
                 }
-                
                 // 네비게이션 링크
                 NavigationLink(destination: Home_GPTView(), isActive: $navigateToDetail) {
                     EmptyView()
