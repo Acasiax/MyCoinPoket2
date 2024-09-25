@@ -14,16 +14,18 @@ struct FearGreedHomeView: View {
     @Namespace var animation
     
     var body: some View {
-        VStack(spacing: 15) {
-            ZStack(alignment: .top) {
-                HomeHeaderView()
-                    .frame(maxWidth: .infinity, alignment: .top)
+        VStack(spacing: 0) {
+     //       ZStack(alignment: .top) {
+//                HomeHeaderView()
+//                    .frame(maxWidth: .infinity, alignment: .top)
                 
                 FearGreedDisplayCard(viewModel: viewModel, progress: $progress)
-            }
+                    .frame(maxWidth: .infinity, alignment: .top)
+     //       }
             
             FearGredIndexItemScroll(viewModel: viewModel, progress: $progress)
                 .padding(.horizontal, -40)
+            Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(

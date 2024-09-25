@@ -8,25 +8,38 @@
 import SwiftUI
 
 struct Home_NewsView: View {
-    @StateObject private var tabViewModel = TabViewModel()
+    @ObservedObject var tabViewModel: TabViewModel
+  //  @StateObject private var tabViewModel = TabViewModel()
     @ObservedObject var viewModel = NewsSearchViewModel()
-
+    
     var body: some View {
-        NavigationView {
+        NavigationStack {
+            
             VStack(spacing: 0) {
+                HStack {
+                    Text("뉴스")
+                        .naviTitleStyle()
+                    Spacer()
+                }
                 CustomTabBar()
-
+                
                 NewsView(tabViewModel: tabViewModel, viewModel: viewModel)
                 
             }
             .onAppear {
+                print("onAppear===")
                 viewModel.fetchNews(for: tabViewModel.activeTab.rawValue)
             }
-            .navigationTitle("뉴스")
+            .onChange(of: tabViewModel.activeTab) {
+              
+                viewModel.fetchNews(for:  tabViewModel.activeTab.rawValue)
+            }
+
+            
         }
     }
-
-   
+    
+    
 }
 
 
@@ -78,10 +91,5 @@ extension Home_NewsView {
         .scrollIndicators(.hidden)
     }
     
-}
-
-
-#Preview {
-    Home_NewsView()
 }
 

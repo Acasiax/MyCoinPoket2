@@ -59,7 +59,7 @@ struct TabModifier: ViewModifier {
 
 
 
-#Preview {
-    Home_NewsView()
-}
-
+//#Preview {
+//    Home_NewsView()
+//}
+//

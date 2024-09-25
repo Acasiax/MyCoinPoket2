@@ -99,7 +99,7 @@ struct NewsSearchListView: View {
 
 
 
-#Preview {
-   Home_NewsView()
-}
-
+//#Preview {
+//   Home_NewsView()
+//}
+//

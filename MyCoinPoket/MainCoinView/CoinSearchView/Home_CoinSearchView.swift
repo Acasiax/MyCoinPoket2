@@ -26,7 +26,7 @@ struct Home_CoinSearchView: View {
     
     var body: some View {
         ZStack {
-            NavigationView {
+            NavigationStack {
                 
                 VStack {
                     categoryButtonsView()
@@ -48,6 +48,7 @@ struct Home_CoinSearchView: View {
                 } .background(Color(CustomColors.lightGray)
                     .ignoresSafeArea())
             }
+           // .ignoresSafeArea(edges: .top)
             .task {
                 do {
                     let result = try await UpbitAPIManager.fetchMarket()

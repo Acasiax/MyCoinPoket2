@@ -14,8 +14,7 @@ struct ChartView: View {
     @State private var chartType: ChartType = .pie
     
     var body: some View {
-        NavigationStack {
-            
+
             LazyVStack {
                 Section("차트 종류") {
                     Picker("", selection: $chartType) {
@@ -83,7 +82,7 @@ struct ChartView: View {
 
 
             }
-            .navigationTitle("내 자산 포트폴리오")
+            //.ㄹnTitle("내 자산 포트폴리오")
          //   .onAppear(perform: resetChartAnimation)
             .onAppear(perform: animateChart)
             .onChange(of: newExpenseViewModel.expenses) {
@@ -102,15 +101,15 @@ struct ChartView: View {
               //  resetChartAnimation()
            //     animateChart()
             }
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("업데이트") {
-                        trigger.toggle()
-                    }
-                }
-            }
+//            .toolbar {
+//                ToolbarItem(placement: .topBarTrailing) {
+//                    Button("업데이트") {
+//                        trigger.toggle()
+//                    }
+//                }
+//            }
         }
-    }
+    
     
     // MARK: Animating Chart
     private func animateChart() {

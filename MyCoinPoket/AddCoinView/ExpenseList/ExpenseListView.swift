@@ -22,31 +22,44 @@ struct ExpenseListView: View {
     }
     
     var body: some View {
-        
-        
-        ChartView(newExpenseViewModel: newExpenseViewModel)
-            .padding(.horizontal, 15)
-         
-  
-        
-        ScrollView {
-            CustomSegmentedControl()
-                .padding(.top)
-            
-            LazyVStack(alignment: .leading, spacing: 12) {
-                ForEach(filteredExpenses) { expense in
-                    ExpenseRowView(expense: expense, viewModel: newExpenseViewModel)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 20)
-                        .background(Color.gray.opacity(0.1))
-                        .cornerRadius(10)
-                }
-                .animation(.easeInOut, value: filteredExpenses)
-                .padding(.horizontal, 20)
+        VStack{
+            HStack {
+                Text("내 자산 포트폴리오")
+                    .naviTitleStyle()
+                Spacer()
             }
-            .padding(.top)
+           // .background(Color.green)
+            
+            
+            ChartView(newExpenseViewModel: newExpenseViewModel)
+                .padding(.horizontal, 15)
+               
+             
+      
+            
+            ScrollView {
+                CustomSegmentedControl()
+                    .padding(.top)
+                
+                LazyVStack(alignment: .leading, spacing: 12) {
+                    ForEach(filteredExpenses) { expense in
+                        ExpenseRowView(expense: expense, viewModel: newExpenseViewModel)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 20)
+                           // .background(Color.gray.opacity(0.1))
+                            .background {
+                                Color("BG").ignoresSafeArea()
+                            }
+                            .cornerRadius(10)
+                    }
+                    .animation(.easeInOut, value: filteredExpenses)
+                    .padding(.horizontal, 20)
+                }
+                .padding(.top)
+            }
+           // .navigationTitle("저장된 자산")
         }
-        .navigationTitle("저장된 자산")
+        //.background(Color.yellow)
     }
     
 
@@ -169,9 +182,10 @@ extension ExpenseListView {
         }
         .padding(5)
         .background {
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .fill(.white)
-        }
+                  RoundedRectangle(cornerRadius: 10, style: .continuous) // 배경을 둥글게 처리
+                      .fill(Color("BG")) // 둥근 모서리 안쪽에 배경 색상을 설정
+                      .shadow(radius: 5) // 그림자 추가 (선택 사항)
+              }
     }
 }
 

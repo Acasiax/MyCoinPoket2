@@ -46,6 +46,7 @@
 		AA56B36F2CA2A59B00B68816 /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B36E2CA2A59B00B68816 /* HomeHeaderView.swift */; };
 		AA56B3712CA2A5B600B68816 /* FearGredIndexItemScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3702CA2A5B600B68816 /* FearGredIndexItemScroll.swift */; };
 		AA56B3742CA2ABD600B68816 /* SettingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3732CA2ABD600B68816 /* SettingListView.swift */; };
+		AA56B3762CA4283800B68816 /* TitleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3752CA4283800B68816 /* TitleModifier.swift */; };
 		AAD0A1032C94666800910ABF /* MyCoinPoketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */; };
 		AAD0A1052C94666800910ABF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1042C94666800910ABF /* ContentView.swift */; };
 		AAD0A1072C94666A00910ABF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAD0A1062C94666A00910ABF /* Assets.xcassets */; };
@@ -130,6 +131,7 @@
 		AA56B36E2CA2A59B00B68816 /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
 		AA56B3702CA2A5B600B68816 /* FearGredIndexItemScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FearGredIndexItemScroll.swift; sourceTree = "<group>"; };
 		AA56B3732CA2ABD600B68816 /* SettingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListView.swift; sourceTree = "<group>"; };
+		AA56B3752CA4283800B68816 /* TitleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleModifier.swift; sourceTree = "<group>"; };
 		AAD0A0FF2C94666800910ABF /* MyCoinPoket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCoinPoket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoinPoketApp.swift; sourceTree = "<group>"; };
 		AAD0A1042C94666800910ABF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				AA56B3732CA2ABD600B68816 /* SettingListView.swift */,
+				AA56B3752CA4283800B68816 /* TitleModifier.swift */,
 			);
 			path = SettingListView;
 			sourceTree = "<group>";
@@ -773,6 +776,7 @@
 				AAD0A14C2C946A0C00910ABF /* UpbitTargetType.swift in Sources */,
 				AAD0A1642C946B2600910ABF /* GraphView2.swift in Sources */,
 				AAD0A1382C94683B00910ABF /* NewsView.swift in Sources */,
+				AA56B3762CA4283800B68816 /* TitleModifier.swift in Sources */,
 				AA56B3662CA2A52A00B68816 /* FearGreedHomeView.swift in Sources */,
 				AA56B33A2CA2560C00B68816 /* Neon.swift in Sources */,
 				AA56B31F2CA1C93300B68816 /* ExpenseListView.swift in Sources */,
@@ -950,11 +954,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyCoinPoket/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "코인생활";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -962,9 +968,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.acasia.MyCoinPoket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -980,11 +990,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyCoinPoket/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "코인생활";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -992,9 +1004,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.acasia.MyCoinPoket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
