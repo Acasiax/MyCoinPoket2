@@ -10,6 +10,7 @@ import SwiftUI
 struct TabBarView: View {
     @ObservedObject var tabBarVM: TabBarViewModel
     @ObservedObject var newExpenseViewModel : NewExpenseViewModel
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         HStack(spacing: 0) {
@@ -29,11 +30,11 @@ struct TabBarView: View {
         }
         
         .background(
-            Color.white
-                .clipShape(CustomCurveShape())
-                .shadow(color: Color.black.opacity(0.06), radius: 5, x: -5, y: -5)
-                .ignoresSafeArea(.container, edges: .bottom)
-        )
+                    (colorScheme == .light ? Color.white : Color.clear)
+                        .clipShape(CustomCurveShape())
+                        .shadow(color: Color.black.opacity(0.06), radius: 5, x: -5, y: -5)
+                        .ignoresSafeArea(.container, edges: .bottom)
+                )
     }
 }
 

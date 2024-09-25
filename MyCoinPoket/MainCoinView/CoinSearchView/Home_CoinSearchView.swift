@@ -39,14 +39,18 @@ struct Home_CoinSearchView: View {
                             loadCoinPrice: loadCoinPrice
                         )
                     }
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.primary)
                     .navigationTitle("시세")
                     .navigationBarTitleTextColor(.black)
                     .searchable(text: $text, placement: .navigationBarDrawer, prompt: "코인 이름을 검색해보세요")
-                    .background(Color(CustomColors.lightGray)
-                        .ignoresSafeArea())
-                } .background(Color(CustomColors.lightGray)
-                    .ignoresSafeArea())
+//                    .background(Color(CustomColors.lightGray)
+//                        .ignoresSafeArea())
+                    .background {
+                       Color("LightGrayBG").ignoresSafeArea()
+                   }
+                } .background {
+                    Color("LightGrayBG").ignoresSafeArea()
+                }
             }
            // .ignoresSafeArea(edges: .top)
             .task {
