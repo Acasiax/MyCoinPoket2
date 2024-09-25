@@ -41,6 +41,7 @@ struct Home_CoinSearchView: View {
                     }
                     .foregroundStyle(.primary)
                     .navigationTitle("시세")
+                 //   .navigationBarTitleDisplayMode(.inline)
                     .navigationBarTitleTextColor(.black)
                     .searchable(text: $text, placement: .navigationBarDrawer, prompt: "코인 이름을 검색해보세요")
 //                    .background(Color(CustomColors.lightGray)

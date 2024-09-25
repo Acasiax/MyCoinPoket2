@@ -84,9 +84,6 @@ struct Home_AddAssetView: View {
             .navigationTitle("자산 추가하기")
             .navigationBarTitleDisplayMode(.inline)
             
-//            NavigationLink(destination: ExpenseListView(newExpenseViewModel: newExpenseViewModel), isActive: $newExpenseViewModel.isNavigate) {
-//                EmptyView()
-//            }
         }
     }
 }

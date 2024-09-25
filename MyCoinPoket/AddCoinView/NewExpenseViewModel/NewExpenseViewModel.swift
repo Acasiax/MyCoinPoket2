@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import RealmSwift
 
 // MARK: - Expense Model And Sample Data
 class Expense: Identifiable, ObservableObject, Hashable {
@@ -52,7 +53,6 @@ class Expense: Identifiable, ObservableObject, Hashable {
         self.buyPrice = buyPrice
         self.resultPrice = resultPrice
         self.date = date
-       // self.selectedType = selectedType
         self.myselectedType = .expense
         self.livePrice = livePrice
         self.totalPurchaseAmount = resultPrice

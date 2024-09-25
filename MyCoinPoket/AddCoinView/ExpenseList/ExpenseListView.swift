@@ -23,7 +23,12 @@ struct ExpenseListView: View {
     
     var body: some View {
         VStack{
-            HStack {
+            HStack(spacing: -15) {
+                Image(.logo)
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .padding(.leading, 10)
+                
                 Text("내 자산 포트폴리오")
                     .naviTitleStyle()
                 Spacer()

@@ -47,6 +47,7 @@
 		AA56B3712CA2A5B600B68816 /* FearGredIndexItemScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3702CA2A5B600B68816 /* FearGredIndexItemScroll.swift */; };
 		AA56B3742CA2ABD600B68816 /* SettingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3732CA2ABD600B68816 /* SettingListView.swift */; };
 		AA56B3762CA4283800B68816 /* TitleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3752CA4283800B68816 /* TitleModifier.swift */; };
+		AA56B3792CA4524900B68816 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AA56B3782CA4524900B68816 /* RealmSwift */; };
 		AAD0A1032C94666800910ABF /* MyCoinPoketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */; };
 		AAD0A1052C94666800910ABF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1042C94666800910ABF /* ContentView.swift */; };
 		AAD0A1072C94666A00910ABF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAD0A1062C94666A00910ABF /* Assets.xcassets */; };
@@ -180,6 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA56B3792CA4524900B68816 /* RealmSwift in Frameworks */,
 				AAD0A2F02C99961C00910ABF /* SDWebImageSwiftUI in Frameworks */,
 				AAD0A2F32C99962A00910ABF /* Alamofire in Frameworks */,
 				AAD0A2F62C99963400910ABF /* SwiftSoup in Frameworks */,
@@ -680,6 +682,7 @@
 				AAD0A2EF2C99961C00910ABF /* SDWebImageSwiftUI */,
 				AAD0A2F22C99962A00910ABF /* Alamofire */,
 				AAD0A2F52C99963400910ABF /* SwiftSoup */,
+				AA56B3782CA4524900B68816 /* RealmSwift */,
 			);
 			productName = MyCoinPoket;
 			productReference = AAD0A0FF2C94666800910ABF /* MyCoinPoket.app */;
@@ -713,6 +716,7 @@
 				AAD0A2EE2C99961C00910ABF /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				AAD0A2F12C99962A00910ABF /* XCRemoteSwiftPackageReference "Alamofire" */,
 				AAD0A2F42C99963400910ABF /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				AA56B3772CA4524900B68816 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = AAD0A1002C94666800910ABF /* Products */;
 			projectDirPath = "";
@@ -1038,6 +1042,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AA56B3772CA4524900B68816 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.54.0;
+			};
+		};
 		AAD0A2EE2C99961C00910ABF /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
@@ -1065,6 +1077,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AA56B3782CA4524900B68816 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA56B3772CA4524900B68816 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		AAD0A2EF2C99961C00910ABF /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AAD0A2EE2C99961C00910ABF /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;

@@ -10,7 +10,7 @@ import SwiftUI
 struct TitleModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.system(size: 30))
+            .font(.system(size: 25))
             .bold()
             .padding(.top)
             .padding(.leading, 20)
