@@ -56,11 +56,8 @@ struct FearGreedDisplayCard: View {
             }
             
         }
-        .padding(.top, 50)
+        .padding(.top, 15)  // 중복된 top padding 제거
         .frame(maxWidth: .infinity)
-//        .frame(height: 340)
-
-        .padding(.top, 15)
         .padding(.horizontal, 15)
     }
 }

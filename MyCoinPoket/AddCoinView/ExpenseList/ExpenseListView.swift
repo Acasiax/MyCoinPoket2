@@ -184,7 +184,7 @@ extension ExpenseListView {
         .background {
                   RoundedRectangle(cornerRadius: 10, style: .continuous) // 배경을 둥글게 처리
                       .fill(Color("BG")) // 둥근 모서리 안쪽에 배경 색상을 설정
-                      .shadow(radius: 5) // 그림자 추가 (선택 사항)
+                     // .shadow(radius: 5) // 그림자 추가 (선택 사항)
               }
     }
 }

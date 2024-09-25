@@ -72,8 +72,9 @@ struct CoinListView: View {
                     let priceColor = calculatePriceColor(price: price, prevPrice: prevPrice)
 
                     // 가격 텍스트
-                  //  Text("\(Int(price))원")
-                    Text("\(price)원")
+
+                   // Text("\(price)")
+                    Text(formatPrice(price, for: item.market))
                         .font(.system(size: 15, weight: .bold))
                         .foregroundColor(priceColor)
                         .padding(8) // 패딩을 추가해 테두리가 잘 보이도록 설정
@@ -136,4 +137,52 @@ struct CoinListView: View {
             return Color.gray // 기본 값
         }
     }
+}
+
+
+
+
+extension CoinListView {
+    
+    func formatPrice(_ price: Double, for market: String) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal // 3자리마다 콤마 추가
+        
+        if market.hasPrefix("KRW") {
+            if price < 1 {
+                return String(price) // 소수점 전체 표시
+            } else if price < 10 {
+                numberFormatter.minimumFractionDigits = 4
+                numberFormatter.maximumFractionDigits = 4
+            } else if price < 10000 {
+                numberFormatter.minimumFractionDigits = 2
+                numberFormatter.maximumFractionDigits = 2
+            } else {
+                numberFormatter.minimumFractionDigits = 0
+                numberFormatter.maximumFractionDigits = 0
+            }
+        } else if market.hasPrefix("BTC") {
+            numberFormatter.minimumFractionDigits = 8
+            numberFormatter.maximumFractionDigits = 8
+        } else if market.hasPrefix("USDT") {
+            if price < 1 {
+                return String(price) // 소수점 전체 표시
+            } else if price < 10 {
+                numberFormatter.minimumFractionDigits = 3
+                numberFormatter.maximumFractionDigits = 3
+            } else {
+                numberFormatter.minimumFractionDigits = 2
+                numberFormatter.maximumFractionDigits = 2
+            }
+        } else {
+            // 기타 카테고리는 기본적으로 소수점 없는 정수로 표시
+            numberFormatter.minimumFractionDigits = 0
+            numberFormatter.maximumFractionDigits = 0
+        }
+
+        // 가격을 3자리마다 콤마가 포함된 문자열로 변환
+        return numberFormatter.string(from: NSNumber(value: price)) ?? "\(price)"
+    }
+
+    
 }
