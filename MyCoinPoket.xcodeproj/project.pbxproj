@@ -48,6 +48,9 @@
 		AA56B3742CA2ABD600B68816 /* SettingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3732CA2ABD600B68816 /* SettingListView.swift */; };
 		AA56B3762CA4283800B68816 /* TitleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3752CA4283800B68816 /* TitleModifier.swift */; };
 		AA56B3792CA4524900B68816 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AA56B3782CA4524900B68816 /* RealmSwift */; };
+		AA56B37A2CA636CD00B68816 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = AA56B3782CA4524900B68816 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AA56B37D2CA64FB000B68816 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA56B37C2CA64FB000B68816 /* Launch Screen.storyboard */; };
+		AA56B37F2CA660D300B68816 /* 바른생활런치스크린300.png in Resources */ = {isa = PBXBuildFile; fileRef = AA56B37E2CA660D300B68816 /* 바른생활런치스크린300.png */; };
 		AAD0A1032C94666800910ABF /* MyCoinPoketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */; };
 		AAD0A1052C94666800910ABF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1042C94666800910ABF /* ContentView.swift */; };
 		AAD0A1072C94666A00910ABF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAD0A1062C94666A00910ABF /* Assets.xcassets */; };
@@ -92,6 +95,20 @@
 		AAD0A2F62C99963400910ABF /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = AAD0A2F52C99963400910ABF /* SwiftSoup */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		AA56B37B2CA636CD00B68816 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AA56B37A2CA636CD00B68816 /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		AA56B3102CA1C85000B68816 /* Home_AddAssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home_AddAssetView.swift; sourceTree = "<group>"; };
 		AA56B3122CA1C86400B68816 /* CoinSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSelectionView.swift; sourceTree = "<group>"; };
@@ -133,6 +150,8 @@
 		AA56B3702CA2A5B600B68816 /* FearGredIndexItemScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FearGredIndexItemScroll.swift; sourceTree = "<group>"; };
 		AA56B3732CA2ABD600B68816 /* SettingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListView.swift; sourceTree = "<group>"; };
 		AA56B3752CA4283800B68816 /* TitleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleModifier.swift; sourceTree = "<group>"; };
+		AA56B37C2CA64FB000B68816 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		AA56B37E2CA660D300B68816 /* 바른생활런치스크린300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "바른생활런치스크린300.png"; sourceTree = "<group>"; };
 		AAD0A0FF2C94666800910ABF /* MyCoinPoket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCoinPoket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoinPoketApp.swift; sourceTree = "<group>"; };
 		AAD0A1042C94666800910ABF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -414,6 +433,8 @@
 		AAD0A0F62C94666800910ABF = {
 			isa = PBXGroup;
 			children = (
+				AA56B37E2CA660D300B68816 /* 바른생활런치스크린300.png */,
+				AA56B37C2CA64FB000B68816 /* Launch Screen.storyboard */,
 				AAD0A1102C94668900910ABF /* .gitignore */,
 				AAD0A1012C94666800910ABF /* MyCoinPoket */,
 				AAD0A1002C94666800910ABF /* Products */,
@@ -672,6 +693,7 @@
 				AAD0A0FB2C94666800910ABF /* Sources */,
 				AAD0A0FC2C94666800910ABF /* Frameworks */,
 				AAD0A0FD2C94666800910ABF /* Resources */,
+				AA56B37B2CA636CD00B68816 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -734,6 +756,8 @@
 			files = (
 				AAD0A10A2C94666A00910ABF /* Preview Assets.xcassets in Resources */,
 				AAD0A1112C94668900910ABF /* .gitignore in Resources */,
+				AA56B37D2CA64FB000B68816 /* Launch Screen.storyboard in Resources */,
+				AA56B37F2CA660D300B68816 /* 바른생활런치스크린300.png in Resources */,
 				AAD0A1072C94666A00910ABF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -962,14 +986,15 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.acasia.MyCoinPoket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -998,14 +1023,15 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.acasia.MyCoinPoket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

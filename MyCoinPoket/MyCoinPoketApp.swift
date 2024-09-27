@@ -12,6 +12,10 @@ struct MyCoinPoketApp: App {
     
     @AppStorage("isDarkMode") private var isDarkMode = false // 앱 전체에 다크모드 상태를 저장
     
+//    init() {
+//           Thread.sleep(forTimeInterval: 5)
+//       }
+//    
     var body: some Scene {
         WindowGroup {
             ContentView()

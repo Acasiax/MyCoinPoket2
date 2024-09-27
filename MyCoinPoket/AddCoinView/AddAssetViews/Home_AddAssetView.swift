@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct Home_AddAssetView: View {
     @ObservedObject var newExpenseViewModel : NewExpenseViewModel
@@ -83,6 +84,9 @@ struct Home_AddAssetView: View {
             }
             .navigationTitle("자산 추가하기")
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                print(Realm.Configuration.defaultConfiguration.fileURL)
+            }
             
         }
     }
