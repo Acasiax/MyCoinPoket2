@@ -6,20 +6,22 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct ExpenseListView: View {
     @ObservedObject var newExpenseViewModel: NewExpenseViewModel
     @Namespace var animation
-   
-  var filteredExpenses: [Expense] {
-        // 사용자가 세그먼트 컨트롤에서 "전체"를 선택한 경우, 모든 expenses를 반환
-        if newExpenseViewModel.selectedType == .all {
-            return newExpenseViewModel.expenses
-        } else {
-            // 사용자가 "수익" 또는 "손실"을 선택한 경우, 해당 wowexpenseType과 일치하는 expenses만 필터링하여 반환
-            return newExpenseViewModel.expenses.filter { $0.wowexpenseType == newExpenseViewModel.selectedType }
-        }
-    }
+    @ObservedResults(Expense.self) var expenses
+    
+    var filteredExpenses: [Expense] {
+         // 사용자가 세그먼트 컨트롤에서 "전체"를 선택한 경우, 모든 expenses를 반환
+         if newExpenseViewModel.selectedType == .all {
+             return expenses.map { $0 }  // @ObservedResults에서 가져온 Realm 데이터
+         } else {
+             // 사용자가 "수익" 또는 "손실"을 선택한 경우, 해당 wowexpenseType과 일치하는 expenses만 필터링하여 반환
+             return expenses.filter { $0.wowexpenseType == newExpenseViewModel.selectedType }
+         }
+     }
     
     var body: some View {
         VStack{
@@ -75,7 +77,7 @@ struct ExpenseListView: View {
 
 // 새로운 ExpenseRowView🔥
 struct ExpenseRowView: View {
-    @ObservedObject var expense: Expense // Expense가 클래스이므로 @ObservedObject 사용
+    @ObservedRealmObject var expense: Expense // Expense가 클래스이므로 @ObservedObject 사용
     @ObservedObject var viewModel: NewExpenseViewModel
 
     var body: some View {

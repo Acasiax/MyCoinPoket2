@@ -10,30 +10,23 @@ import Combine
 import RealmSwift
 
 // MARK: - Expense Model And Sample Data
-class Expense: Identifiable, ObservableObject, Hashable {
-    var id = UUID().uuidString
-    @Published  var coinName: String // 코인 이름
-    @Published  var coinMarketName: String // 코인 마켓 이름
-    @Published  var numberOfCoins: Double // 보유한 코인의 수량
-    @Published var buyPrice: Double // 구매할 때 가격
-    @Published var resultPrice: Double // 구매할 때 코인의 수량 * 구매할 때 가격 = 내가 지불한 금액
-    @Published var date: Date
+class Expense: Object, ObjectKeyIdentifiable {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var coinName: String = "" // 코인 이름
+    @Persisted var coinMarketName: String = "" // 코인 마켓 이름
+    @Persisted var numberOfCoins: Double = 0.0 // 보유한 코인의 수량
+    @Persisted var totalPurchaseAmount: Double = 0.0 // 총 매수 금액
+    @Published var myResult: Double = 0.0 // 평가손익
+    @Published var buyPrice: Double = 0.0 // 구매할 때 가격
+    @Published var resultPrice: Double = 0.0 // 구매할 때 코인의 수량 * 구매할 때 가격 = 내가 지불한 금액
+    @Published var date: Date = Date()
     @Published var myselectedType: ExpenseType = .all
     @Published var isAnimated: Bool = true
-
-    @Published var livePrice: String
-    @Published var profitRatePersent: Double = 0.0 //수익률
-    @Published var myResult:  Double = 0.0 //평가손익 (그래서 내 돈의 결과)
-
-    // 총 매수 금액 속성 추가
-       @Published var totalPurchaseAmount: Double = 0.0
-
-    // 평가금액 계산: 코인 수량 * 실시간 가격
-    @Published var evaluationAmount: Double = 0.0
+    @Published var livePrice: String = ""
+    @Published var profitRatePersent: Double = 0.0 // 수익률
     
-    
-    //매수평균가
-    @Published var averagePurchasePrice: Double = 0.0
+    @Published var evaluationAmount: Double = 0.0 // 평가 금액 계산
+    @Published var averagePurchasePrice: Double = 0.0 // 매수 평균가
     
     
     var wowexpenseType: ExpenseType {
@@ -46,27 +39,28 @@ class Expense: Identifiable, ObservableObject, Hashable {
 
     
     
-    init(coinName: String, coinMarketName: String, numberOfCoins: Double, buyPrice: Double, resultPrice: Double, date: Date, selectedType: ExpenseType, livePrice: String = "0", profitLoss: String = "", evaluationAmount: Double = 0) {
-        self.coinName = coinName
-        self.coinMarketName = coinMarketName
-        self.numberOfCoins = numberOfCoins
-        self.buyPrice = buyPrice
-        self.resultPrice = resultPrice
-        self.date = date
-        self.myselectedType = .expense
-        self.livePrice = livePrice
-        self.totalPurchaseAmount = resultPrice
-        self.evaluationAmount = evaluationAmount
-        
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
+    convenience init(coinName: String, coinMarketName: String, numberOfCoins: Double, buyPrice: Double, resultPrice: Double, date: Date, selectedType: ExpenseType, livePrice: String = "0", evaluationAmount: Double = 0) {
+           self.init()  // Realm의 기본 이니셜라이저 호출
+           self.coinName = coinName
+           self.coinMarketName = coinMarketName
+           self.numberOfCoins = numberOfCoins
+           self.buyPrice = buyPrice
+           self.resultPrice = resultPrice
+           self.date = date
+           self.myselectedType = selectedType
+           self.livePrice = livePrice
+           self.totalPurchaseAmount = resultPrice
+           self.evaluationAmount = evaluationAmount
+       }
 
-    static func == (lhs: Expense, rhs: Expense) -> Bool {
-        return lhs.id == rhs.id
-    }
+    
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(id)
+//    }
+//
+//    static func == (lhs: Expense, rhs: Expense) -> Bool {
+//        return lhs.id == rhs.id
+//    }
 }
 
 
@@ -84,6 +78,7 @@ var sample_expenses: [Expense] = [
 
 // MARK: - ViewModel
 class NewExpenseViewModel: ObservableObject {
+   
     // 총 구입한 매수 금액을 저장할 변수
     @Published var totalPurchaseAmount: Double = 0.0
     @Published var resultPrice: String = ""
@@ -194,43 +189,47 @@ class NewExpenseViewModel: ObservableObject {
     // 실시간 가격을 받아온 후에 저장하는 로직
     func saveExpense(coinName: String, coinMarketName: String, numberOfCoins: Double, buyPrice: Double, resultPrice: Double, date: Date, selectedType: ExpenseType) {
         print(#function)
-        // 이미 동일한 coinMarketName을 가진 Expense가 있는지 확인
-        if let existingExpenseIndex = findExistingExpense(coinMarketName: coinMarketName) {
-            
-            let existingExpense = self.expenses[existingExpenseIndex]
-            
-            // 새로운 코인 추가 후 총 매수 금액 계산
-              calculateTotalPurchaseAmount88(for: coinMarketName, newNumberOfCoins: numberOfCoins, newBuyPrice: buyPrice)
-          
-         
-            
-            // 기존 Expense가 있으면 업데이트
-            updateExistingExpense(index: existingExpenseIndex, numberOfCoins: numberOfCoins, buyPrice: buyPrice)
-            
-            
-            updateEvaluationAmount(for: existingExpense)
-            
-            resetFields()
-            
-            
-        } else {
-            // 없으면 새로운 Expense 추가
-            addNewExpense(coinName: coinName, coinMarketName: coinMarketName, numberOfCoins: numberOfCoins, buyPrice: buyPrice, resultPrice: resultPrice, date: date, selectedType: selectedType)
-            
-            
-            
-        }
         
-        // 업데이트 또는 추가 후 모든 코인의 실시간 가격 요청
-        fetchLivePriceForAllCoins()
+        do {
+            let realm = try Realm()
+            
+            // 동일한 coinMarketName을 가진 Expense가 있는지 확인
+            if let existingExpense = realm.objects(Expense.self).filter("coinMarketName == %@", coinMarketName).first {
+                
+                // 새로운 코인 추가 후 총 매수 금액 계산 (트랜잭션은 calculateTotalPurchaseAmount88에서 처리)
+                calculateTotalPurchaseAmount88(for: coinMarketName, newNumberOfCoins: numberOfCoins, newBuyPrice: buyPrice)
+                
+                // 기존 Expense 업데이트 (이 작업은 트랜잭션이 필요 없으며, 이미 트랜잭션이 처리된 상태)
+                updateExistingExpense(existingExpense: existingExpense, numberOfCoins: numberOfCoins, buyPrice: buyPrice)
+                
+                // 평가 금액 업데이트 (이 작업도 트랜잭션 없이 수행 가능)
+              //  updateEvaluationAmount(for: existingExpense)
+                
+                resetFields()
+                
+            } else {
+                // 없으면 새로운 Expense 추가
+                addNewExpense(coinName: coinName, coinMarketName: coinMarketName, numberOfCoins: numberOfCoins, buyPrice: buyPrice, resultPrice: resultPrice, date: date, selectedType: selectedType)
+            }
+            
+            // 업데이트 또는 추가 후 모든 코인의 실시간 가격 요청
+            fetchLivePriceForAllCoins()
+            
+        } catch {
+            print("Realm 트랜잭션 오류: \(error.localizedDescription)")
+        }
     }
 
-    
+
+
+
+
+
+    //새로운 코인일때!
     private func addNewExpense(coinName: String, coinMarketName: String, numberOfCoins: Double, buyPrice: Double, resultPrice: Double, date: Date, selectedType: ExpenseType) {
         print(#function)
-        // 새로운 Expense 생성 및 추가
+        
         let newExpense = Expense(
-           
             coinName: coinName,
             coinMarketName: coinMarketName,
             numberOfCoins: numberOfCoins,
@@ -240,14 +239,21 @@ class NewExpenseViewModel: ObservableObject {
             selectedType: selectedType
         )
 
-        // 배열에 추가
+        // Realm 트랜잭션을 사용하여 데이터를 저장
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(newExpense)
+            }
+        } catch {
+            print("Realm에 데이터를 저장하는 중 오류 발생: \(error)")
+        }
+
+        // 배열에 추가하여 UI 갱신
         self.expenses.append(newExpense)
-        print(newExpense.coinMarketName)
         resetFields()
-       
-        
     }
-    
+
   
     // 선택한 코인 마켓을 사용하여 웹소켓에 요청
     func fetchLivePriceForCoin() {

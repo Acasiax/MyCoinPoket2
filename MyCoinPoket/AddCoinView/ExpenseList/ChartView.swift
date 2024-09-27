@@ -7,12 +7,13 @@
 
 import SwiftUI
 import Charts
+import RealmSwift
 
 struct ChartView: View {
     @ObservedObject var newExpenseViewModel: NewExpenseViewModel
     @State private var trigger: Bool = false
     @State private var chartType: ChartType = .pie
-    
+   
     var body: some View {
 
             LazyVStack {
