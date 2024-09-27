@@ -11,6 +11,7 @@ import RealmSwift
 extension NewExpenseViewModel {
     
     func updateEvaluationAmount(for expense: Expense) {
+       // print("블랙핑크")
          // Realm 객체가 관리되고 있는 상태인지 확인
          if let realm = expense.realm {
              // Realm에 관리되는 객체이므로 트랜잭션 내에서 수정해야 함

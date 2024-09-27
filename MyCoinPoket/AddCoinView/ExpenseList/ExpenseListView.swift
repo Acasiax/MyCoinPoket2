@@ -38,7 +38,7 @@ struct ExpenseListView: View {
            // .background(Color.green)
             
             
-            ChartView(newExpenseViewModel: newExpenseViewModel)
+            ChartView()
                 .padding(.horizontal, 15)
                
              

@@ -10,7 +10,7 @@ import Combine
 import RealmSwift
 
 // MARK: - Expense Model And Sample Data
-class Expense: Object, ObjectKeyIdentifiable {
+class Expense: Object, ObjectKeyIdentifiable, ObservableObject {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var coinName: String = "" // 코인 이름
     @Persisted var coinMarketName: String = "" // 코인 마켓 이름
@@ -78,7 +78,7 @@ var sample_expenses: [Expense] = [
 
 // MARK: - ViewModel
 class NewExpenseViewModel: ObservableObject {
-   
+    @ObservedResults(Expense.self) var expenses
     // 총 구입한 매수 금액을 저장할 변수
     @Published var totalPurchaseAmount: Double = 0.0
     @Published var resultPrice: String = ""
@@ -91,7 +91,7 @@ class NewExpenseViewModel: ObservableObject {
     @Published var selectedType: ExpenseType = .all
     @Published var date: Date = Date()
     @Published var isNavigate: Bool = false
-    @Published var expenses: [Expense] = sample_expenses
+  //  @Published var expenses: [Expense] = sample_expenses
     @Published var selectedCurrency: String = "KRW"
     @Published var totalPriceByMarket: [String: Double] = [:]
     @Published var averagePriceByMarket: [String: Double] = [:]
@@ -142,20 +142,20 @@ class NewExpenseViewModel: ObservableObject {
     }
     
     
-    // 모든 `Expense` 객체의 `coinMarketName`을 수집하여 웹소켓에 전송하는 함수
-       func fetchLivePriceForAllCoins() {
-           // expenses 배열에서 모든 coinMarketName을 추출하여 배열로 만든다.
-           let allMarketCodes = expenses.map { $0.coinMarketName }
-           
-           // 중복된 마켓 코드를 제거하기 위해 Set으로 변환 후 다시 배열로 변환
-           let uniqueMarketCodes = Array(Set(allMarketCodes))
-           
-           // 웹소켓에 전송
-           WebSocketManager.shared.send(marketCodes: uniqueMarketCodes)
-           
-           print("웹소켓에 전송된 마켓 코드: \(uniqueMarketCodes)")
-       }
-    
+    // 모든 Expense 객체의 coinMarketName을 수집하여 웹소켓에 전송하는 함수
+        func fetchLivePriceForAllCoins() {
+            // expenses 배열에서 모든 coinMarketName을 추출하여 배열로 만든다.
+            let allMarketCodes = expenses.map { $0.coinMarketName }
+            
+            // 중복된 마켓 코드를 제거하기 위해 Set으로 변환 후 다시 배열로 변환
+            let uniqueMarketCodes = Array(Set(allMarketCodes))
+            
+            // 웹소켓에 전송
+            WebSocketManager.shared.send(marketCodes: uniqueMarketCodes)
+            
+            print("웹소켓에 전송된 마켓 코드: \(uniqueMarketCodes)")
+        }
+     
     
     
     // 웹소켓 관찰
@@ -173,7 +173,7 @@ class NewExpenseViewModel: ObservableObject {
                  for expense in self.expenses {
                      if expense.coinMarketName == ticker.code {
                          expense.livePrice = String(ticker.trade_price) // 실시간 가격을 업데이트
-                     //    print("업데이트된 \(expense.coinName)의 실시간 가격: \(expense.livePrice)")
+                         print("업데이트된 \(expense.coinName)의 실시간 가격: \(expense.livePrice)")
                          updateEvaluationAmount(for: expense) //평가금액
                          updateaveragePurchasePrice(for: expense) //평균매수가
                          updateprofitLoss(for: expense) //수익률
@@ -250,7 +250,7 @@ class NewExpenseViewModel: ObservableObject {
         }
 
         // 배열에 추가하여 UI 갱신
-        self.expenses.append(newExpense)
+       // self.expenses.append(newExpense)
         resetFields()
     }
 
