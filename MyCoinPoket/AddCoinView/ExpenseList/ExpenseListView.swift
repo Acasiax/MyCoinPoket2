@@ -31,48 +31,97 @@ class Expense: Object, ObjectKeyIdentifiable {
     }
 }
 
+enum ChartType: String, CaseIterable {
+    case pie = "원형"
+    case bar = "막대기"
+  //  case line = "선"
+}
+
 
 import SwiftUI
 import RealmSwift
 
-
 struct ExpenseListView: View {
     @ObservedResults(Expense.self) var realmExpenses
     @ObservedObject var viewModel: NewExpenseViewModel
- 
+    @Namespace private var animation
+    @State private var chartType: ChartType = .pie
     @State private var timer: Timer? = nil
     
-    var body: some View {
-        List {
-            ForEach(realmExpenses) { expense in
-                let expenseViewModel = viewModel.getExpenseViewModel(for: expense)
-                ExpenseRowView(expense: expense, viewModel: expenseViewModel)
+    var filteredExpenses: [Expense] {
+        switch viewModel.selectedType {
+        case .all:
+            return Array(realmExpenses)
+        case .income:
+            return realmExpenses.filter { expense in
+                calculateMyResult(expense: expense) > 0
             }
+        case .expense:
+            return realmExpenses.filter { expense in
+                calculateMyResult(expense: expense) <= 0
+            }
+        }
+    }
+
+    var body: some View {
+        
+        VStack{
+            HStack(spacing: -15) {
+                Image(.logo)
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .padding(.leading, 10)
+                
+                Text("내 자산 포트폴리오")
+                    .naviTitleStyle()
+                Spacer()
+            }
+             .background(Color.green)
+            
+            
+            ChartView(expenses: Array(realmExpenses), chartType: $chartType)
+                   .padding(.horizontal, 15)
+        }
+        ScrollView {
+            
+            CustomSegmentedControl()
+            .padding(.top)
+            
+            LazyVStack(alignment: .leading, spacing: 12) {
+                ForEach(filteredExpenses) { expense in
+                    let expenseViewModel = viewModel.getExpenseViewModel(for: expense)
+                    ExpenseRowView(expense: expense, viewModel: expenseViewModel)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 20)
+                       // .background(Color.gray.opacity(0.1))
+                        .background {
+                            Color("BG").ignoresSafeArea()
+                        }
+                        .cornerRadius(10)
+                }
+            }
+            .padding()
         }
         .onAppear {
             print("======")
             fetchLivePriceForAllCoins()
             startTimer()
-            
         }
         .onDisappear {
-                   stopTimer()
-               }
-       
-
+            stopTimer()
+        }
     }
-
     
     private func startTimer() {
-           timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-               fetchLivePriceForAllCoins()
-           }
-       }
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            fetchLivePriceForAllCoins()
+        }
+    }
        
-       private func stopTimer() {
-           timer?.invalidate()
-           timer = nil
-       }
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
     
     private func fetchLivePriceForAllCoins() {
         let allMarketCodes = realmExpenses.map { $0.coinMarketName }
@@ -81,78 +130,166 @@ struct ExpenseListView: View {
         print("웹소켓에 보낸 거 \(uniqueMarketCodes)")
     }
     
-   
-    
+    private func calculateMyResult(expense: Expense) -> Double {
+        let livePrice = Double(viewModel.getExpenseViewModel(for: expense).livePrice) ?? 0.0
+        let evaluationAmount = expense.numberOfCoins * livePrice
+        return evaluationAmount - expense.totalPurchaseAmount
+    }
 }
+
+
+extension ExpenseListView {
+    @ViewBuilder
+    func CustomSegmentedControl() -> some View {
+        HStack(spacing: 0) {
+            ForEach([ExpenseType.all, ExpenseType.expense, ExpenseType.income], id: \.rawValue) { tab in
+                Text(tab.rawValue.capitalized)
+                    .fontWeight(.semibold)
+                    .foregroundColor(viewModel.selectedType == tab ? .white : .black)
+                    .opacity(viewModel.selectedType == tab ? 1 : 0.7)
+                    .padding(.vertical, 12)
+                    .frame(maxWidth: .infinity)
+                    .background {
+                        if viewModel.selectedType == tab {
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .fill(
+                                    LinearGradient(
+                                                   gradient: Gradient(colors: [Color.blue.opacity(0.6), Color.blue]),
+                                                   startPoint: .topLeading,
+                                                   endPoint: .bottomTrailing
+                                               )
+                                )
+                                .matchedGeometryEffect(id: "TAB", in: animation)
+                        }
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        withAnimation {
+                            viewModel.selectedType = tab
+                        }
+                    }
+            }
+        }
+        .padding(5)
+        .background {
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .fill(Color("BG"))
+        }
+    }
+}
+    
+
 
 struct ExpenseRowView: View {
     @ObservedRealmObject var expense: Expense
     @ObservedObject var viewModel: ExpenseViewModel
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("코인 이름: \(expense.coinName)")
-            Text("마켓 이름: \(expense.coinMarketName)")
-            Text("보유수량: \(expense.numberOfCoins)")
-            Text("총매입가격: \(expense.totalPurchaseAmount)")
-            
-            Text("실시간 가격: \(viewModel.livePrice)") // 실시간 가격은 ViewModel에서 가져옵니다.
-            Text("평가금액: \(calculateEvaluationAmount())")
-            Text("평균매수가: \(calculateAveragePurchasePrice())")
-            Text("수익률: \(calculateProfitLoss())%")
-            Text("평가손익: \(calculateMyResult())")
+        VStack {
+            HStack {
+                Text(expense.coinName)
+                    .fontWeight(.bold)
+                Text(expense.coinMarketName)
+                    .foregroundColor(.gray)
+
+                Spacer()
+
+                VStack(alignment: .trailing) {
+                    Text("평가손익: \(calculateMyResult(), specifier: "%.2f")원")
+                        .font(.callout)
+                    
+                    Text("수익률: \(calculateProfitLoss(), specifier: "%.2f")%")
+                        .font(.callout)
+                    Text("실시간 현재가: \(viewModel.livePrice)원")
+                        .font(.callout)
+               
+                }
+            }
+
+            Divider()
+
+            VStack(spacing: 10) {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("보유수량  (마켓티커)")
+                            .foregroundColor(.gray)
+                        Text("\(expense.numberOfCoins)개")
+                    }
+                    Spacer()
+                    VStack(alignment: .trailing) {
+                        Text("매수평균가")
+                            .foregroundColor(.gray)
+                        Text("\(calculateAveragePurchasePrice(), specifier: "%.2f")원")
+                    }
+                }
+
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("평가금액")
+                            .foregroundColor(.gray)
+                        Text("\(calculateEvaluationAmount(), specifier: "%.2f")원")
+                    }
+                    Spacer()
+                    VStack(alignment: .trailing) {
+                        Text("매수금액")
+                            .foregroundColor(.gray)
+                        Text("\(expense.totalPurchaseAmount)원")
+                    }
+                }
+            }
         }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 20)
+        .background(Color.gray.opacity(0.1))
+        .cornerRadius(10)
     }
+
+ 
 }
 
-  
 extension ExpenseRowView {
     
     // 평가 금액 = 현재코인 가격 * 보유 코인 갯수
-       private func calculateEvaluationAmount() -> Double {
-           let numberOfCoins = expense.numberOfCoins // Realm에서 최신 보유수량 값 사용
-           let livePrice = Double(viewModel.livePrice) ?? 0.0
-           return numberOfCoins * livePrice
-       }
-    
-    
-    
-    //평균매수가
+    private func calculateEvaluationAmount() -> Double {
+        let numberOfCoins = expense.numberOfCoins // Realm에서 최신 보유수량 값 사용
+        let livePrice = Double(viewModel.livePrice) ?? 0.0
+        return numberOfCoins * livePrice
+    }
+
+    // 평균매수가
     private func calculateAveragePurchasePrice() -> Double {
-            let totalPurchaseAmount = expense.totalPurchaseAmount // Realm에서 최신 총 매입 금액 사용
-            let numberOfCoins = expense.numberOfCoins // Realm에서 최신 보유수량 값 사용
-            
-            if numberOfCoins != 0 {
-                return totalPurchaseAmount / numberOfCoins
-            } else {
-                return 0.0 // 매수량이 0일 경우 평균 매수가는 0으로 설정
-            }
+        let totalPurchaseAmount = expense.totalPurchaseAmount // Realm에서 최신 총 매입 금액 사용
+        let numberOfCoins = expense.numberOfCoins // Realm에서 최신 보유수량 값 사용
+        
+        if numberOfCoins != 0 {
+            return totalPurchaseAmount / numberOfCoins
+        } else {
+            return 0.0 // 매수량이 0일 경우 평균 매수가는 0으로 설정
         }
+    }
     
-
     // 수익률 = (평가 금액 - 총 매입 금액) / 총 매입 금액 * 100
-       private func calculateProfitLoss() -> Double {
-           let evaluationAmount = calculateEvaluationAmount() // 평가 금액 계산
-           let totalPurchaseAmount = expense.totalPurchaseAmount // Realm에서 최신 총 매입 금액 사용
+    private func calculateProfitLoss() -> Double {
+        let evaluationAmount = calculateEvaluationAmount() // 평가 금액 계산
+        let totalPurchaseAmount = expense.totalPurchaseAmount // Realm에서 최신 총 매입 금액 사용
 
-           if totalPurchaseAmount != 0 {
-               let profitLossValue = (evaluationAmount - totalPurchaseAmount) / totalPurchaseAmount * 100
-               return profitLossValue
-           } else {
-               return 0.0 // 총 매입 금액이 0일 경우 수익률은 0으로 설정
-           }
-       }
-    
+        if totalPurchaseAmount != 0 {
+            let profitLossValue = (evaluationAmount - totalPurchaseAmount) / totalPurchaseAmount * 100
+            return profitLossValue
+        } else {
+            return 0.0 // 총 매입 금액이 0일 경우 수익률은 0으로 설정
+        }
+    }
     
     // 평가 손익 = 평가 금액 - 총 매입 금액
-        private func calculateMyResult() -> Double {
-            let evaluationAmount = calculateEvaluationAmount() // 평가 금액 계산
-            let totalPurchaseAmount = expense.totalPurchaseAmount // Realm에서 최신 총 매입 금액 사용
-            return evaluationAmount - totalPurchaseAmount
-        }
-    
-    
+    private func calculateMyResult() -> Double {
+        let evaluationAmount = calculateEvaluationAmount() // 평가 금액 계산
+        let totalPurchaseAmount = expense.totalPurchaseAmount // Realm에서 최신 총 매입 금액 사용
+        return evaluationAmount - totalPurchaseAmount
+    }
 }
+
 
 
 
@@ -195,7 +332,7 @@ extension ExpenseRowView {
 //               
 //             
 //      
-//            
+            
 //            ScrollView {
 //                CustomSegmentedControl()
 //                    .padding(.top)
@@ -216,19 +353,19 @@ extension ExpenseRowView {
 //                }
 //                .padding(.top)
 //            }
-//           // .navigationTitle("저장된 자산")
-//        }
-//        //.background(Color.yellow)
-//    }
-//    
-//
-//
+           // .navigationTitle("저장된 자산")
+     //   }
+        //.background(Color.yellow)
+  //  }
+    
+
+
 //}
 //
 //
 //
 //// 새로운 ExpenseRowView🔥
-//struct ExpenseRowView: View {
+//struct ExpenseRowView2: View {
 //    @ObservedObject var expense: Expense // Expense가 클래스이므로 @ObservedObject 사용
 //    @ObservedObject var viewModel: NewExpenseViewModel
 //
@@ -307,7 +444,7 @@ extension ExpenseRowView {
 //
 //
 //extension ExpenseListView {
-//    
+////    
 //    @ViewBuilder
 //    func CustomSegmentedControl() -> some View {
 //        HStack(spacing: 0) {
