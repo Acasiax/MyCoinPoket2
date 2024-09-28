@@ -195,16 +195,18 @@ class NewExpenseViewModel: ObservableObject {
     // 웹소켓 관찰🌟
     
     func observeWebSocket() {
+        print(#function)
         WebSocketManager.shared.openWebSocket()
 
         WebSocketManager.shared.tickerSubject
             .receive(on: DispatchQueue.main)
             .sink { [weak self] ticker in
                 guard let self = self else { return }
+                print("수신된 티커 데이터: \(ticker.code),, 가격: \(ticker.trade_price)")
                 if let viewModel = self.expenseViewModels.values.first(where: { $0.coinMarketName == ticker.code }) {
                     viewModel.livePrice = String(ticker.trade_price)
-                    //viewModel.evaluationAmount = viewModel.numberOfCoins * (Double(viewModel.livePrice) ?? 0.0)
-                   // updateEvaluationAmount(for: expenseViewModel)
+                 
+                   
                 }
             }
             .store(in: &cancellable)
@@ -238,7 +240,7 @@ class NewExpenseViewModel: ObservableObject {
 //              }
 //              .store(in: &cancellable)
 //      }
-    
+//    
     
 //    func observeWebSocket() {
 //           WebSocketManager.shared.openWebSocket()

@@ -19,6 +19,7 @@ class WebSocketManager: NSObject {
     var tickerSubject = PassthroughSubject<MarketPrice33, Never>()
     
     func openWebSocket() {
+        print(#function)
         let session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
         let url = URL(string: UpbitAPI.openWebSocketURL)!
         websocket = session.webSocketTask(with: url)
@@ -26,6 +27,7 @@ class WebSocketManager: NSObject {
     }
     
     func closeWebSocket() {
+        print(#function)
         websocket?.cancel(with: .goingAway, reason: nil)
         websocket = nil
     }

@@ -35,9 +35,12 @@ class Expense: Object, ObjectKeyIdentifiable {
 import SwiftUI
 import RealmSwift
 
+
 struct ExpenseListView: View {
     @ObservedResults(Expense.self) var realmExpenses
     @ObservedObject var viewModel: NewExpenseViewModel
+ 
+    @State private var timer: Timer? = nil
     
     var body: some View {
         List {
@@ -47,15 +50,39 @@ struct ExpenseListView: View {
             }
         }
         .onAppear {
+            print("======")
             fetchLivePriceForAllCoins()
+            startTimer()
+            
         }
+        .onDisappear {
+                   stopTimer()
+               }
+       
+
     }
 
+    
+    private func startTimer() {
+           timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+               fetchLivePriceForAllCoins()
+           }
+       }
+       
+       private func stopTimer() {
+           timer?.invalidate()
+           timer = nil
+       }
+    
     private func fetchLivePriceForAllCoins() {
         let allMarketCodes = realmExpenses.map { $0.coinMarketName }
         let uniqueMarketCodes = Array(Set(allMarketCodes))
         WebSocketManager.shared.send(marketCodes: uniqueMarketCodes)
+        print("웹소켓에 보낸 거 \(uniqueMarketCodes)")
     }
+    
+   
+    
 }
 
 struct ExpenseRowView: View {
