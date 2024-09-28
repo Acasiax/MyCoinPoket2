@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct ContentView: View {
     @StateObject private var tabBarVM = TabBarViewModel()
     @StateObject private var newExpenseViewModel = NewExpenseViewModel()
@@ -27,7 +25,8 @@ struct ContentView: View {
                     case .Home:
                         Home_CoinSearchView(appModel: AppViewModel())
                     case .Wallet:
-                        ExpenseListView(newExpenseViewModel: newExpenseViewModel)
+                        ExpenseListView(viewModel: newExpenseViewModel)
+                       // ExpenseListView()
                     case .News:
                         Home_NewsView(tabViewModel: tabViewModel, viewModel: newsViewModel)
                     case .GPTForturn:

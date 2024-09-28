@@ -60,7 +60,7 @@ class WebSocketManager: NSObject {
                 switch message {
                 case .data(let data):
                     if let jsonString = String(data: data, encoding: .utf8) {
-                      //  print("수신된 데이터: \(jsonString)")
+                      // print("수신된 데이터: \(jsonString)")
                         
                         // TOO_MANY_REQUEST 에러 확인 및 처리
                         if jsonString.contains("TOO_MANY_REQUEST") {

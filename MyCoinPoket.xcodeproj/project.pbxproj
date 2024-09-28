@@ -51,6 +51,7 @@
 		AA56B37A2CA636CD00B68816 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = AA56B3782CA4524900B68816 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AA56B37D2CA64FB000B68816 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA56B37C2CA64FB000B68816 /* Launch Screen.storyboard */; };
 		AA56B37F2CA660D300B68816 /* 바른생활런치스크린300.png in Resources */ = {isa = PBXBuildFile; fileRef = AA56B37E2CA660D300B68816 /* 바른생활런치스크린300.png */; };
+		AA56B3812CA78C8900B68816 /* RealmExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3802CA78C8900B68816 /* RealmExpense.swift */; };
 		AAD0A1032C94666800910ABF /* MyCoinPoketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */; };
 		AAD0A1052C94666800910ABF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1042C94666800910ABF /* ContentView.swift */; };
 		AAD0A1072C94666A00910ABF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAD0A1062C94666A00910ABF /* Assets.xcassets */; };
@@ -152,6 +153,7 @@
 		AA56B3752CA4283800B68816 /* TitleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleModifier.swift; sourceTree = "<group>"; };
 		AA56B37C2CA64FB000B68816 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		AA56B37E2CA660D300B68816 /* 바른생활런치스크린300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "바른생활런치스크린300.png"; sourceTree = "<group>"; };
+		AA56B3802CA78C8900B68816 /* RealmExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExpense.swift; sourceTree = "<group>"; };
 		AAD0A0FF2C94666800910ABF /* MyCoinPoket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCoinPoket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoinPoketApp.swift; sourceTree = "<group>"; };
 		AAD0A1042C94666800910ABF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			children = (
 				AA56B3192CA1C8D200B68816 /* ExpenseCalculator.swift */,
 				AA56B31B2CA1C8F000B68816 /* NewExpenseViewModel.swift */,
+				AA56B3802CA78C8900B68816 /* RealmExpense.swift */,
 			);
 			path = NewExpenseViewModel;
 			sourceTree = "<group>";
@@ -821,6 +824,7 @@
 				AA56B3712CA2A5B600B68816 /* FearGredIndexItemScroll.swift in Sources */,
 				AAD0A15E2C946AF000910ABF /* GraphView.swift in Sources */,
 				AA56B3572CA2A41600B68816 /* FearGreedAPI.swift in Sources */,
+				AA56B3812CA78C8900B68816 /* RealmExpense.swift in Sources */,
 				AAD0A16D2C952DE500910ABF /* HeaderNamedView.swift in Sources */,
 				AA56B35A2CA2A45F00B68816 /* FearGreedNetworkManager.swift in Sources */,
 				AAD0A13A2C94684F00910ABF /* NewsDetailView.swift in Sources */,
