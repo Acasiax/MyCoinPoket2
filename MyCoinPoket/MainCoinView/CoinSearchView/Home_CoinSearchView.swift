@@ -26,7 +26,8 @@ struct Home_CoinSearchView: View {
     
     var body: some View {
         ZStack {
-            NavigationStack {
+        
+         //   NavigationStack {
                 
                 VStack {
                     categoryButtonsView()
@@ -40,8 +41,8 @@ struct Home_CoinSearchView: View {
                         )
                     }
                     .foregroundStyle(.primary)
-                    .navigationTitle("시세")
-                 //   .navigationBarTitleDisplayMode(.inline)
+                  //  .navigationTitle("시세")
+                    .navigationBarTitleDisplayMode(.inline)
                     .navigationBarTitleTextColor(.black)
                     .searchable(text: $text, placement: .navigationBarDrawer, prompt: "코인 이름을 검색해보세요")
 //                    .background(Color(CustomColors.lightGray)
@@ -52,7 +53,8 @@ struct Home_CoinSearchView: View {
                 } .background {
                     Color("LightGrayBG").ignoresSafeArea()
                 }
-            }
+               
+          //  }
            // .ignoresSafeArea(edges: .top)
             .task {
                 do {

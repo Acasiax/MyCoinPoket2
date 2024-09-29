@@ -17,7 +17,7 @@ struct TabModel: Identifiable {
         case bitcoin = "비트코인"
         case nft = "NFT"
         case crypto = "스테이킹"
-        case privacy = "asdf"
+        case privacy = "에어드롭"
     }
 }
 

@@ -202,7 +202,7 @@ class NewExpenseViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] ticker in
                 guard let self = self else { return }
-                print("수신된 티커 데이터: \(ticker.code),, 가격: \(ticker.trade_price)")
+              //  print("수신된 티커 데이터: \(ticker.code),, 가격: \(ticker.trade_price)")
                 if let viewModel = self.expenseViewModels.values.first(where: { $0.coinMarketName == ticker.code }) {
                     viewModel.livePrice = String(ticker.trade_price)
                  
@@ -211,84 +211,7 @@ class NewExpenseViewModel: ObservableObject {
             }
             .store(in: &cancellable)
     }
-
-    
-//    func observeWebSocket() {
-//         
-//          WebSocketManager.shared.openWebSocket()
-//
-//          WebSocketManager.shared.tickerSubject
-//              .receive(on: DispatchQueue.main)
-//              .sink { [weak self] ticker in
-//                  guard let self = self else { return }
-//                //  print("수신된 티커 데이터: \(ticker.code), 가격: \(ticker.trade_price)")
-//             
-////                   모든 Expense 객체의 coinMarketName과 수신된 ticker의 code를 비교하여 업데이트
-//                  for expenseViewModel in self.expenseViewModels {
-//                      if expenseViewModel.coinMarketName == ticker.code {
-//                          
-//                          expenseViewModel.livePrice = String(ticker.trade_price) // 실시간 가격을 업데이트
-//                         print("업데이트된 \(expenseViewModel.coinName)의 실시간 가격: \(expenseViewModel.livePrice)")
-//                          
-//                          updateEvaluationAmount(for: expenseViewModel) //평가금액
-////                          updateaveragePurchasePrice(for: expense) //평균매수가
-////                          updateprofitLoss(for: expense) //수익률
-////                          updateMyResult(for: expense)
-//                          
-//                      }
-//                  }
-//              }
-//              .store(in: &cancellable)
-//      }
-//    
-    
-//    func observeWebSocket() {
-//           WebSocketManager.shared.openWebSocket()
-//           WebSocketManager.shared.tickerSubject
-//               .receive(on: DispatchQueue.main)
-//               .sink { [weak self] ticker in
-//                   guard let self = self else { return }
-//                     print("수신된 티커 데이터: \(ticker.code), 가격: \(ticker.trade_price)")
-//                   // 모든 ExpenseViewModel의 coinMarketName과 수신된 ticker의 code를 비교하여 업데이트
-//                   for expenseViewModel in self.expenseViewModels {
-//                       if expenseViewModel.coinMarketName == ticker.code {
-//                           expenseViewModel.livePrice = String(ticker.trade_price)
-//                           expenseViewModel.evaluationAmount = expenseViewModel.numberOfCoins * (Double(expenseViewModel.livePrice) ?? 0.0)
-//                           expenseViewModel.myResult = expenseViewModel.evaluationAmount - expenseViewModel.totalPurchaseAmount
-//                           expenseViewModel.profitRatePercent = (expenseViewModel.myResult / expenseViewModel.totalPurchaseAmount) * 100
-//                       }
-//                   }
-//               }
-//               .store(in: &cancellable)
-//       }
-
-    
-//    func observeWebSocket() {
-//        
-//         WebSocketManager.shared.openWebSocket()
-//
-//         WebSocketManager.shared.tickerSubject
-//             .receive(on: DispatchQueue.main)
-//             .sink { [weak self] ticker in
-//                 guard let self = self else { return }
-//                // print("수신된 티커 데이터: \(ticker.code), 가격: \(ticker.trade_price)")
-//                 
-//                 // 모든 Expense 객체의 coinMarketName과 수신된 ticker의 code를 비교하여 업데이트
-//                 for expense in self.expenses {
-//                     if expense.coinMarketName == ticker.code {
-//                         expense.livePrice = String(ticker.trade_price) // 실시간 가격을 업데이트
-//                         print("업데이트된 \(expense.coinName)의 실시간 가격: \(expense.livePrice)")
-//                         updateEvaluationAmount(for: expense) //평가금액
-//                         updateaveragePurchasePrice(for: expense) //평균매수가
-//                         updateprofitLoss(for: expense) //수익률
-//                         updateMyResult(for: expense)
-//                         
-//                     }
-//                 }
-//             }
-//             .store(in: &cancellable)
-//     }
-     
+ 
     
     // 실시간 가격을 받아온 후에 저장하는 로직
     func saveExpense(coinName: String, coinMarketName: String, numberOfCoins: Double, buyPrice: Double, resultPrice: Double, date: Date, selectedType: ExpenseType) {

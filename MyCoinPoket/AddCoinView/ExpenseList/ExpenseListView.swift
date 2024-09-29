@@ -66,49 +66,47 @@ struct ExpenseListView: View {
     var body: some View {
         
         VStack{
-            HStack(spacing: -15) {
-                Image(.logo)
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .padding(.leading, 10)
-                
+            HStack {
                 Text("내 자산 포트폴리오")
                     .naviTitleStyle()
                 Spacer()
             }
-             .background(Color.green)
+            //  .background(Color.green)
             
             
-            ChartView(expenses: Array(realmExpenses), chartType: $chartType)
-                   .padding(.horizontal, 15)
-        }
-        ScrollView {
-            
-            CustomSegmentedControl()
-            .padding(.top)
-            
-            LazyVStack(alignment: .leading, spacing: 12) {
-                ForEach(filteredExpenses) { expense in
-                    let expenseViewModel = viewModel.getExpenseViewModel(for: expense)
-                    ExpenseRowView(expense: expense, viewModel: expenseViewModel)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 20)
-                       // .background(Color.gray.opacity(0.1))
-                        .background {
-                            Color("BG").ignoresSafeArea()
+            ScrollView {
+                ChartView(expenses: Array(realmExpenses), chartType: $chartType)
+                    .padding(.horizontal, 15)
+                
+                ScrollView {
+                    
+                    CustomSegmentedControl()
+                        .padding(.top)
+                    
+                    LazyVStack(alignment: .leading, spacing: 12) {
+                        ForEach(filteredExpenses) { expense in
+                            let expenseViewModel = viewModel.getExpenseViewModel(for: expense)
+                            ExpenseRowView(expense: expense, viewModel: expenseViewModel)
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 20)
+                            // .background(Color.gray.opacity(0.1))
+                                .background {
+                                    Color("BG").ignoresSafeArea()
+                                }
+                                .cornerRadius(10)
                         }
-                        .cornerRadius(10)
+                    }
+                    .padding()
+                }
+                .onAppear {
+                    print("======")
+                    fetchLivePriceForAllCoins()
+                    startTimer()
+                }
+                .onDisappear {
+                    stopTimer()
                 }
             }
-            .padding()
-        }
-        .onAppear {
-            print("======")
-            fetchLivePriceForAllCoins()
-            startTimer()
-        }
-        .onDisappear {
-            stopTimer()
         }
     }
     
