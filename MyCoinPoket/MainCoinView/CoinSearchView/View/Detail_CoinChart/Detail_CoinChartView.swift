@@ -40,9 +40,8 @@ struct Detail_CoinChartView: View {
             .padding()
             .background(Color.white)
             
-            HeaderNamedView(coin88: coin88)
+            HeaderNamedView(coin88: coin88, socketViewModel: socketViewModel)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color.green)
                 .padding(.top, 10)
             
             // MainPriceInfoView에 socketViewModel 전달

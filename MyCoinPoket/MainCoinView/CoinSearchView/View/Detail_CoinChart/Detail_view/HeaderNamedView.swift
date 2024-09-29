@@ -10,28 +10,34 @@ import SwiftUI
 struct HeaderNamedView: View {
     
     var coin88: UpBitMarket
+    @ObservedObject var socketViewModel: SocketViewModel
     
     var body: some View {
         HStack(spacing: 15){
-        
-            Image(systemName: "star")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 50, height: 50)
+            
+            if let coin = socketViewModel.coins.first(where: { $0.code == coin88.market }) {
+                       let price = coin.trade_price
+                       let prevPrice = coin.prev_closing_price
+
+                       Rectangle()
+                           .frame(width: 7, height: 40)
+                           .cornerRadius(5)
+                           .foregroundColor(price > prevPrice ? .red : (price < prevPrice ? .blue : .primary))
+                   } else {
+                       Rectangle()
+                           .frame(width: 7, height: 40)
+                           .cornerRadius(5)
+                           .foregroundColor(.primary)
+                   }
             
             VStack(alignment: .leading, spacing: 5) {
                 Text(coin88.koreanName)
-                    .font(.callout)
-                if let price = coin88.price {
-                    Text("현재 가격: \(price, specifier: "%.2f")")
-                        .font(.headline)
-                        .foregroundStyle(.green)
-                } else {
-                    Text("가격 정보 없음")
-                        .font(.headline)
-                        .foregroundStyle(.red)
-                }
-         
+                    .font(.title3)
+                    .bold()
+                
+                Text(coin88.market)
+            
+                
             }
         }
     }
@@ -46,7 +52,6 @@ struct MainPriceInfoView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(coin88.market)
             
             // 실시간 가격 표시
             if let coin = socketViewModel.coins.first(where: { $0.code == coin88.market }) {
@@ -60,8 +65,10 @@ struct MainPriceInfoView: View {
                     .font(.largeTitle.bold())
             }
 
-            // change_price 변동액 표시
-            if let changePrice = coin88.change_price {
+     
+            // 실시간 가격을 이용한 change_price 변동액 표시
+            if let coin = socketViewModel.coins.first(where: { $0.code == coin88.market }) {
+                let changePrice = coin.trade_price - coin.prev_closing_price
                 Text("\(changePrice > 0 ? "+" : "")\(String(format: "%.2f", changePrice))")
                     .font(.caption)
                     .fontWeight(.semibold)
