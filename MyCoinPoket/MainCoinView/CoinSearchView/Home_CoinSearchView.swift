@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - 배너
 struct Home_CoinSearchView: View {
 
     @State private var text = ""
@@ -26,36 +25,50 @@ struct Home_CoinSearchView: View {
     
     var body: some View {
         ZStack {
-        
-         //   NavigationStack {
+            VStack {
+                HStack{
+                    Text("시세")
+                        .naviTitleStyle()
+                    Spacer()
+                }
+                // 검색 필드
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.gray)
+                    TextField("코인 이름을 검색해보세요", text: $text)
+                        .padding(.vertical, 8)
+                }
+                .background(Color(.systemGray4))
+                .cornerRadius(10)
                 
-                VStack {
-                    categoryButtonsView()
-                    
-                    ScrollView {
-                        CoinListView(
-                            filterCoinName: filterCoinName,
-                            selectedItem: $selectedItem,
-                            appModel: appModel,
-                            loadCoinPrice: loadCoinPrice
-                        )
-                    }
-                    .foregroundStyle(.primary)
-                  //  .navigationTitle("시세")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .navigationBarTitleTextColor(.black)
-                    .searchable(text: $text, placement: .navigationBarDrawer, prompt: "코인 이름을 검색해보세요")
-//                    .background(Color(CustomColors.lightGray)
-//                        .ignoresSafeArea())
-                    .background {
-                       Color("LightGrayBG").ignoresSafeArea()
-                   }
-                } .background {
+                .padding(.horizontal, 10)
+                .padding(.bottom)
+                //  .background(Color.green)
+               
+                .cornerRadius(10)
+                .padding([.leading, .trailing], 16)
+                
+                // 카테고리 버튼 뷰
+                categoryButtonsView()
+                
+                ScrollView {
+                    CoinListView(
+                        filterCoinName: filterCoinName,
+                        selectedItem: $selectedItem,
+                        appModel: appModel,
+                        loadCoinPrice: loadCoinPrice
+                    )
+                }
+                .foregroundStyle(.primary)
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarTitleTextColor(.black)
+                .background {
                     Color("LightGrayBG").ignoresSafeArea()
                 }
-               
-          //  }
-           // .ignoresSafeArea(edges: .top)
+            }
+            .background {
+                Color("LightGrayBG").ignoresSafeArea()
+            }
             .task {
                 do {
                     let result = try await UpbitAPIManager.fetchMarket()
@@ -74,12 +87,6 @@ struct Home_CoinSearchView: View {
     }
 }
 
-
-
-
 #Preview {
     Home_CoinSearchView(appModel: AppViewModel())
-    // .preferredColorScheme(.dark)
-    
 }
-

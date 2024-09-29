@@ -39,11 +39,22 @@ struct CoinListView: View {
 
 
     func rowView(_ item: UpBitMarket) -> some View {
+       
         HStack {
-            Rectangle()
-                .frame(width: 5, height: 20)
-                .cornerRadius(5)
-                .foregroundColor(colorForChange(item.change))
+              if let coin = socketViewModel.coins.first(where: { $0.code == item.market }) {
+                  let price = coin.trade_price
+                  let prevPrice = coin.prev_closing_price
+
+                  Rectangle()
+                      .frame(width: 5, height: 20)
+                      .cornerRadius(5)
+                      .foregroundColor(price > prevPrice ? .red : (price < prevPrice ? .blue : .primary))
+              } else {
+                  Rectangle()
+                      .frame(width: 5, height: 20)
+                      .cornerRadius(5)
+                      .foregroundColor(.primary)
+              }
             
             VStack(alignment: .leading) {
                 Text(item.koreanName)

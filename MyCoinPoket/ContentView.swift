@@ -23,6 +23,7 @@ struct ContentView: View {
                 VStack {
                     switch tabBarVM.currentTab {
                     case .Home:
+                       // HomeTest333()
                         Home_CoinSearchView(appModel: AppViewModel())
                     case .Wallet:
                         ExpenseListView(viewModel: newExpenseViewModel)
