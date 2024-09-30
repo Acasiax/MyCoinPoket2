@@ -20,12 +20,12 @@ struct SettingListView: View {
                     NavigationLink(destination: FearGreedHomeView()) {
                         Text("크립토 공포/ 탐욕 지수 확인하기")
                     }
-                    NavigationLink(destination: ForturnView()) {
-                        Text("GPT 비트코인 주간 운세")
-                    }
-                    NavigationLink(destination: DetailView(itemName: "아이템 3")) {
-                        Text("초기화")
-                    }
+//                    NavigationLink(destination: ForturnView()) {
+//                        Text("GPT 비트코인 주간 운세")
+//                    }
+//                    NavigationLink(destination: DetailView(itemName: "아이템 3")) {
+//                        Text("초기화")
+//                    }
                     
                     // 다크모드 토글
                     Toggle(isOn: $isDarkMode) {
