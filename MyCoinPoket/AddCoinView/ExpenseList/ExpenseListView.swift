@@ -185,10 +185,12 @@ struct ExpenseRowView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(expense.coinName)
-                    .fontWeight(.bold)
-                Text(expense.coinMarketName)
-                    .foregroundColor(.gray)
+                VStack(alignment: .leading){
+                    Text(expense.coinName)
+                        .fontWeight(.bold)
+                    Text(expense.coinMarketName)
+                        .foregroundColor(.gray)
+                }
 
                 Spacer()
 
@@ -209,7 +211,7 @@ struct ExpenseRowView: View {
             VStack(spacing: 10) {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("보유수량  (마켓티커)")
+                        Text("보유수량")
                             .foregroundColor(.gray)
                         Text("\(expense.numberOfCoins)개")
                     }
