@@ -10,7 +10,8 @@ import Charts
 import RealmSwift
 
 struct ChartView: View {
-    var expenses: [Expense]
+   // var expenses: [Expense]
+    @ObservedResults(Expense.self) var realmExpenses
     @Binding var chartType: ChartType
     
     var body: some View {
@@ -29,9 +30,9 @@ struct ChartView: View {
             
             switch chartType {
             case .pie:
-                PieChartView(expenses: expenses)
+                PieChartView(expenses: realmExpenses)
             case .bar:
-                BarChartView(expenses: expenses)
+                BarChartView(expenses: realmExpenses)
                 
             }
         }
@@ -39,7 +40,7 @@ struct ChartView: View {
 }
 
 struct PieChartView: View {
-    var expenses: [Expense]
+    var expenses: Results<Expense>
     
     var body: some View {
         VStack {
@@ -68,7 +69,7 @@ struct PieChartView: View {
 
 
 struct BarChartView: View {
-    var expenses: [Expense]
+    var expenses: Results<Expense>
     
     var body: some View {
         Chart {

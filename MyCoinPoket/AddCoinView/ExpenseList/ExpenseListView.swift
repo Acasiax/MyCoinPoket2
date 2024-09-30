@@ -74,32 +74,52 @@ struct ExpenseListView: View {
             //  .background(Color.green)
             
             
-            ScrollView {
-                ChartView(expenses: Array(realmExpenses), chartType: $chartType)
+           // ScrollView {
+//                ChartView(expenses: Array(realmExpenses), chartType: $chartType)
+                ChartView(chartType: $chartType)
                     .padding(.horizontal, 15)
                 
-                ScrollView {
+             //   ScrollView {
                     
                     CustomSegmentedControl()
                         .padding(.top)
                     
-                    LazyVStack(alignment: .leading, spacing: 12) {
-                        ForEach(filteredExpenses) { expense in
-                            let expenseViewModel = viewModel.getExpenseViewModel(for: expense)
-                            ExpenseRowView(expense: expense, viewModel: expenseViewModel)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 20)
-                            // .background(Color.gray.opacity(0.1))
-                                .background {
-                                    Color("BG").ignoresSafeArea()
-                                }
-                                .cornerRadius(10)
-                        }
+//                    LazyVStack(alignment: .leading, spacing: 12) {
+//                        ForEach(filteredExpenses) { expense in
+//                            let expenseViewModel = viewModel.getExpenseViewModel(for: expense)
+//                            ExpenseRowView(expense: expense, viewModel: expenseViewModel)
+//                                .padding(.horizontal, 10)
+//                                .padding(.vertical, 20)
+//                            // .background(Color.gray.opacity(0.1))
+//                                .background {
+//                                    Color("BG").ignoresSafeArea()
+//                                }
+//                                .cornerRadius(10)
+//                        }
+//                        .onDelete(perform: deleteExpense)
+//                       
+//                    }
+                List {
+                    ForEach(filteredExpenses) { expense in
+                        let expenseViewModel = viewModel.getExpenseViewModel(for: expense)
+                        ExpenseRowView(expense: expense, viewModel: expenseViewModel)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 20)
+                            .background {
+                                Color("BG").ignoresSafeArea()
+                            }
+                            .cornerRadius(10)
                     }
-                    .padding()
+                    .onDelete(perform: deleteExpense)
                 }
+                .listStyle(PlainListStyle())
+
+                   // .padding()
+             //   }
+                
                 .onAppear {
                     print("======")
+                    viewModel.updateExpenseViewModels()
                     fetchLivePriceForAllCoins()
                     startTimer()
                 }
@@ -108,7 +128,7 @@ struct ExpenseListView: View {
                 }
             }
         }
-    }
+  //  }
     
     private func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
@@ -127,6 +147,14 @@ struct ExpenseListView: View {
         WebSocketManager.shared.send(marketCodes: uniqueMarketCodes)
         print("웹소켓에 보낸 거 \(uniqueMarketCodes)")
     }
+    
+    // Realm에서 객체 삭제하는 함수
+      private func deleteExpense(at offsets: IndexSet) {
+          offsets.map { filteredExpenses[$0] }.forEach { expense in
+              viewModel.deleteExpense(expense: expense)
+          }
+      }
+
     
     private func calculateMyResult(expense: Expense) -> Double {
         let livePrice = Double(viewModel.getExpenseViewModel(for: expense).livePrice) ?? 0.0

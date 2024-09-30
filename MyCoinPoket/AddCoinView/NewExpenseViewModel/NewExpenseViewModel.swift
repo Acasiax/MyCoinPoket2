@@ -116,24 +116,42 @@ class NewExpenseViewModel: ObservableObject {
            observeWebSocket1()
        }
 
-       private func updateExpenseViewModels() {
-           for expense in realmExpenses {
-               if expenseViewModels[expense.id] == nil {
-                   expenseViewModels[expense.id] = ExpenseViewModel(expense: expense)
-               }
-           }
-       }
-       
-       func getExpenseViewModel(for expense: Expense) -> ExpenseViewModel {
-           if let existingViewModel = expenseViewModels[expense.id] {
-               return existingViewModel
-           } else {
-               let newViewModel = ExpenseViewModel(expense: expense)
-               expenseViewModels[expense.id] = newViewModel
-               return newViewModel
-           }
-       }
+    // 모든 Expense 객체에 대한 ExpenseViewModel 업데이트
+      func updateExpenseViewModels() {
+          for expense in realmExpenses {
+              if expenseViewModels[expense.id] == nil {
+                  expenseViewModels[expense.id] = ExpenseViewModel(expense: expense)
+              }
+          }
+      }
+      
+    func getExpenseViewModel(for expense: Expense) -> ExpenseViewModel {
+        if let expenseViewModel = expenseViewModels[expense.id] {
+            return expenseViewModel
+        } else {
+            let newViewModel = ExpenseViewModel(expense: expense)
+            expenseViewModels[expense.id] = newViewModel
+            return newViewModel
+        }
+    }
 
+    
+    // 삭제 함수 추가
+       func deleteExpense(expense: Expense) {
+           do {
+               let realm = try Realm()
+               try realm.write {
+                   if let index = realmExpenses.firstIndex(where: { $0.id == expense.id }) {
+                       realm.delete(realmExpenses[index])
+                   }
+               }
+               // 삭제 후 실시간 가격 요청 업데이트
+               fetchLivePriceForAllCoins()
+           } catch {
+               print("Realm 삭제 중 오류 발생: \(error.localizedDescription)")
+           }
+       }
+    
     
     // 웹소켓을 통해 실시간 가격을 업데이트하는 메서드 (이거는 struct NewExpense에 사용하는 거임)
     func observeWebSocket1() {
