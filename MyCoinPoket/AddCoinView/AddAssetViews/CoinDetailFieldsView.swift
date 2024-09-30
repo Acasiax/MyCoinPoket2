@@ -84,7 +84,7 @@ struct CoinDetailFieldsView: View {
             }
             
             // 실시간 코인가격 필드
-            HStack {
+            HStack(alignment: .center) {
                 Text("실시간 코인가격")
                     .fontWeight(.bold)
                 
@@ -101,11 +101,33 @@ struct CoinDetailFieldsView: View {
                 } else {
                     Text(viewModel.livePrice)
                 }
+                //  }
+                
+                // 수익 또는 손실 상태 표시
+                // CheckBox(viewModel: viewModel)
+                if let buyPrice = Double(viewModel.buyPrice), let livePrice = Double(viewModel.livePrice), buyPrice != 0 {
+                    if buyPrice < livePrice {
+                        Text("수익입니다")
+                           // .applyProfitLossStyle()
+                        
+                            .foregroundColor(.green)
+                    } else if buyPrice > livePrice {
+                        Text("손실입니다")
+                         //   .applyProfitLossStyle()
+                            .foregroundColor(.red)
+                    } else {
+                        Text("변동 없음")
+                          //  .applyProfitLossStyle()
+                            .foregroundColor(.gray)
+                    }
+                } else {
+                    Text("")
+                    //    .applyProfitLossStyle()
+                    
+                }
+                
+                
             }
-            
-            // 수익 또는 손실 상태 표시
-            CheckBox(viewModel: viewModel)
-
             
             Label {
                 DatePicker("", selection: $viewModel.date, displayedComponents: [.date])
@@ -192,3 +214,18 @@ struct CheckBoxStyle: ToggleStyle {
     }
 }
 
+// 커스텀 수정자 정의
+extension View {
+    func applyProfitLossStyle() -> some View {
+        self
+            .font(.system(size: 15))
+            .padding(.horizontal, 30)
+            .frame(maxWidth: .infinity) // 최대 너비 설정
+//            .background(
+//                RoundedRectangle(cornerRadius: 12, style: .continuous)
+//                    .fill(Color.white)
+//            )
+            
+           
+    }
+}

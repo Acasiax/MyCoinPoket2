@@ -107,11 +107,13 @@ struct ExpenseListView: View {
                             .padding(.vertical, 20)
                             .background {
                                 Color("BG").ignoresSafeArea()
+                               // Color.blue.ignoresSafeArea()
                             }
                             .cornerRadius(10)
                     }
                     .onDelete(perform: deleteExpense)
                 }
+                .cornerRadius(10)
                 .listStyle(PlainListStyle())
 
                    // .padding()
