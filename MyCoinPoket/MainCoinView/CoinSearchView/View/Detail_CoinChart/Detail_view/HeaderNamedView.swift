@@ -67,9 +67,12 @@ struct MainPriceInfoView: View {
 
      
             // 실시간 가격을 이용한 change_price 변동액 표시
+            // 실시간 가격을 이용한 change_price 변동액 표시
             if let coin = socketViewModel.coins.first(where: { $0.code == coin88.market }) {
                 let changePrice = coin.trade_price - coin.prev_closing_price
-                Text("\(changePrice > 0 ? "+" : "")\(String(format: "%.2f", changePrice))")
+                let formattedChangePrice = String(format: "%.2f", changePrice).convertToCurrencyFormat()
+
+                Text("\(changePrice > 0 ? "+" : "")\(formattedChangePrice)")
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(changePrice < 0 ? .white : .black)
@@ -90,6 +93,20 @@ struct MainPriceInfoView: View {
                             .fill(Color.gray)
                     }
             }
+
         }
+    }
+}
+
+extension String {
+    func convertToCurrencyFormat() -> String {
+        if let value = Double(self) {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.maximumFractionDigits = 2
+            formatter.minimumFractionDigits = 2
+            return formatter.string(from: NSNumber(value: value)) ?? self
+        }
+        return self
     }
 }

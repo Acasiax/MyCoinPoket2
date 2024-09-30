@@ -14,7 +14,7 @@ struct FearGreedDisplayCard: View {
     
     var body: some View {
         VStack{
-            Text("현재 크립토 공포 지수")
+            Text("\(viewModel.selectedIndexType) 크립토 공포 지수")
                 .fontWeight(.heavy)
                 .foregroundStyle(Color(CustomColors.darkBlue))
                 .font(.title3)

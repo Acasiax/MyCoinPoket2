@@ -14,7 +14,7 @@ class FearGreedViewModel: ObservableObject {
     @Published var lastWeekIndex: FearGreedIndex?
     @Published var lastMonthIndex: FearGreedIndex?
     @Published var indexItem: [IndexItem] = [] // indexItem 배열에 데이터 저장
-    
+    @Published var selectedIndexType: String = "현재"
 
     func fetchFearGreedIndex() {
         FearGreedNetworkManager.fetchFearGreedIndex { result in

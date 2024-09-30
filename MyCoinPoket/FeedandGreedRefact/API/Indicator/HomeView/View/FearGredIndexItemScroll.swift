@@ -53,41 +53,40 @@ extension FearGredIndexItemScroll {
                 
                 Text(indexItem.amount)
                     .fontWeight(.bold)
-                  
+                
             }
-          //  .padding()
-          //  .background(Color(CustomColors.lightnavy))
+            //  .padding()
+            //  .background(Color(CustomColors.lightnavy))
             .cornerRadius(10)
-            
             .onTapGesture {
                 // 선택한 공포지수 값으로 currentIndex 업데이트
                 if let selectedIndex = viewModel.indexItem.firstIndex(where: { $0.id == indexItem.id }) {
                     let fearGreedIndices = [viewModel.currentIndex, viewModel.yesterdayIndex, viewModel.lastWeekIndex, viewModel.lastMonthIndex]
-                    
+                    // 다른 행을 눌렀을 때도 정상적으로 값을 업데이트
                     if let fearGreedIndex = fearGreedIndices[selectedIndex] {
-                        // 다른 행을 눌렀을 때도 정상적으로 값을 업데이트
-                        if viewModel.currentIndex?.value != fearGreedIndex.value {
-                            viewModel.currentIndex = fearGreedIndex
-                            
-                            // 프로그레스바 업데이트
-                            withAnimation(.easeInOut(duration: 1.5)) {
-                                progress = CGFloat(Double(fearGreedIndex.value) ?? 0) / 100
-                            }
-                        } else {
-                            // currentIndex를 nil로 설정한 후에 다시 원래 값으로 설정하는 트릭
-                            viewModel.currentIndex = nil
-                            progress = 0
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                viewModel.currentIndex = fearGreedIndex
-                                withAnimation(.easeInOut(duration: 1.5)) {
-                                    progress = CGFloat(Double(fearGreedIndex.value) ?? 0) / 100
-                                }
-                            }
+                        viewModel.currentIndex = fearGreedIndex
+                        
+                        // 선택된 인덱스 타입 업데이트
+                        switch selectedIndex {
+                        case 0:
+                            viewModel.selectedIndexType = "현재"
+                        case 1:
+                            viewModel.selectedIndexType = "어제"
+                        case 2:
+                            viewModel.selectedIndexType = "지난주"
+                        case 3:
+                            viewModel.selectedIndexType = "29일 전"
+                        default:
+                            viewModel.selectedIndexType = "현재"
+                        }
+                        
+                        // 프로그레스바 업데이트
+                        withAnimation(.easeInOut(duration: 1.5)) {
+                            progress = CGFloat(Double(fearGreedIndex.value) ?? 0) / 100
                         }
                     }
                 }
             }
-            
         }
         
     }

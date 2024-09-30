@@ -51,7 +51,7 @@ struct Detail_CoinChartView: View {
             // 라인 그래프
             GraphView(market: coin88.market, appModel: appModel)
             
-            Controls()  // 구매/판매 버튼
+           // Controls()  // 구매/판매 버튼
         }
         .padding(.horizontal, 16)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
