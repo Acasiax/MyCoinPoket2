@@ -63,11 +63,16 @@ struct Home_CoinSearchView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarTitleTextColor(.black)
                 .background {
-                    Color("LightGrayBG").ignoresSafeArea()
+                   // Color.white.ignoresSafeArea()
+                    Color("BasicWhite").ignoresSafeArea()
                 }
+//                .background {
+//                    Color("LightGrayBG").ignoresSafeArea()
+//                }
             }
             .background {
-                Color("LightGrayBG").ignoresSafeArea()
+                //Color("LightGrayBG").ignoresSafeArea()
+                Color("BasicWhite").ignoresSafeArea()
             }
             .task {
                 do {
