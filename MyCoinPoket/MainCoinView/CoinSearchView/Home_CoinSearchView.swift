@@ -38,7 +38,8 @@ struct Home_CoinSearchView: View {
                     TextField("코인 이름을 검색해보세요", text: $text)
                         .padding(.vertical, 8)
                 }
-                .background(Color(.systemGray4))
+                .padding(.horizontal)
+                .background(Color(.systemGray5))
                 .cornerRadius(10)
                 
                 .padding(.horizontal, 10)
@@ -46,7 +47,7 @@ struct Home_CoinSearchView: View {
                 //  .background(Color.green)
                
                 .cornerRadius(10)
-                .padding([.leading, .trailing], 16)
+                .padding([.leading, .trailing], 1)
                 
                 // 카테고리 버튼 뷰
                 categoryButtonsView()

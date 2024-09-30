@@ -52,6 +52,9 @@
 		AA56B37D2CA64FB000B68816 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA56B37C2CA64FB000B68816 /* Launch Screen.storyboard */; };
 		AA56B37F2CA660D300B68816 /* 바른생활런치스크린300.png in Resources */ = {isa = PBXBuildFile; fileRef = AA56B37E2CA660D300B68816 /* 바른생활런치스크린300.png */; };
 		AA56B3812CA78C8900B68816 /* RealmExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3802CA78C8900B68816 /* RealmExpense.swift */; };
+		AA56B3832CAADFAB00B68816 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3822CAADFAB00B68816 /* SplashView.swift */; };
+		AA56B38A2CAAE5B600B68816 /* Cafe24Ohsquare-v2.0.otf in Resources */ = {isa = PBXBuildFile; fileRef = AA56B3892CAAE5B600B68816 /* Cafe24Ohsquare-v2.0.otf */; };
+		AA56B38C2CAAE61200B68816 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B38B2CAAE61200B68816 /* Font.swift */; };
 		AAD0A1032C94666800910ABF /* MyCoinPoketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */; };
 		AAD0A1052C94666800910ABF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1042C94666800910ABF /* ContentView.swift */; };
 		AAD0A1072C94666A00910ABF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAD0A1062C94666A00910ABF /* Assets.xcassets */; };
@@ -154,6 +157,9 @@
 		AA56B37C2CA64FB000B68816 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		AA56B37E2CA660D300B68816 /* 바른생활런치스크린300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "바른생활런치스크린300.png"; sourceTree = "<group>"; };
 		AA56B3802CA78C8900B68816 /* RealmExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExpense.swift; sourceTree = "<group>"; };
+		AA56B3822CAADFAB00B68816 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		AA56B3892CAAE5B600B68816 /* Cafe24Ohsquare-v2.0.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cafe24Ohsquare-v2.0.otf"; sourceTree = "<group>"; };
+		AA56B38B2CAAE61200B68816 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		AAD0A0FF2C94666800910ABF /* MyCoinPoket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCoinPoket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoinPoketApp.swift; sourceTree = "<group>"; };
 		AAD0A1042C94666800910ABF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -433,6 +439,24 @@
 			path = SettingListView;
 			sourceTree = "<group>";
 		};
+		AA56B3842CAAE50700B68816 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				AA56B3852CAAE51400B68816 /* Font */,
+				AA56B3822CAADFAB00B68816 /* SplashView.swift */,
+				AA56B38B2CAAE61200B68816 /* Font.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		AA56B3852CAAE51400B68816 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				AA56B3892CAAE5B600B68816 /* Cafe24Ohsquare-v2.0.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		AAD0A0F62C94666800910ABF = {
 			isa = PBXGroup;
 			children = (
@@ -455,6 +479,7 @@
 		AAD0A1012C94666800910ABF /* MyCoinPoket */ = {
 			isa = PBXGroup;
 			children = (
+				AA56B3842CAAE50700B68816 /* Splash */,
 				AAD0A13D2C9468DD00910ABF /* Info.plist */,
 				AA56B3722CA2ABA800B68816 /* SettingListView */,
 				AA56B34B2CA2A30E00B68816 /* FeedandGreedRefact */,
@@ -758,6 +783,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAD0A10A2C94666A00910ABF /* Preview Assets.xcassets in Resources */,
+				AA56B38A2CAAE5B600B68816 /* Cafe24Ohsquare-v2.0.otf in Resources */,
 				AAD0A1112C94668900910ABF /* .gitignore in Resources */,
 				AA56B37D2CA64FB000B68816 /* Launch Screen.storyboard in Resources */,
 				AA56B37F2CA660D300B68816 /* 바른생활런치스크린300.png in Resources */,
@@ -787,6 +813,7 @@
 				AAD0A1682C951B1F00910ABF /* CoinSearchFunction.swift in Sources */,
 				AAD0A1152C9466D400910ABF /* NewsExt.swift in Sources */,
 				AAD0A1292C9467C400910ABF /* NaverNewsRouter.swift in Sources */,
+				AA56B38C2CAAE61200B68816 /* Font.swift in Sources */,
 				AA56B3612CA2A4EC00B68816 /* IndicatorShape.swift in Sources */,
 				AAD0A1502C946A4500910ABF /* UpbitAPIManager.swift in Sources */,
 				AAD0A1542C946A6B00910ABF /* CustomCurveShape.swift in Sources */,
@@ -819,6 +846,7 @@
 				AA56B3422CA256D400B68816 /* BlurView.swift in Sources */,
 				AA56B33C2CA2562400B68816 /* Server.swift in Sources */,
 				AA56B31A2CA1C8D200B68816 /* ExpenseCalculator.swift in Sources */,
+				AA56B3832CAADFAB00B68816 /* SplashView.swift in Sources */,
 				AAD0A12B2C9467D700910ABF /* NaverNewsTargetType.swift in Sources */,
 				AA56B3292CA2552000B68816 /* OpenAIRouter.swift in Sources */,
 				AA56B3712CA2A5B600B68816 /* FearGredIndexItemScroll.swift in Sources */,

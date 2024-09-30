@@ -7,5 +7,9 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Cafe24Ohsquare-v2.0.otf</string>
+	</array>
 </dict>
 </plist>

@@ -23,20 +23,37 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="바른생활런치스크린300" highlightedImage="바른생활런치스크린300" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EyV-Wc-4mr">
-                                <rect key="frame" x="136.66666666666666" y="259" width="119.66666666666666" height="119.66666666666669"/>
+                                <rect key="frame" x="126.66666666666669" y="229" width="140" height="140"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EyV-Wc-4mr" secondAttribute="height" multiplier="1:1" id="CdH-kf-Y7h"/>
+                                    <constraint firstAttribute="height" constant="140" id="cZF-0x-Rlq"/>
+                                    <constraint firstAttribute="width" constant="140" id="zYW-KI-rr4"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="로딩 중입니다..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOp-TQ-Rgv">
+                                <rect key="frame" x="142.66666666666666" y="399" width="108" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="잠시만 기다려 주세요!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IhM-yy-BcC">
+                                <rect key="frame" x="123.66666666666669" y="425" width="146" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" systemColor="systemBlueColor"/>
                         <constraints>
+                            <constraint firstItem="SOp-TQ-Rgv" firstAttribute="top" secondItem="EyV-Wc-4mr" secondAttribute="bottom" constant="30" id="1gl-4f-sto"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="centerX" secondItem="obG-Y5-kRd" secondAttribute="centerX" id="5cz-MP-9tL"/>
+                            <constraint firstItem="IhM-yy-BcC" firstAttribute="top" secondItem="SOp-TQ-Rgv" secondAttribute="bottom" constant="5" id="FiA-7U-sEK"/>
                             <constraint firstItem="obG-Y5-kRd" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="20" symbolic="YES" id="SfN-ll-jLj"/>
-                            <constraint firstItem="EyV-Wc-4mr" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="136.66999999999999" id="WhW-9B-sfM"/>
                             <constraint firstAttribute="bottom" secondItem="obG-Y5-kRd" secondAttribute="bottom" constant="20" id="Y44-ml-fuU"/>
-                            <constraint firstItem="EyV-Wc-4mr" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="200" id="bDa-08-mqA"/>
+                            <constraint firstItem="EyV-Wc-4mr" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="170" id="bDa-08-mqA"/>
+                            <constraint firstItem="SOp-TQ-Rgv" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="g9e-vV-kIZ"/>
+                            <constraint firstItem="IhM-yy-BcC" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="gR6-zd-XcS"/>
                             <constraint firstItem="EyV-Wc-4mr" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="yy3-eu-CU4"/>
                         </constraints>
                     </view>
