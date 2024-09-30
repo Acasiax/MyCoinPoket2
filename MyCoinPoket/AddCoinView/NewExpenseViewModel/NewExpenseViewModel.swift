@@ -134,24 +134,6 @@ class NewExpenseViewModel: ObservableObject {
            }
        }
 
-
- 
-
-    
-    
-//    init() {
-//  
-//        
-//        fetchLivePriceForAllCoins()
-//        // 초기화 시, Realm에서 가져온 expenses를 ExpenseViewModel로 변환
-//        self.expenseViewModels = realmExpenses.map { ExpenseViewModel(expense: $0) }
-//        
-//        observeWebSocket() // 웹소켓 관찰 시작
-//        observeWebSocket1() //자산 추가할때 실시간 값 나오게 하는거
-//      
-//    }
-    
-
     
     // 웹소켓을 통해 실시간 가격을 업데이트하는 메서드 (이거는 struct NewExpense에 사용하는 거임)
     func observeWebSocket1() {
