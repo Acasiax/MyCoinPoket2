@@ -258,7 +258,8 @@ struct ExpenseRowView: View {
                     
                     Text("수익률: \(calculateProfitLoss(), specifier: "%.2f")%")
                         .font(.callout)
-                    Text("실시간 현재가: \(viewModel.livePrice)원")
+                 //   Text("실시간 현재가: \(viewModel.livePrice)원")
+                    Text("실시간 현재가: \(formattedPrice(viewModel.livePrice))원")
                         .font(.callout)
                
                 }
@@ -307,6 +308,33 @@ struct ExpenseRowView: View {
 }
 
 extension ExpenseRowView {
+    
+    //세자리 콤마 함수
+    private func formattedPrice(_ price: String) -> String {
+        guard let priceDouble = Double(price) else {
+            return price
+        }
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
+        if priceDouble < 1 {
+            numberFormatter.minimumFractionDigits = 0
+            numberFormatter.maximumFractionDigits = 10 // 소수점 이하 전체 표시
+        } else if priceDouble < 10 {
+            numberFormatter.minimumFractionDigits = 4
+            numberFormatter.maximumFractionDigits = 4
+        } else if priceDouble < 10_000 {
+            numberFormatter.minimumFractionDigits = 2
+            numberFormatter.maximumFractionDigits = 2
+        } else {
+            numberFormatter.minimumFractionDigits = 0
+            numberFormatter.maximumFractionDigits = 0
+        }
+        
+        return numberFormatter.string(from: NSNumber(value: priceDouble)) ?? price
+    }
+
     
     // 평가 금액 = 현재코인 가격 * 보유 코인 갯수
     private func calculateEvaluationAmount() -> Double {
