@@ -9,9 +9,11 @@ import SwiftUI
 
 struct TabBarView: View {
     @ObservedObject var tabBarVM: TabBarViewModel
-    @ObservedObject var newExpenseViewModel : NewExpenseViewModel
+    @ObservedObject var newExpenseViewModel: NewExpenseViewModel
     @Environment(\.colorScheme) var colorScheme
-    
+    @State private var isPressed: Bool = false
+    @State private var navigateToAddAsset: Bool = false
+
     var body: some View {
         HStack(spacing: 0) {
             
@@ -28,22 +30,17 @@ struct TabBarView: View {
             
             TabButton(tab: .GPTForturn, title: "프로필")
         }
-        
         .background(
-                    (colorScheme == .light ? Color.white : Color.clear)
-                        .clipShape(CustomCurveShape())
-                        .shadow(color: Color.black.opacity(0.06), radius: 5, x: -5, y: -5)
-                        .ignoresSafeArea(.container, edges: .bottom)
-                )
+            (colorScheme == .light ? Color.white : Color.clear)
+                .clipShape(CustomCurveShape())
+                .shadow(color: Color.black.opacity(0.06), radius: 5, x: -5, y: -5)
+                .ignoresSafeArea(.container, edges: .bottom)
+        )
     }
 }
 
-
-
-
-
 extension TabBarView {
-    
+
     @ViewBuilder
     func TabButton(tab: MainTab, title: String) -> some View {
         Button(action: {
@@ -66,32 +63,39 @@ extension TabBarView {
             .frame(maxWidth: .infinity)
         }
     }
-    
-   
+
     @ViewBuilder
-       func AddButton() -> some View {
-           // Home_AddAssetView로 이동하는 네비게이션 링크 추가
-           NavigationLink(destination: Home_AddAssetView(newExpenseViewModel: newExpenseViewModel, tabBarVM: tabBarVM)) {
-               Image(systemName: "plus")
-                   .resizable()
-                   .renderingMode(.template)
-                   .aspectRatio(contentMode: .fit)
-                   .frame(width: 26, height: 26)
-                   .foregroundColor(.white)
-                   .offset(x: -1)
-                   .padding(18)
-                   .background(Color.blue)
-                   .clipShape(Circle())
-                   .shadow(color: Color.black.opacity(0.04), radius: 5, x: 5, y: 5)
-                   .shadow(color: Color.black.opacity(0.04), radius: 5, x: -5, y: -5)
-           }
-       }
-   }
-
-
-
-
-#Preview {
-    ContentView()
+    func AddButton() -> some View {
+        ZStack {
+            NavigationLink(destination: Home_AddAssetView(newExpenseViewModel: newExpenseViewModel, tabBarVM: tabBarVM), isActive: $navigateToAddAsset) {
+                EmptyView()
+            }
+            Button(action: {
+                withAnimation(.spring(response: 0.18, dampingFraction: 0.8, blendDuration: 0)) {
+                    isPressed = true
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.19) {
+                    withAnimation {
+                        isPressed = false
+                        navigateToAddAsset = true
+                    }
+                }
+            }) {
+                Image(systemName: "plus")
+                    .resizable()
+                    .renderingMode(.template)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: isPressed ? 22 : 26, height: isPressed ? 22 : 26) // 크기 변화
+                    .foregroundColor(.white)
+                    .offset(x: -1)
+                    .padding(18)
+                    .background(Color.blue)
+                    .clipShape(Circle())
+                    .shadow(color: Color.black.opacity(0.04), radius: 5, x: 5, y: 5)
+                    .shadow(color: Color.black.opacity(0.04), radius: 5, x: -5, y: -5)
+            }
+            .scaleEffect(isPressed ? 0.9 : 1.0) // 애니메이션으로 살짝 작아졌다가 커짐
+        }
+    }
 }
 

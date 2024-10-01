@@ -47,6 +47,8 @@ struct ExpenseListView: View {
     @Namespace private var animation
     @State private var chartType: ChartType = .pie
     @State private var timer: Timer? = nil
+    @State private var isChartExpanded: Bool = false // 차트 보임 여부 상태
+
     
     var filteredExpenses: [Expense] {
         switch viewModel.selectedType {
@@ -76,10 +78,36 @@ struct ExpenseListView: View {
             
            // ScrollView {
 //                ChartView(expenses: Array(realmExpenses), chartType: $chartType)
-                ChartView(chartType: $chartType)
-                    .padding(.horizontal, 15)
+//                ChartView(chartType: $chartType)
+//                    .padding(.horizontal, 15)
                 
              //   ScrollView {
+            
+            
+            
+            HStack {
+                        Text("보유자산 포트폴리오")
+                            .font(.headline)
+                        Spacer()
+                        Image(systemName: isChartExpanded ? "chevron.up" : "chevron.down")
+                            .onTapGesture {
+                                withAnimation {
+                                    isChartExpanded.toggle() // 차트 보임 여부 변경
+                                }
+                            }
+                    }
+                    .padding()
+                    .background(Color.gray.opacity(0.15))
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+
+                    if isChartExpanded {
+                        ChartView(chartType: $chartType)
+                            .padding(.horizontal, 15)
+                    }
+            
+            
+            
                     
                     CustomSegmentedControl()
                         .padding(.top)
