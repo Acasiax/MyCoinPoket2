@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 struct ContentView: View {
     @StateObject private var tabBarVM = TabBarViewModel()
     @StateObject private var newExpenseViewModel = NewExpenseViewModel()
     @StateObject private var tabViewModel = TabViewModel()
     @StateObject private var newsViewModel = NewsSearchViewModel()
+    
     
     var body: some View {
         NavigationStack {
@@ -48,6 +50,7 @@ struct ContentView: View {
                 }
             }
         }
+
     }
 }
 

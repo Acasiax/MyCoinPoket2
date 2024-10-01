@@ -46,7 +46,7 @@ struct SplashView: View {
                 }
 
                 if isSecondTextVisible {
-                    Text("바른 코인 생활")
+                    Text("코인생활")
                         .font(.Cafe24Ohsquare)
                         .bold()
                         .foregroundColor(.white)

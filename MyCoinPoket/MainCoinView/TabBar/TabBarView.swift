@@ -28,7 +28,7 @@ struct TabBarView: View {
             TabButton(tab: .News, title: "뉴스")
                 .offset(x: 10)
             
-            TabButton(tab: .GPTForturn, title: "프로필")
+            TabButton(tab: .GPTForturn, title: "설정")
         }
         .background(
             (colorScheme == .light ? Color.white : Color.clear)
