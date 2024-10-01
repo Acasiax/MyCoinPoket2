@@ -16,12 +16,43 @@ struct FearGreedDisplayCard: View {
         VStack{
             Text("\(viewModel.selectedIndexType) 크립토 공포 지수")
                 .fontWeight(.heavy)
-                .foregroundStyle(Color(CustomColors.darkBlue))
+                .foregroundStyle(Color.white)
                 .font(.title3)
-                .padding(8)
-                .background{
-                    Color.blue.opacity(0.2)
-                }.cornerRadius(10)
+                .padding(.horizontal)
+                .padding(.vertical)
+//                .background{
+//                    Color.blue.opacity(0.2)
+//                }
+                
+                .background(
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 25)
+                            .fill(Color.white)
+                            .opacity(0.1)
+                            .background(
+                                Color.white
+                                    .opacity(0.08)
+                                    .blur(radius: 10)
+                            )
+                            .background(
+                                RoundedRectangle(cornerRadius: 25)
+                                    .stroke(
+                                        LinearGradient(gradient: Gradient(colors: [
+                                            Color("Purple"),
+                                            Color("Purple").opacity(0.5),
+                                            .clear,
+                                            .clear,
+                                            Color("LightBlue")
+                                        ]), startPoint: .topLeading, endPoint: .bottomTrailing),
+                                        lineWidth: 2.5
+                                    )
+                                    .padding(2)
+                            )
+                            .shadow(color: .black.opacity(0.1), radius: 5, x: -5, y: -5)
+                            .shadow(color: .black.opacity(0.1), radius: 5, x: 5, y: 5)
+                    }
+                )
+              //  .cornerRadius(10)
             
             
             if let index = viewModel.currentIndex {
@@ -46,8 +77,9 @@ struct FearGreedDisplayCard: View {
                 
                 Text("날짜: \(Date.formatTimestamp(index.timestamp))")
                     .font(.caption)
-                    .foregroundColor(.black)
+                    .foregroundStyle(.lightGreen)
                     .padding(.top, 5)
+                    .padding(.bottom, 5)
             } else {
                 Text("Loading data...")
                     .onAppear {

@@ -42,7 +42,7 @@ class FearGreedViewModel: ObservableObject {
         // 현재 공포 및 탐욕 지수 추가
         if let currentIndex = currentIndex {
             indexItem.append(IndexItem(
-                icon: "flame.fill",
+                icon: "bitcoinsign.arrow.circlepath",
                 title: "현재 공포 및 탐욕 지수",
                 subTitle: Date.formatTimestamp(currentIndex.timestamp),
                 amount: currentIndex.value
@@ -51,7 +51,7 @@ class FearGreedViewModel: ObservableObject {
         
         if let yesterdayIndex = yesterdayIndex {
             indexItem.append(IndexItem(
-                icon: "flame.fill",
+                icon: "bitcoinsign.arrow.circlepath",
                 title: "어제 공포 및 탐욕 지수",
                 subTitle: Date.formatTimestamp(yesterdayIndex.timestamp),
                 amount: yesterdayIndex.value
@@ -60,7 +60,7 @@ class FearGreedViewModel: ObservableObject {
         
         if let lastWeekIndex = lastWeekIndex {
             indexItem.append(IndexItem(
-                icon: "flame.fill",
+                icon: "bitcoinsign.arrow.circlepath",
                 title: "지난주 공포 및 탐욕 지수",
                 subTitle: Date.formatTimestamp(lastWeekIndex.timestamp),
                 amount: lastWeekIndex.value
@@ -70,7 +70,7 @@ class FearGreedViewModel: ObservableObject {
         if let lastMonthIndex = lastMonthIndex {
             print(lastMonthIndex)
             indexItem.append(IndexItem(
-                icon: "flame.fill",
+                icon: "bitcoinsign.arrow.circlepath",
                 title: "29일 전 공포 및 탐욕 지수",
                 subTitle: Date.formatTimestamp(lastMonthIndex.timestamp),
                 amount: lastMonthIndex.value

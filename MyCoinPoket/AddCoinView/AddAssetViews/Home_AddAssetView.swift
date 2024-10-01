@@ -80,7 +80,7 @@ struct Home_AddAssetView: View {
               
             }
             .background {
-                Color("BG").ignoresSafeArea()
+                Color("BasicWhite").ignoresSafeArea()
             }
             .navigationTitle("자산 추가하기")
             .navigationBarTitleDisplayMode(.inline)

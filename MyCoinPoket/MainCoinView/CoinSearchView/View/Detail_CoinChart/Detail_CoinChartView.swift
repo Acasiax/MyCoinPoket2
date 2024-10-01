@@ -29,7 +29,7 @@ struct Detail_CoinChartView: View {
                 }) {
                     Image(systemName: "arrow.left")
                         .font(.title)
-                        .foregroundColor(.black)
+                        .foregroundColor(.blue)
                 }
                 Spacer()
                 Text(coin88.koreanName)
@@ -37,8 +37,8 @@ struct Detail_CoinChartView: View {
                     .foregroundColor(.black)
                 Spacer()
             }
-            .padding()
-            .background(Color.white)
+            //.padding()
+            .background(Color("BasicWhite"))
             
             HeaderNamedView(coin88: coin88, socketViewModel: socketViewModel)
                 .frame(maxWidth: .infinity, alignment: .leading)

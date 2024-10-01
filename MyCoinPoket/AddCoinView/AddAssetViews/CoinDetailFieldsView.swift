@@ -29,7 +29,7 @@ struct CoinDetailFieldsView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .background {
-                        Capsule().fill(.white)
+                        Capsule().fill(Color("BG"))
                     }
                     .padding(.horizontal, 20)
                     .padding(.top)
@@ -61,7 +61,7 @@ struct CoinDetailFieldsView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .background {
-                    Capsule().fill(.white)
+                    Capsule().fill(Color("BG"))
                 }
                 .padding(.horizontal, 20)
             }
@@ -77,7 +77,7 @@ struct CoinDetailFieldsView: View {
                     .disabled(true) // 결과값 수정 불가
                     .frame(maxWidth: .infinity)
                     .background {
-                        Capsule().fill(.white)
+                        Capsule().fill(Color("BG"))
                     }
                     .padding(.horizontal, 20)
                     .padding(.top)
@@ -137,7 +137,7 @@ struct CoinDetailFieldsView: View {
                     .padding(.horizontal, 20)
             } icon: { }
             .background {
-                RoundedRectangle(cornerRadius: 12, style: .continuous).fill(.white)
+                RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Color("BG"))
             }
             .scaleEffect(0.9)
         }

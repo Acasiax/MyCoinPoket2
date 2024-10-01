@@ -34,7 +34,8 @@ struct CoinSelectionView: View {
             .padding(.vertical, 12)
             .padding(.horizontal, 15)
             .background {
-                RoundedRectangle(cornerRadius: 12, style: .continuous).fill(.white)
+                RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Color("BG"))
+                
             }
             .onTapGesture {
                 isShowingCoinSearch = true  // Sheet 열기

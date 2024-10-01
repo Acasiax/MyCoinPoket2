@@ -27,11 +27,11 @@ struct SaveButtonView: View {
                 .background {
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
                         .fill(
-                            LinearGradient(colors: [
-                                Color("Gradient1"),
-                                Color("Gradient2"),
-                                Color("Gradient3")
-                            ], startPoint: .topLeading, endPoint: .bottomTrailing)
+                            LinearGradient(
+                                           gradient: Gradient(colors: [Color.blue.opacity(0.6), Color.blue]),
+                                           startPoint: .topLeading,
+                                           endPoint: .bottomTrailing
+                                       )
                         )
                 }
                 .foregroundStyle(.white)
