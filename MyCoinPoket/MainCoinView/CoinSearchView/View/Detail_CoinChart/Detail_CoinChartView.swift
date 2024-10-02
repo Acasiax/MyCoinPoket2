@@ -58,6 +58,7 @@ struct Detail_CoinChartView: View {
         .onAppear {
             appModel.fetchWeeklyCandles(for: coin88.market)  // 화면이 나타날 때 주간 시세 데이터 가져오기
         }
+        
         .navigationBarHidden(true)  // 기본 네비게이션 바 숨기기
     }
 

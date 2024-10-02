@@ -56,6 +56,7 @@
 		AA56B38A2CAAE5B600B68816 /* Cafe24Ohsquare-v2.0.otf in Resources */ = {isa = PBXBuildFile; fileRef = AA56B3892CAAE5B600B68816 /* Cafe24Ohsquare-v2.0.otf */; };
 		AA56B38C2CAAE61200B68816 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B38B2CAAE61200B68816 /* Font.swift */; };
 		AA56B3932CAC1C0600B68816 /* AppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3922CAC1C0600B68816 /* AppInfoView.swift */; };
+		AA6521522CAD744400B56E01 /* FaceIDPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6521512CAD744400B56E01 /* FaceIDPasswordView.swift */; };
 		AAD0A1032C94666800910ABF /* MyCoinPoketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */; };
 		AAD0A1052C94666800910ABF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1042C94666800910ABF /* ContentView.swift */; };
 		AAD0A1072C94666A00910ABF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAD0A1062C94666A00910ABF /* Assets.xcassets */; };
@@ -162,6 +163,7 @@
 		AA56B3892CAAE5B600B68816 /* Cafe24Ohsquare-v2.0.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cafe24Ohsquare-v2.0.otf"; sourceTree = "<group>"; };
 		AA56B38B2CAAE61200B68816 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		AA56B3922CAC1C0600B68816 /* AppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoView.swift; sourceTree = "<group>"; };
+		AA6521512CAD744400B56E01 /* FaceIDPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIDPasswordView.swift; sourceTree = "<group>"; };
 		AAD0A0FF2C94666800910ABF /* MyCoinPoket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCoinPoket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoinPoketApp.swift; sourceTree = "<group>"; };
 		AAD0A1042C94666800910ABF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 				AA56B3732CA2ABD600B68816 /* SettingListView.swift */,
 				AA56B3752CA4283800B68816 /* TitleModifier.swift */,
 				AA56B3922CAC1C0600B68816 /* AppInfoView.swift */,
+				AA6521512CAD744400B56E01 /* FaceIDPasswordView.swift */,
 			);
 			path = SettingListView;
 			sourceTree = "<group>";
@@ -880,6 +883,7 @@
 				AA56B3742CA2ABD600B68816 /* SettingListView.swift in Sources */,
 				AA56B3252CA254F800B68816 /* OpenAiDTO.swift in Sources */,
 				AA56B32E2CA2556100B68816 /* BitcoinFortuneView.swift in Sources */,
+				AA6521522CAD744400B56E01 /* FaceIDPasswordView.swift in Sources */,
 				AA56B3272CA2550E00B68816 /* OpenAIHeader.swift in Sources */,
 				AAD0A2ED2C9984F200910ABF /* MarketPrice33.swift in Sources */,
 			);

@@ -5,65 +5,6 @@
 //  Created by 이윤지 on 9/24/24.
 //
 
-//import SwiftUI
-//
-//struct SettingListView: View {
-//    @AppStorage("isDarkMode") private var isDarkMode = false // 다크모드 상태 저장
-//    
-//    var body: some View {
-//        NavigationStack {
-//            VStack(alignment: .leading) {
-//                Text("설정")
-//                    .naviTitleStyle()
-//                
-//                List {
-//                    NavigationLink(destination: FearGreedHomeView()) {
-//                        Text("크립토 공포/ 탐욕 지수 확인하기")
-//                    }
-//                    //                    NavigationLink(destination: ForturnView()) {
-//                    //                        Text("GPT 비트코인 주간 운세")
-//                    //                    }
-//                    //                    NavigationLink(destination: DetailView(itemName: "아이템 3")) {
-//                    //                        Text("초기화")
-//                    //                    }
-//                    
-//                  
-//                    
-//                    
-//                    // 다크모드 토글
-//                    Toggle(isOn: $isDarkMode) {
-//                        Text("다크모드")
-//                    }
-//                    
-//             
-//                        Section(header: Text("정보")) {
-//                            ShareLink(item: URL(string: "https://yourappurl.com")!) {
-//                                Text("친구에게 추천하기")
-//                            }
-//                            Button(action: {
-//                                // 리뷰 작성하기 기능 구현
-//                            }) {
-//                                Text("리뷰 작성하기")
-//                            }
-//                            
-//                            Button(action: {
-//                                // 문의하기 기능 구현
-//                            }) {
-//                                Text("문의하기")
-//                            }
-//                            
-//                            NavigationLink(destination: AppInfoView()) {
-//                                Text("앱 정보")
-//                            }
-//                        }
-//                        
-//                    }
-//                }
-//            }
-//        }
-//    
-//    
-
 
 import SwiftUI
 import LocalAuthentication
@@ -72,12 +13,20 @@ struct SettingListView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false // 다크모드 상태 저장
     @AppStorage("isBioAuthEnabled") private var isBioAuthEnabled: Bool = false // 생체인증 상태 저장
     @AppStorage("isAuthAttempted") private var isAuthAttempted: Bool = false // 생체인증 시도 상태 저장 (앱 재실행 시에도 유지)
+    @State private var isPasswordSetupViewPresented = false // 비밀번호 설정 뷰 띄우기
+    
+    @StateObject private var viewModel = PasswordViewModel()
+    @State private var showPasswordSetting = false
+    @State private var showAlreadyPassword = false
+    @State private var buttonText: String = "비밀번호 기본초기"
     
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
                 Text("설정")
-                    .naviTitleStyle()
+                    .font(.largeTitle)
+                    .bold()
+                    .padding()
                 
                 List {
                     NavigationLink(destination: FearGreedHomeView()) {
@@ -104,28 +53,44 @@ struct SettingListView: View {
                     }
                     
                     Section(header: Text("정보")) {
-                        ShareLink(item: URL(string: "https://yourappurl.com")!) {
+                        ShareLink(item: URL(string: "https://apps.apple.com/kr/app/%EA%B0%80%EC%83%81%EC%9E%90%EC%82%B0-%EC%BD%94%EC%9D%B8-%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4-%EC%95%B1-%EC%BD%94%EC%9D%B8%EC%83%9D%ED%99%9C/id6720724248")!) {
+                            
                             Text("친구에게 추천하기")
                         }
-                        Button(action: {
-                            // 리뷰 작성하기 기능 구현
-                        }) {
-                            Text("리뷰 작성하기")
-                        }
-                        
-                        Button(action: {
-                            // 문의하기 기능 구현
-                        }) {
-                            Text("문의하기")
-                        }
-                        
+//                        Button(action: {
+//                            // 리뷰 작성하기 기능 구현
+//                        }) {
+//                            Text("리뷰 작성하기")
+//                        }
+//                        
+//                        Button(action: {
+//                            // 문의하기 기능 구현
+//                        }) {
+//                            Text("문의하기")
+//                        }
+//                        
                         NavigationLink(destination: AppInfoView()) {
                             Text("앱 정보")
                         }
                     }
                 }
+                .onAppear {
+                    viewModel.loadPassword()
+                    // 키체인에 비밀번호가 있는지 확인
+                    if let existingPassword = viewModel.existingPassword {
+                        print("키체인 비번:\(existingPassword)") // 키체인 비밀번호 출력
+                    }
+                    buttonText = viewModel.existingPassword != nil ? "기존 비밀번호가 있네요" : "비밀번호 신규 생성"
+                }
+                .sheet(isPresented: $showPasswordSetting) {
+                    PasswordSetting1(viewModel: viewModel, showPasswordSetting: $showPasswordSetting, showAlreadyPassword: $showAlreadyPassword) // 비밀번호 설정 뷰 모달
+                }
+                .sheet(isPresented: $showAlreadyPassword) {
+                    AlreadyPassword(viewModel: viewModel, showAlreadyPassword: $showAlreadyPassword) // 기존 비밀번호 입력 뷰 모달
+                }
             }
         }
+        .background(Color.clear.ignoresSafeArea()) // 배경 검정색
     }
     
     // 생체인증 확인 함수
@@ -146,9 +111,14 @@ struct SettingListView: View {
         Task {
             do {
                 try await context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "보안을 위한 본인 인증이 필요합니다.")
-                // 인증 성공 시 토글 유지
+                // 인증 성공 시 비밀번호 설정 또는 기존 비밀번호 입력 뷰로 이동
                 DispatchQueue.main.async {
                     isAuthAttempted = false // 성공 후 인증 시도 상태 해제
+                    if viewModel.existingPassword != nil {
+                        showAlreadyPassword = true // 기존 비밀번호 입력 뷰 모달 표시
+                    } else {
+                        showPasswordSetting = true // 비밀번호 설정 뷰 모달 표시
+                    }
                 }
             } catch {
                 // 인증 실패 시 토글 해제
@@ -161,6 +131,7 @@ struct SettingListView: View {
         }
     }
 }
+
 
 
 
