@@ -8,7 +8,8 @@
 import SwiftUI
 
 extension Font {
-    static var Cafe24Ohsquare: Font {
-        return Font.custom("Cafe24OhsquareOTF", size: 30)
+    static func Cafe24Ohsquare(size: CGFloat) -> Font {
+        return Font.custom("Cafe24OhsquareOTF", size: size)
     }
 }
+

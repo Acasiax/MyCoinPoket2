@@ -63,11 +63,14 @@ struct AlreadyPassword: View {
 
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(alignment: .center) {
                 Text("기존의 비밀번호를 입력해주세요.")
-                    .font(.system(size: 23, weight: .regular))
+                    .font(.Cafe24Ohsquare(size: 26))
                     .bold()
                     .foregroundStyle(.white)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
+                    .padding()
                     .padding(.bottom, 40)
                 
                 HStack(spacing: 20) {
@@ -161,8 +164,10 @@ struct PasswordSetting1: View {
     var body: some View {
         VStack(alignment: .center) {
             Text(isConfirming ? "비밀번호를 다시 입력해주세요." : "비밀번호를 생성해주세요.")
-                .font(.system(size: 23, weight: .regular))
+                .font(.Cafe24Ohsquare(size: 26))
                 .bold()
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity) 
                 .foregroundStyle(.white)
                 .padding(.bottom, 40)
 

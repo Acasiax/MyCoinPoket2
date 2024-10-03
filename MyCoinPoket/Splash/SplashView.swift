@@ -47,7 +47,7 @@ struct SplashView: View {
 
                 if isSecondTextVisible {
                     Text("코인생활")
-                        .font(.Cafe24Ohsquare)
+                        .font(.Cafe24Ohsquare(size: 30))
                         .bold()
                         .foregroundColor(.white)
                         .transition(.move(edge: .bottom).combined(with: .opacity))

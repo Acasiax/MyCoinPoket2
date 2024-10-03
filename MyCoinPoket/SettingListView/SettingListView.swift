@@ -55,7 +55,7 @@ struct SettingListView: View {
                     Section(header: Text("정보")) {
                         ShareLink(item: URL(string: "https://apps.apple.com/kr/app/%EA%B0%80%EC%83%81%EC%9E%90%EC%82%B0-%EC%BD%94%EC%9D%B8-%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4-%EC%95%B1-%EC%BD%94%EC%9D%B8%EC%83%9D%ED%99%9C/id6720724248")!) {
                             
-                            Text("친구에게 추천하기")
+                            Text("친구에게 공유하기")
                         }
 //                        Button(action: {
 //                            // 리뷰 작성하기 기능 구현
@@ -88,6 +88,14 @@ struct SettingListView: View {
                 .sheet(isPresented: $showAlreadyPassword) {
                     AlreadyPassword(viewModel: viewModel, showAlreadyPassword: $showAlreadyPassword) // 기존 비밀번호 입력 뷰 모달
                 }
+            }
+            .onAppear {
+                viewModel.loadPassword()
+                // 키체인에 비밀번호가 있는지 확인
+                if let existingPassword = viewModel.existingPassword {
+                    print("키체인 비번:\(existingPassword)") // 키체인 비밀번호 출력
+                }
+              
             }
         }
         .background(Color.clear.ignoresSafeArea()) // 배경 검정색

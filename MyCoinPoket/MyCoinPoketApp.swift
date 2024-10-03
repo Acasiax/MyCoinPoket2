@@ -6,53 +6,6 @@
 //
 
 import SwiftUI
-
-//@main
-//struct MyCoinPoketApp: App {
-//    
-//    @AppStorage("isDarkMode") private var isDarkMode = false // 앱 전체에 다크모드 상태를 저장
-//    
-////    init() {
-////           Thread.sleep(forTimeInterval: 1)
-////       }
-////    
-//    var body: some Scene {
-//        WindowGroup {
-//            ContentView()
-//                .preferredColorScheme(isDarkMode ? .dark : .light) // 다크 모드 여부에 따라 설정
-//          //  Home_NewsView()
-//        }
-//    }
-//}
-
-
-//@main
-//struct MyCoinPoketApp: App {
-//    @AppStorage("isBioAuthEnabled") private var isBioAuthEnabled: Bool = true // 생체인증 상태 저장
-//    @AppStorage("isDarkMode") private var isDarkMode = false // 앱 전체에 다크모드 상태를 저장
-//    
-//    var body: some Scene {
-//        WindowGroup {
-//            SplashScreen() // 스플래쉬 화면을 먼저 표시
-//                .preferredColorScheme(isDarkMode ? .dark : .light) // 다크 모드 여부에 따라 설정
-//        }
-//    }
-//}
-//
-//
-//struct SplashScreen: View {
-//    @State private var isActive = false
-//
-//    var body: some View {
-//        if isActive {
-//            ContentView() // 메인 화면으로 전환
-//        } else {
-//            SplashView(isActive: $isActive) // 스플래쉬 화면 표시
-//        }
-//    }
-//}
-
-import SwiftUI
 import LocalAuthentication
 
 @main
@@ -71,36 +24,41 @@ struct MyCoinPoketApp: App {
 import SwiftUI
 import LocalAuthentication
 
-
 struct SplashScreen: View {
     @State private var isActive = false
     @State private var isAuthAttempted = false
     @AppStorage("isBioAuthEnabled") private var isBioAuthEnabled: Bool = false // 생체인증 상태 저장
-    
+    @StateObject private var passwordViewModel = PasswordViewModel() // 비밀번호 관리 뷰 모델
+    @State private var showPasswordSheet = false // 비밀번호 입력 창 표시 여부
+    @State private var enteredPassword = "" // 사용자가 입력한 비밀번호
+    @State private var alertMessage = "" // 얼럿 메시지 내용
+    @State private var showAlert = false // 잘못된 비밀번호 입력 시 표시될 얼럿 여부
+
     var body: some View {
         if isActive {
             ContentView() // 메인 화면으로 전환
         } else {
-               VStack {
-                   Text("본인 인증이 필요합니다")
-                       .font(.Cafe24Ohsquare)
-                       .foregroundColor(.white) // 텍스트 색상 흰색으로 설정
-                       .padding(.top, 50) // 상단에 배치
-                       .padding()
+            VStack {
+                Text("본인 인증이 필요합니다")
+                    .font(.Cafe24Ohsquare(size: 27))
+                    .bold()
+                    .foregroundColor(.white)
+                    .padding(.top, 50) // 상단에 배치
+                    .padding()
 
-                   Spacer() // 화면의 최상단에 텍스트를 고정하기 위해 Spacer 추가
+                Spacer() // 화면의 최상단에 텍스트를 고정하기 위해 Spacer 추가
 
-                   Button(action: {
-                       checkBioAuth() // 생체인증 시도
-                   }) {
-                       Text("생체인증 시작")
-                           .padding()
-                           .background(Color.blue)
-                           .foregroundColor(.white)
-                           .cornerRadius(10)
-                   }
+                Button(action: {
+                    checkBioAuth() // 생체인증 시도
+                }) {
+                    Text("생체인증 시작")
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
 
-                   Spacer() // 하단 여백 추가
+                Spacer() // 하단 여백 추가
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.black.ignoresSafeArea()) // 전체 배경색을 검정색으로 설정
@@ -115,6 +73,22 @@ struct SplashScreen: View {
                     }
                 }
             }
+            .sheet(isPresented: $showPasswordSheet) {
+                PasswordInputView(passwordViewModel: passwordViewModel, enteredPassword: $enteredPassword, onPasswordCorrect: {
+                    withAnimation {
+                        isActive = true // 비밀번호가 올바르면 메인 화면으로 전환
+                    }
+                })
+                .presentationDetents([.fraction(0.4), .large]) // 높이를 화면의 40%와 전체 중 선택 가능하게 설정
+                .presentationDragIndicator(.visible) // 드래그 인디케이터를 보여줌
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("오류"),
+                    message: Text(alertMessage),
+                    dismissButton: .default(Text("확인"))
+                )
+            }
         }
     }
     
@@ -124,7 +98,7 @@ struct SplashScreen: View {
         context.localizedFallbackTitle = "암호 입력"
         context.localizedCancelTitle = "취소"
         var error: NSError?
-        
+
         // 생체인증 가능 여부 확인
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             isAuthAttempted = true // 인증 시도 상태 설정
@@ -137,29 +111,10 @@ struct SplashScreen: View {
                             isActive = true
                         }
                     } else {
-                        // 생체인증 실패 시 처리 (여기서는 실패 메시지만 출력하고, 사용자가 재시도 가능)
+                        // 생체인증 실패 시 비밀번호 입력 창 표시
                         if let error = evaluateError {
                             print("생체인증 실패:", error.localizedDescription)
-                            
-                            // 생체인증 잠금 시 패스코드 인증 시도
-                            if (evaluateError as NSError?)?.code == LAError.biometryLockout.rawValue {
-                                // 생체 인증이 잠겨있을 때 패스코드 인증 시도
-                                context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "생체 인증이 잠겼습니다. 패스코드를 입력해주세요.") { success, error in
-                                    DispatchQueue.main.async {
-                                        if success {
-                                            // 패스코드 인증 성공 시 메인 화면으로 전환
-                                            withAnimation {
-                                                isActive = true
-                                            }
-                                        } else {
-                                            // 패스코드 인증 실패 시 처리
-                                            if let error = error {
-                                                print("패스코드 인증 실패:", error.localizedDescription)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            showPasswordSheet = true
                         }
                     }
                 }
@@ -171,8 +126,78 @@ struct SplashScreen: View {
             }
             DispatchQueue.main.async {
                 withAnimation {
-                    isActive = true
+                    showPasswordSheet = true
                 }
+            }
+        }
+    }
+}
+
+struct PasswordInputView: View {
+    @ObservedObject var passwordViewModel: PasswordViewModel
+    @Binding var enteredPassword: String
+    var onPasswordCorrect: () -> Void
+    @Environment(\.dismiss) var dismiss // 모달을 닫기 위한 환경 변수
+    @State private var showAlert = false // 잘못된 비밀번호 입력 시 표시될 얼럿 여부
+
+    var body: some View {
+        VStack {
+            Text("비밀번호를 입력해주세요.")
+                .font(.Cafe24Ohsquare(size: 26))
+                .bold()
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity)
+                .foregroundStyle(.white)
+                .padding()
+
+            SecureField("비밀번호", text: $enteredPassword)
+                .padding()
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .keyboardType(.numberPad)
+
+            Button(action: {
+                            if enteredPassword == passwordViewModel.existingPassword {
+                                onPasswordCorrect()
+                                dismiss() // 모달 닫기
+                            } else {
+                                // 비밀번호가 틀리면 얼럿 표시
+                                enteredPassword = ""
+                                showAlert = true
+                            }
+                        }) {
+                            Text("확인")
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                        .padding()
+                        .alert(isPresented: $showAlert) {
+                            Alert(
+                                title: Text("오류"),
+                                message: Text("잘못된 비밀번호입니다. 다시 시도해주세요."),
+                                dismissButton: .default(Text("확인"))
+                            )
+                        }
+
+            .onAppear {
+                passwordViewModel.loadPassword()
+                // 키체인에 비밀번호가 있는지 확인
+                if let existingPassword = passwordViewModel.existingPassword {
+                    print("키체인 비번:\(existingPassword)") // 키체인 비밀번호 출력
+                }
+            }
+            .padding()
+        }
+        .padding()
+        .padding(.top, 70)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .background(Color.black.opacity(0.5).ignoresSafeArea())
+        .onAppear {
+            passwordViewModel.loadPassword()
+            // 키체인에 비밀번호가 있는지 확인
+            if let existingPassword = passwordViewModel.existingPassword {
+                print("키체인 비번:\(existingPassword)") // 키체인 비밀번호 출력
             }
         }
     }
