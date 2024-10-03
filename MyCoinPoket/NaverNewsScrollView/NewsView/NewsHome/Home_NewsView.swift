@@ -19,6 +19,7 @@ struct Home_NewsView: View {
                 HStack {
                     Text("뉴스")
                         .naviTitleStyle()
+                        .padding(.bottom, 10)
                     Spacer()
                 }
                 CustomTabBar()
@@ -48,15 +49,22 @@ extension Home_NewsView {
     @ViewBuilder
     func CustomTabBar() -> some View {
         ScrollView(.horizontal) {
-            HStack(spacing: 20) {
+            HStack(spacing: 1) {
                 ForEach($tabViewModel.tabs) { $tab in
                     Button(action: {
                         tabViewModel.selectTab(tab.id, viewModel: viewModel)
                     }) {
                         Text(tab.id.rawValue)
-                            .fontWeight(.medium)
+                            .fontWeight(.bold)
                             .padding(.vertical, 12)
+                            .padding(.horizontal, 10)
                             .foregroundStyle(tabViewModel.activeTab == tab.id ? Color.primary : .gray)
+                            .background(
+                                tabViewModel.activeTab == tab.id
+                                ? Color.blue.opacity(0.2) // 선택된 탭은 파란색으로 배경 표시
+                                : Color.clear
+                            )
+                            .cornerRadius(8)
                             .contentShape(.rect)
                     }
                     .buttonStyle(.plain)
@@ -64,7 +72,7 @@ extension Home_NewsView {
                         tab.size = rect.size
                         tab.minX = rect.minX
                     }
-                  
+                    
                 }
             }
         }
@@ -82,7 +90,7 @@ extension Home_NewsView {
                 let indicatorPosition = tabViewModel.progress.interpolate(inputRange: inputRange, outputRange: outputPositionRange)
 
                 Rectangle()
-                    .fill(.primary)
+                    .fill(.blue)
                     .frame(width: indicatorWidth, height: 1.5)
                     .offset(x: indicatorPosition)
             }

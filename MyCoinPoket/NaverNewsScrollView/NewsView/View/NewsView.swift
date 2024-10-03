@@ -28,6 +28,8 @@ struct NewsView: View {
 
                 NewsSearchListView(viewModel: viewModel)
                     .modifier(TabModifier(tab: .crypto, size: size, tabViewModel: tabViewModel))
+                NewsSearchListView(viewModel: viewModel)
+                    .modifier(TabModifier(tab: .privacy, size: size, tabViewModel: tabViewModel))
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
             .allowsHitTesting(!tabViewModel.isDragging)
