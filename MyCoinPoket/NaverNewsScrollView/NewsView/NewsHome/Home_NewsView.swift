@@ -9,40 +9,32 @@ import SwiftUI
 
 struct Home_NewsView: View {
     @ObservedObject var tabViewModel: TabViewModel
-  //  @StateObject private var tabViewModel = TabViewModel()
     @ObservedObject var viewModel = NewsSearchViewModel()
+    @Namespace private var animation
     
     var body: some View {
         NavigationStack {
-            
             VStack(spacing: 0) {
                 HStack {
                     Text("뉴스")
                         .naviTitleStyle()
-                        .padding(.bottom, 10)
+                        .padding(.bottom, 15)
                     Spacer()
                 }
                 CustomTabBar()
                 
                 NewsView(tabViewModel: tabViewModel, viewModel: viewModel)
-                
             }
             .onAppear {
                 print("onAppear===")
                 viewModel.fetchNews(for: tabViewModel.activeTab.rawValue)
             }
             .onChange(of: tabViewModel.activeTab) {
-              
-                viewModel.fetchNews(for:  tabViewModel.activeTab.rawValue)
+                viewModel.fetchNews(for: tabViewModel.activeTab.rawValue)
             }
-
-            
         }
     }
-    
-    
 }
-
 
 extension Home_NewsView {
     
@@ -55,24 +47,29 @@ extension Home_NewsView {
                         tabViewModel.selectTab(tab.id, viewModel: viewModel)
                     }) {
                         Text(tab.id.rawValue)
-                            .fontWeight(.bold)
+                            .fontWeight(.semibold)
                             .padding(.vertical, 12)
                             .padding(.horizontal, 10)
-                            .foregroundStyle(tabViewModel.activeTab == tab.id ? Color.primary : .gray)
+                            .foregroundStyle(tabViewModel.activeTab == tab.id ? Color.white : .gray)
                             .background(
-                                tabViewModel.activeTab == tab.id
-                                ? Color.blue.opacity(0.2) // 선택된 탭은 파란색으로 배경 표시
-                                : Color.clear
+                                ZStack {
+                                    if tabViewModel.activeTab == tab.id {
+                                        Color.blue.opacity(0.7)
+                                            .matchedGeometryEffect(id: "tabBackground", in: animation)
+                                    } else {
+                                        Color.clear
+                                    }
+                                }
                             )
                             .cornerRadius(8)
                             .contentShape(.rect)
+                            .padding(.bottom, 5)
                     }
                     .buttonStyle(.plain)
                     .rect { rect in
                         tab.size = rect.size
                         tab.minX = rect.minX
                     }
-                    
                 }
             }
         }
@@ -81,7 +78,7 @@ extension Home_NewsView {
                 Rectangle()
                     .fill(.gray.opacity(0.3))
                     .frame(height: 1)
-                    .padding(.horizontal, -15)
+                    .padding(.horizontal, -10)
 
                 let inputRange = tabViewModel.tabs.indices.compactMap { return CGFloat($0) }
                 let outputRange = tabViewModel.tabs.compactMap { return $0.size.width }
@@ -93,11 +90,11 @@ extension Home_NewsView {
                     .fill(.blue)
                     .frame(width: indicatorWidth, height: 1.5)
                     .offset(x: indicatorPosition)
+                    .matchedGeometryEffect(id: "tabIndicator", in: animation)
             }
         }
         .padding(.leading, 25)
         .scrollIndicators(.hidden)
     }
-    
 }
 

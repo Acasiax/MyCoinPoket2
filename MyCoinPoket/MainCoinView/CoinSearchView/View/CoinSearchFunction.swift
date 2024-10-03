@@ -26,9 +26,11 @@ extension Home_CoinSearchView {
             updateWebSocketForCategory()
         }) {
             Text(title)
+                .foregroundStyle(selectedCategory == title ? Color.white : Color.gray)
                 .padding(7)
-                .background(selectedCategory == title ? Color.gray : Color.blue)
-                .foregroundColor(.white)
+                .padding(.horizontal, 5)
+                .background(selectedCategory == title ? Color.blue : Color.gray.opacity(0.2))
+                //.foregroundColor(.white)
                 .cornerRadius(8)
         }
     }

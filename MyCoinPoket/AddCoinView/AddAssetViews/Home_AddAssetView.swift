@@ -34,6 +34,7 @@ struct Home_AddAssetView: View {
         NavigationStack {
             ScrollView {
                 VStack {
+                 
                     VStack(spacing: 10) {
                         // 코인 이름 입력 필드
                         CoinSelectionView(

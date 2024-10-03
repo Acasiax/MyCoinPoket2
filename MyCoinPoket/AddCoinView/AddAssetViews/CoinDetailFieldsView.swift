@@ -12,11 +12,14 @@ struct CoinDetailFieldsView: View {
     @Binding var selectedCategory: String
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(alignment: .leading, spacing: 20) {
             // 구매수량 필드
             HStack {
                 Text("구매수량")
                     .fontWeight(.bold)
+                    .frame(width: 70, alignment: .leading)
+                 //   .background(Color.blue)
+                
                 TextField("0", text: $viewModel.numberOfCoins)
                     .font(.system(size: 30))
                     .foregroundStyle(.primary)
@@ -27,18 +30,22 @@ struct CoinDetailFieldsView: View {
                             .font(.system(size: 30))
                             .opacity(0)
                     }
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: 230)
                     .background {
                         Capsule().fill(Color("BG"))
                     }
-                    .padding(.horizontal, 20)
+                 
                     .padding(.top)
             }
+            
+            //MARK: -  구매가 입력 필드
             
             // 구매가 입력 필드
             HStack {
                 Text("구매가")
                     .fontWeight(.bold)
+                    .frame(width: 70, alignment: .leading)
+                  //  .background(Color.blue)
                 
                 HStack {
                     Picker("Currency", selection: $viewModel.selectedCurrency) {
@@ -46,7 +53,7 @@ struct CoinDetailFieldsView: View {
                         Text("USD").tag("USD")
                     }
                     .pickerStyle(MenuPickerStyle())
-                    .frame(width: 90)
+                   // .frame(width: .infinity)
                     
                     TextField("0", text: $viewModel.buyPrice)
                         .font(.system(size: 30))
@@ -59,13 +66,16 @@ struct CoinDetailFieldsView: View {
                         .font(.system(size: 30))
                         .opacity(0)
                 }
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: 230)
                 .background {
                     Capsule().fill(Color("BG"))
+                    
                 }
-                .padding(.horizontal, 20)
+              
             }
             
+            
+            //MARK: -   총액 필드
             // 총액 필드
             HStack {
                 Text("총액")
@@ -83,10 +93,17 @@ struct CoinDetailFieldsView: View {
                     .padding(.top)
             }
             
+           
+        }
+        
+        
+        // 실시간 코인가격 필드
+        VStack(alignment: .center) {
             // 실시간 코인가격 필드
             HStack(alignment: .center) {
                 Text("실시간 코인가격")
                     .fontWeight(.bold)
+                   
                 
                 if selectedCategory == "KRW" {
                     if let price = Double(viewModel.livePrice) {
@@ -127,20 +144,27 @@ struct CoinDetailFieldsView: View {
                 }
                 
                 
-            }
+            } .padding(.top, 5)
+                .padding(.bottom, -5)
+           
+             Label {
+                 DatePicker("", selection: $viewModel.date, displayedComponents: [.date])
+                     .datePickerStyle(.graphical)
+                     .labelsHidden()
+                     .frame(maxWidth: .infinity, alignment: .leading)
+                     .padding(.horizontal, 20)
+             } icon: { }
+             .background {
+                 RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Color("BG"))
+             }
+             .scaleEffect(0.9)
             
-            Label {
-                DatePicker("", selection: $viewModel.date, displayedComponents: [.date])
-                    .datePickerStyle(.graphical)
-                    .labelsHidden()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
-            } icon: { }
-            .background {
-                RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Color("BG"))
-            }
-            .scaleEffect(0.9)
         }
+        
+       
+        
+        
+        
     }
 }
 
