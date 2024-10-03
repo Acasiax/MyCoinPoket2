@@ -14,8 +14,8 @@ struct Home_CoinSearchView: View {
     @State var isStarred = false
     @ObservedObject var appModel: AppViewModel
     @State var selectedItem: UpBitMarket? = nil
-
     @State var selectedCategory: String = "KRW"
+    @State private var isKeyboardVisible = false
     
     // 코인 필터링 로직: 선택한 카테고리에 따라 필터링
     var filterCoinName: [UpBitMarket] {
@@ -26,7 +26,7 @@ struct Home_CoinSearchView: View {
     var body: some View {
         ZStack {
             VStack {
-                HStack{
+                HStack {
                     Text("시세")
                         .naviTitleStyle()
                     Spacer()
@@ -35,17 +35,16 @@ struct Home_CoinSearchView: View {
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.gray)
-                    TextField("코인 이름을 검색해보세요", text: $text)
-                        .padding(.vertical, 8)
+                    TextField("코인 이름을 검색해보세요", text: $text, onEditingChanged: { isEditing in
+                        isKeyboardVisible = isEditing
+                    })
+                    .padding(.vertical, 8)
                 }
                 .padding(.horizontal)
                 .background(Color(.systemGray5))
                 .cornerRadius(10)
-                
                 .padding(.horizontal, 10)
                 .padding(.bottom)
-                //  .background(Color.green)
-               
                 .cornerRadius(10)
                 .padding([.leading, .trailing], 1)
                 
@@ -64,16 +63,16 @@ struct Home_CoinSearchView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarTitleTextColor(.black)
                 .background {
-                   // Color.white.ignoresSafeArea()
                     Color("BasicWhite").ignoresSafeArea()
                 }
-//                .background {
-//                    Color("LightGrayBG").ignoresSafeArea()
-//                }
             }
             .background {
-                //Color("LightGrayBG").ignoresSafeArea()
                 Color("BasicWhite").ignoresSafeArea()
+            }
+            .onTapGesture {
+                if isKeyboardVisible {
+                    dismissKeyboard()
+                }
             }
             .task {
                 do {
@@ -90,6 +89,12 @@ struct Home_CoinSearchView: View {
     func fetchGraphData(for item: UpBitMarket) async {
         await appModel.fetchWeeklyCandles(for: item.market)
         print(item.market)
+    }
+
+    // 키보드를 내리는 함수
+    private func dismissKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        isKeyboardVisible = false
     }
 }
 
