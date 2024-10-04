@@ -57,6 +57,7 @@
 		AA56B38C2CAAE61200B68816 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B38B2CAAE61200B68816 /* Font.swift */; };
 		AA56B3932CAC1C0600B68816 /* AppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA56B3922CAC1C0600B68816 /* AppInfoView.swift */; };
 		AA6521522CAD744400B56E01 /* FaceIDPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6521512CAD744400B56E01 /* FaceIDPasswordView.swift */; };
+		AA65217F2CB003A800B56E01 /* TradingViewWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA65217E2CB003A800B56E01 /* TradingViewWebView.swift */; };
 		AAD0A1032C94666800910ABF /* MyCoinPoketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */; };
 		AAD0A1052C94666800910ABF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD0A1042C94666800910ABF /* ContentView.swift */; };
 		AAD0A1072C94666A00910ABF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAD0A1062C94666A00910ABF /* Assets.xcassets */; };
@@ -164,6 +165,7 @@
 		AA56B38B2CAAE61200B68816 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		AA56B3922CAC1C0600B68816 /* AppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoView.swift; sourceTree = "<group>"; };
 		AA6521512CAD744400B56E01 /* FaceIDPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIDPasswordView.swift; sourceTree = "<group>"; };
+		AA65217E2CB003A800B56E01 /* TradingViewWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingViewWebView.swift; sourceTree = "<group>"; };
 		AAD0A0FF2C94666800910ABF /* MyCoinPoket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCoinPoket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD0A1022C94666800910ABF /* MyCoinPoketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoinPoketApp.swift; sourceTree = "<group>"; };
 		AAD0A1042C94666800910ABF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -463,6 +465,14 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		AA65217D2CB0039A00B56E01 /* TradingView */ = {
+			isa = PBXGroup;
+			children = (
+				AA65217E2CB003A800B56E01 /* TradingViewWebView.swift */,
+			);
+			path = TradingView;
+			sourceTree = "<group>";
+		};
 		AAD0A0F62C94666800910ABF = {
 			isa = PBXGroup;
 			children = (
@@ -485,6 +495,7 @@
 		AAD0A1012C94666800910ABF /* MyCoinPoket */ = {
 			isa = PBXGroup;
 			children = (
+				AA65217D2CB0039A00B56E01 /* TradingView */,
 				AA56B3842CAAE50700B68816 /* Splash */,
 				AAD0A13D2C9468DD00910ABF /* Info.plist */,
 				AA56B3722CA2ABA800B68816 /* SettingListView */,
@@ -871,6 +882,7 @@
 				AAD0A15C2C946AD500910ABF /* Detail_CoinChartView.swift in Sources */,
 				AAD0A1522C946A5900910ABF /* TabBarView.swift in Sources */,
 				AA56B36D2CA2A57B00B68816 /* FearGreedDisplayCard.swift in Sources */,
+				AA65217F2CB003A800B56E01 /* TradingViewWebView.swift in Sources */,
 				AA56B35D2CA2A48B00B68816 /* FearGreedViewModel.swift in Sources */,
 				AA56B3402CA256C300B68816 /* ForturnView.swift in Sources */,
 				AA56B3462CA256F200B68816 /* CardView.swift in Sources */,
@@ -1035,7 +1047,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.acasia.MyCoinPoket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1072,7 +1084,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.acasia.MyCoinPoket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

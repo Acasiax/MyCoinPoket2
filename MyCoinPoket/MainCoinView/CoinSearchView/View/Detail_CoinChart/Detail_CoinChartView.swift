@@ -34,11 +34,12 @@ struct Detail_CoinChartView: View {
                 Spacer()
                 Text(coin88.koreanName)
                     .font(.headline)
-                    .foregroundColor(.black)
+                    .foregroundStyle(.white)
                 Spacer()
             }
-            //.padding()
+
             .background(Color("BasicWhite"))
+           // .background(Color.clear)
             
             HeaderNamedView(coin88: coin88, socketViewModel: socketViewModel)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -47,17 +48,21 @@ struct Detail_CoinChartView: View {
             // MainPriceInfoView에 socketViewModel 전달
             MainPriceInfoView(coin88: coin88, socketViewModel: socketViewModel)
                 .frame(maxWidth: .infinity, alignment: .leading)
-
+                .padding(.bottom, 10)
             // 라인 그래프
-            GraphView(market: coin88.market, appModel: appModel)
-            
-           // Controls()  // 구매/판매 버튼
+            //GraphView(market: coin88.market, appModel: appModel)
+            Home(coin88: coin88, socketViewModel: socketViewModel)
+                .frame(height: 500)
+                .edgesIgnoringSafeArea(.all)
+                .padding(.bottom, 10)
+            Controls()  // 구매/판매 버튼
         }
         .padding(.horizontal, 16)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
             appModel.fetchWeeklyCandles(for: coin88.market)  // 화면이 나타날 때 주간 시세 데이터 가져오기
         }
+       // .background(Color.black.opacity(0.9))
         
         .navigationBarHidden(true)  // 기본 네비게이션 바 숨기기
     }

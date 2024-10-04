@@ -22,21 +22,23 @@ struct HeaderNamedView: View {
                        Rectangle()
                            .frame(width: 7, height: 40)
                            .cornerRadius(5)
-                           .foregroundColor(price > prevPrice ? .red : (price < prevPrice ? .blue : .primary))
+                           .foregroundStyle(price > prevPrice ? .red : (price < prevPrice ? .blue : .primary))
                    } else {
                        Rectangle()
                            .frame(width: 7, height: 40)
                            .cornerRadius(5)
-                           .foregroundColor(.primary)
+                           .foregroundStyle(.primary)
                    }
             
             VStack(alignment: .leading, spacing: 5) {
                 Text(coin88.koreanName)
+                   // .foregroundStyle(.blac)
                     .font(.title3)
                     .bold()
                 
                 Text(coin88.market)
-            
+                 //   .foregroundStyle(.black)
+                
                 
             }
         }
@@ -57,12 +59,15 @@ struct MainPriceInfoView: View {
             if let coin = socketViewModel.coins.first(where: { $0.code == coin88.market }) {
                 Text("\(coin.trade_price)")
                     .font(.largeTitle.bold())
+                    .foregroundStyle(.primary)
             } else if let price = coin88.price {
                 Text(price.convertToCurrency())
                     .font(.largeTitle.bold())
+                    .foregroundStyle(.primary)
             } else {
                 Text("가격 없음")
                     .font(.largeTitle.bold())
+                    .foregroundStyle(.white)
             }
 
      
@@ -75,7 +80,7 @@ struct MainPriceInfoView: View {
                 Text("\(changePrice > 0 ? "+" : "")\(formattedChangePrice)")
                     .font(.caption)
                     .fontWeight(.semibold)
-                    .foregroundColor(changePrice < 0 ? .white : .black)
+                    .foregroundColor(changePrice < 0 ? .blue : .red)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 5)
                     .background {
