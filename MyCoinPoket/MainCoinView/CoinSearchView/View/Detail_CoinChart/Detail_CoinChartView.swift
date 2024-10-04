@@ -51,7 +51,7 @@ struct Detail_CoinChartView: View {
                 .padding(.bottom, 10)
             // 라인 그래프
             //GraphView(market: coin88.market, appModel: appModel)
-            Home(coin88: coin88, socketViewModel: socketViewModel)
+            Home_Trading(coin88: coin88, socketViewModel: socketViewModel)
                 .frame(height: 500)
                 .edgesIgnoringSafeArea(.all)
                 .padding(.bottom, 10)

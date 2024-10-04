@@ -12,12 +12,34 @@ struct TradingViewWebView: UIViewRepresentable {
     
     var coin88: UpBitMarket
     @ObservedObject var socketViewModel: SocketViewModel
-    @Environment(\.colorScheme) var colorScheme //아이폰 자체내에 현재 색깔 모드가 무엇인지
-    @AppStorage("isDarkMode") private var isDarkMode = false //사용자가 앱내에서 설정했는지
+    @Binding var selectedInterval: String
+    @Environment(\.colorScheme) var colorScheme
+    @AppStorage("isDarkMode") private var isDarkMode = false
+    
+    class Coordinator {
+        var lastInterval: String = ""
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator()
+    }
+    
     func makeUIView(context: Context) -> WKWebView {
-        
         let webView = WKWebView()
-        
+        context.coordinator.lastInterval = selectedInterval
+        loadChart(webView: webView)
+        return webView
+    }
+
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        // 현재 interval과 이전 interval이 다를 때만 업데이트
+        if context.coordinator.lastInterval != selectedInterval {
+            context.coordinator.lastInterval = selectedInterval
+            loadChart(webView: uiView)
+        }
+    }
+
+    private func loadChart(webView: WKWebView) {
         // "-"로 나누고 순서 변경 후 결합
         let components = coin88.market.split(separator: "-")
         var formattedMarket = ""
@@ -32,8 +54,7 @@ struct TradingViewWebView: UIViewRepresentable {
         
         // 현재 모드에 맞춰 테마 설정
         let theme = isDarkMode ? "dark" : (colorScheme == .dark ? "dark" : "light")
-                print("\(theme)") // 현재 테마 확인
-        
+        print("\(theme)") // 현재 테마 확인
         
         let htmlString = """
         <html>
@@ -47,11 +68,11 @@ struct TradingViewWebView: UIViewRepresentable {
                 "width": "100%",
                 "height": "100%",
                 "symbol": "UPBIT:\(formattedMarket)",
-                "interval": "1",
+                "interval": "\(selectedInterval)",
                 "timezone": "Etc/UTC",
                 "theme": "\(theme)",
                 "style": "1",
-                "locale": "en",
+                "locale": "ko",
                 "container_id": "tradingview_abcde"
             });
             </script>
@@ -59,22 +80,34 @@ struct TradingViewWebView: UIViewRepresentable {
         </html>
         """
         webView.loadHTMLString(htmlString, baseURL: nil)
-        return webView
-    }
-
-    func updateUIView(_ uiView: WKWebView, context: Context) {
-        // 필요시 업데이트 처리
     }
 }
 
-struct Home: View {
+struct Home_Trading: View {
     
     var coin88: UpBitMarket
     @ObservedObject var socketViewModel: SocketViewModel
-    
+    @State private var selectedInterval = "1" // 기본적으로 1분 간격 선택
+
     var body: some View {
-        TradingViewWebView(coin88: coin88, socketViewModel: socketViewModel)
+        VStack {
+            // Picker 또는 Segmented Control로 시간 간격 선택
+            Picker("시간 간격 선택", selection: $selectedInterval) {
+                Text("1분").tag("1")
+                Text("5분").tag("5")
+                Text("15분").tag("15")
+                Text("30분").tag("30")
+                Text("1시간").tag("60")
+                Text("4시간").tag("240")
+                Text("일간").tag("D")
+                Text("주간").tag("W")
+                Text("월간").tag("M")
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding()
+
+            // 차트 뷰
+            TradingViewWebView(coin88: coin88, socketViewModel: socketViewModel, selectedInterval: $selectedInterval)
+        }
     }
 }
-
-
