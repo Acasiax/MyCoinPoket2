@@ -1036,6 +1036,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyCoinPoket/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "코인생활";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "보안을 위해 생체 인증을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1073,6 +1074,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyCoinPoket/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "코인생활";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "보안을 위해 생체 인증을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

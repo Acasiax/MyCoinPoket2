@@ -77,13 +77,15 @@ struct TradingViewWebView: UIViewRepresentable {
                 "style": "1",
                 "locale": "ko",
                 "container_id": "tradingview_abcde",
-                "fullscreen": false,
+                "fullscreen": true,
                 "allow_symbol_change": true,
                 "save_image": false,
                 "range": "all",
                 "timeframe": "1D",
+                "studies": ["RSI"],
+        "hide_top_toolbar": true,
             });
-
+        
             window.onload = function() {
                 var chartDiv = document.getElementById('tradingview_abcde');
             

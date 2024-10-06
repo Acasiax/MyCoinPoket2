@@ -19,7 +19,6 @@ struct Detail_CoinChartView: View {
     @StateObject var appModel: AppViewModel = AppViewModel()
     @ObservedObject var newExpenseViewModel: NewExpenseViewModel
     @ObservedObject var tabBarVM: TabBarViewModel
-    // @Environment(\.dismiss) 속성 추가
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -39,25 +38,23 @@ struct Detail_CoinChartView: View {
                     .foregroundStyle(.primary)
                 Spacer()
             }
-
             .background(Color("BasicWhite"))
-           // .background(Color.clear)
             
-            HeaderNamedView(coin88: coin88, socketViewModel: socketViewModel)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.top, 10)
-            
-            // MainPriceInfoView에 socketViewModel 전달
-            MainPriceInfoView(coin88: coin88, socketViewModel: socketViewModel)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 10)
-//            // 라인 그래프
-//            //GraphView(market: coin88.market, appModel: appModel)
-            Home_Trading(coin88: coin88, socketViewModel: socketViewModel)
-                .frame(height: 500)
-                .edgesIgnoringSafeArea(.all)
-                .padding(.bottom, 10)
-            Controls()  // 구매/판매 버튼
+            ScrollView{
+                HeaderNamedView(coin88: coin88, socketViewModel: socketViewModel)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, 10)
+                
+                MainPriceInfoView(coin88: coin88, socketViewModel: socketViewModel)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom, 10)
+
+                Home_Trading(coin88: coin88, socketViewModel: socketViewModel)
+                    .frame(height: 500)
+                    .edgesIgnoringSafeArea(.all)
+                    .padding(.bottom, 10)
+                Controls()  // 구매/판매 버튼
+            }
         }
         .padding(.horizontal, 16)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -66,16 +63,18 @@ struct Detail_CoinChartView: View {
         }
         .navigationBarHidden(true)  // 기본 네비게이션 바 숨기기
                 
-                // 네비게이션 링크 추가
+        // 네비게이션 링크 추가
         NavigationLink(destination: Home_AddAssetView(newExpenseViewModel: newExpenseViewModel, tabBarVM: tabBarVM), isActive: $isNavigating) {
-                    EmptyView()
-                }
-            }
+            EmptyView()
+        }
+    }
 
     @ViewBuilder
     func Controls() -> some View {
         HStack(spacing: 20) {
-            Button {} label: {
+            Button {
+                openUpbitApp()
+            } label: {
                 Text("업비트로 이동")
                     .fontWeight(.bold)
                     .foregroundColor(.black)
@@ -88,21 +87,35 @@ struct Detail_CoinChartView: View {
             }
             
             Button {
-                           isNavigating = true  // "포폴 추가" 버튼을 누르면 네비게이션 상태 변경
-                       } label: {
-                           Text("포폴 추가")
-                               .fontWeight(.bold)
-                               .foregroundColor(.black)
-                               .frame(maxWidth: .infinity)
-                               .padding(.vertical)
-                               .background {
-                                   RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                       .fill(Color("LightGreen"))
-                               }
-                       }
-                   }
-               }
-           }
+                isNavigating = true  // "포폴 추가" 버튼을 누르면 네비게이션 상태 변경
+            } label: {
+                Text("포폴 추가")
+                    .fontWeight(.bold)
+                    .foregroundColor(.black)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical)
+                    .background {
+                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                            .fill(Color("LightGreen"))
+                    }
+            }
+        }
+    }
+    
+    // 업비트 앱으로 이동하는 함수
+    func openUpbitApp() {
+        // 업비트 URL Scheme 사용 시
+        if let url = URL(string: "upbitex://") {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                print("업비트 앱이 설치되어 있지 않거나 URL Scheme이 올바르지 않습니다.")
+            }
+        }
+    }
+
+   }
+
   
 
 
