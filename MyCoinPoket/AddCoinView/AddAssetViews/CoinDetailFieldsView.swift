@@ -10,7 +10,12 @@ import SwiftUI
 struct CoinDetailFieldsView: View {
     @ObservedObject var viewModel: NewExpenseViewModel
     @Binding var selectedCategory: String
-    
+    @State private var activeTextField: ActiveTextField = .none
+
+    enum ActiveTextField {
+        case none, numberOfCoins, buyPrice
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             // 구매수량 필드
@@ -18,64 +23,62 @@ struct CoinDetailFieldsView: View {
                 Text("구매수량")
                     .fontWeight(.bold)
                     .frame(width: 70, alignment: .leading)
-                 //   .background(Color.blue)
-                
+
                 TextField("0", text: $viewModel.numberOfCoins)
+                    .disabled(true) // 기본 키보드 비활성화
                     .font(.system(size: 30))
                     .foregroundStyle(.primary)
                     .multilineTextAlignment(.center)
-                    .keyboardType(.decimalPad)
-                    .background {
-                        Text(viewModel.numberOfCoins == "" ? "0" : viewModel.numberOfCoins)
-                            .font(.system(size: 30))
-                            .opacity(0)
-                    }
                     .frame(maxWidth: 230)
                     .background {
                         Capsule().fill(Color("BG"))
                     }
-                 
+                    .onTapGesture {
+                        activeTextField = .numberOfCoins
+                    }
                     .padding(.top)
+                    .overlay(
+                        Rectangle()
+                            .frame(height: 2)
+                            .foregroundColor(activeTextField == .numberOfCoins ? .blue : .clear)
+                            .padding(.top, 45)
+                    )
             }
-            
-            //MARK: -  구매가 입력 필드
-            
+
             // 구매가 입력 필드
             HStack {
                 Text("구매가")
                     .fontWeight(.bold)
                     .frame(width: 70, alignment: .leading)
-                  //  .background(Color.blue)
-                
+
                 HStack {
                     Picker("Currency", selection: $viewModel.selectedCurrency) {
                         Text("KRW").tag("KRW")
                         Text("USD").tag("USD")
                     }
                     .pickerStyle(MenuPickerStyle())
-                   // .frame(width: .infinity)
-                    
+
                     TextField("0", text: $viewModel.buyPrice)
+                        .disabled(true) // 기본 키보드 비활성화
                         .font(.system(size: 30))
                         .foregroundStyle(.primary)
                         .multilineTextAlignment(.center)
-                        .keyboardType(.decimalPad)
+                        .frame(maxWidth: 230)
+                        .background {
+                            Capsule().fill(Color("BG"))
+                        }
+                        .onTapGesture {
+                            activeTextField = .buyPrice
+                        }
+                        .overlay(
+                            Rectangle()
+                                .frame(height: 2)
+                                .foregroundColor(activeTextField == .buyPrice ? .blue : .clear)
+                                .padding(.top, 45)
+                        )
                 }
-                .background {
-                    Text(viewModel.buyPrice == "" ? "0" : viewModel.buyPrice)
-                        .font(.system(size: 30))
-                        .opacity(0)
-                }
-                .frame(maxWidth: 230)
-                .background {
-                    Capsule().fill(Color("BG"))
-                    
-                }
-              
             }
-            
-            
-            //MARK: -   총액 필드
+
             // 총액 필드
             HStack {
                 Text("총액")
@@ -90,21 +93,16 @@ struct CoinDetailFieldsView: View {
                         Capsule().fill(Color("BG"))
                     }
                     .padding(.horizontal, 20)
-                    .padding(.top)
+                   // .padding(.top)
             }
-            
-           
         }
-        
-        
+
         // 실시간 코인가격 필드
         VStack(alignment: .center) {
-            // 실시간 코인가격 필드
             HStack(alignment: .center) {
                 Text("실시간 코인가격")
                     .fontWeight(.bold)
-                   
-                
+
                 if selectedCategory == "KRW" {
                     if let price = Double(viewModel.livePrice) {
                         if price < 1000 {
@@ -118,53 +116,89 @@ struct CoinDetailFieldsView: View {
                 } else {
                     Text(viewModel.livePrice)
                 }
-                //  }
-                
+
                 // 수익 또는 손실 상태 표시
-                // CheckBox(viewModel: viewModel)
                 if let buyPrice = Double(viewModel.buyPrice), let livePrice = Double(viewModel.livePrice), buyPrice != 0 {
                     if buyPrice < livePrice {
                         Text("수익입니다")
-                           // .applyProfitLossStyle()
-                        
                             .foregroundColor(.green)
                     } else if buyPrice > livePrice {
                         Text("손실입니다")
-                         //   .applyProfitLossStyle()
                             .foregroundColor(.red)
                     } else {
                         Text("변동 없음")
-                          //  .applyProfitLossStyle()
                             .foregroundColor(.gray)
                     }
                 } else {
                     Text("")
-                    //    .applyProfitLossStyle()
-                    
                 }
-                
-                
-            } .padding(.top, 5)
-                .padding(.bottom, -5)
-           
-             Label {
-                 DatePicker("", selection: $viewModel.date, displayedComponents: [.date])
-                     .datePickerStyle(.graphical)
-                     .labelsHidden()
-                     .frame(maxWidth: .infinity, alignment: .leading)
-                     .padding(.horizontal, 20)
-             } icon: { }
-             .background {
-                 RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Color("BG"))
-             }
-             .scaleEffect(0.9)
-            
+            }
+            .padding(.top, 5)
+            .padding(.bottom, -5)
         }
-        
-       
-        
-        
-        
+
+        // CustomDecimalPad always visible
+        VStack(alignment: .center) {
+            CustomDecimalPad(text: bindingForActiveTextField())
+        }
+    }
+
+    private func bindingForActiveTextField() -> Binding<String> {
+        switch activeTextField {
+        case .numberOfCoins:
+            return $viewModel.numberOfCoins
+        case .buyPrice:
+            return $viewModel.buyPrice
+        case .none:
+            return .constant("") // No active text field
+        }
+    }
+}
+
+struct CustomDecimalPad: View {
+    @Binding var text: String
+
+    let buttons: [[String]] = [
+        ["1", "2", "3"],
+        ["4", "5", "6"],
+        ["7", "8", "9"],
+        [".", "0", "⌫"]
+    ]
+
+    var body: some View {
+        VStack {
+            ForEach(buttons, id: \.self) { row in
+                HStack {
+                    ForEach(row, id: \.self) { button in
+                        Button(action: {
+                            handleButtonPress(button: button)
+                        }) {
+                            Text(button)
+                                .font(.system(size: 24))
+                                .frame(width: 80, height: 80)
+                                .background(Color.gray.opacity(0.1))
+                                .cornerRadius(10)
+                        }
+                    }
+                }
+            }
+        }
+        .padding()
+    }
+
+    private func handleButtonPress(button: String) {
+        switch button {
+        case "⌫":
+            if !text.isEmpty {
+                text.removeLast()
+            }
+        case ".":
+            if !text.contains(".") {
+                text.append(".")
+            }
+        default:
+            text.append(button)
+        }
     }
 }
 

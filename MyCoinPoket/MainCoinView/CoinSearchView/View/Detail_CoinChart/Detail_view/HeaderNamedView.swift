@@ -54,24 +54,24 @@ struct MainPriceInfoView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            
-            // 실시간 가격 표시
-            if let coin = socketViewModel.coins.first(where: { $0.code == coin88.market }) {
-                Text("\(coin.trade_price)")
-                    .font(.largeTitle.bold())
-                    .foregroundStyle(.primary)
-            } else if let price = coin88.price {
-                Text(price.convertToCurrency())
-                    .font(.largeTitle.bold())
-                    .foregroundStyle(.primary)
-            } else {
-                Text("가격 없음")
-                    .font(.largeTitle.bold())
-                    .foregroundStyle(.white)
-            }
+                 
+                 // 실시간 가격 표시
+                 if let coin = socketViewModel.coins.first(where: { $0.code == coin88.market }) {
+                     Text(formatPrice(coin.trade_price, for: coin88.market))
+                         .font(.largeTitle.bold())
+                         .foregroundStyle(.primary)
+                 } else if let price = coin88.price {
+                     Text(formatPrice(price, for: coin88.market))
+                         .font(.largeTitle.bold())
+                         .foregroundStyle(.primary)
+                 } else {
+                     Text("가격 없음")
+                         .font(.largeTitle.bold())
+                         .foregroundStyle(.white)
+                 }
 
      
-            // 실시간 가격을 이용한 change_price 변동액 표시
+
             // 실시간 가격을 이용한 change_price 변동액 표시
             if let coin = socketViewModel.coins.first(where: { $0.code == coin88.market }) {
                 let changePrice = coin.trade_price - coin.prev_closing_price
@@ -85,7 +85,8 @@ struct MainPriceInfoView: View {
                     .padding(.vertical, 5)
                     .background {
                         Capsule()
-                            .fill(changePrice < 0 ? .red : Color("LightGreen"))
+                           // .fill(changePrice < 0 ? .red : Color("LightGreen"))
+                            .fill(Color("LightGreen"))
                     }
             } else {
                 Text("변동 없음")
@@ -102,6 +103,52 @@ struct MainPriceInfoView: View {
         }
     }
 }
+
+
+
+extension MainPriceInfoView {
+    
+    func formatPrice(_ price: Double, for market: String) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal // 3자리마다 콤마 추가
+        
+        func setFractionDigits(min: Int, max: Int) {
+            numberFormatter.minimumFractionDigits = min
+            numberFormatter.maximumFractionDigits = max
+        }
+        
+        if market.hasPrefix("KRW") {
+            if price < 1 {
+                return String(price) // 소수점 전체 표시
+            } else if price < 10 {
+                setFractionDigits(min: 4, max: 4)
+            } else if price < 10000 {
+                setFractionDigits(min: 2, max: 2)
+            } else {
+                setFractionDigits(min: 0, max: 0)
+            }
+        } else if market.hasPrefix("BTC") {
+            setFractionDigits(min: 8, max: 8)
+        } else if market.hasPrefix("USDT") {
+            if price < 1 {
+                return String(price) // 소수점 전체 표시
+            } else if price < 10 {
+                setFractionDigits(min: 3, max: 3)
+            } else {
+                setFractionDigits(min: 2, max: 2)
+            }
+        } else {
+            // 기타 카테고리는 기본적으로 소수점 없는 정수로 표시
+            setFractionDigits(min: 0, max: 0)
+        }
+
+        // 가격을 3자리마다 콤마가 포함된 문자열로 변환
+        return numberFormatter.string(from: NSNumber(value: price)) ?? "\(price)"
+    }
+
+    
+}
+
 
 extension String {
     func convertToCurrencyFormat() -> String {

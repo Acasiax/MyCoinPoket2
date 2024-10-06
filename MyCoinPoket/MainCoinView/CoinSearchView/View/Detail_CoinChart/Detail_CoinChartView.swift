@@ -24,21 +24,21 @@ struct Detail_CoinChartView: View {
     var body: some View {
         VStack(spacing: 0) {
             // 커스텀 네비게이션 바
-            HStack {
-                Button(action: {
-                    dismiss()  // 이전 화면으로 돌아가기
-                }) {
-                    Image(systemName: "arrow.left")
-                        .font(.title)
-                        .foregroundColor(.blue)
-                }
-                Spacer()
-                Text(coin88.koreanName)
-                    .font(.headline)
-                    .foregroundStyle(.primary)
-                Spacer()
-            }
-            .background(Color("BasicWhite"))
+//            HStack {
+//                Button(action: {
+//                    dismiss()  // 이전 화면으로 돌아가기
+//                }) {
+//                    Image(systemName: "arrow.left")
+//                        .font(.title)
+//                        .foregroundColor(.blue)
+//                }
+//                Spacer()
+//                Text(coin88.koreanName)
+//                    .font(.headline)
+//                    .foregroundStyle(.primary)
+//                Spacer()
+//            }
+//            .background(Color("BasicWhite"))
             
             ScrollView{
                 HeaderNamedView(coin88: coin88, socketViewModel: socketViewModel)
@@ -61,7 +61,16 @@ struct Detail_CoinChartView: View {
         .onAppear {
             appModel.fetchWeeklyCandles(for: coin88.market)  // 화면이 나타날 때 주간 시세 데이터 가져오기
         }
-        .navigationBarHidden(true)  // 기본 네비게이션 바 숨기기
+       // .navigationBarHidden(true)  // 기본 네비게이션 바 숨기기
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("\(coin88.koreanName)")
+                    .foregroundColor(.blue)
+                    .bold()
+            }
+        }
+        .toolbarBackground(.clear, for: .navigationBar)
                 
         // 네비게이션 링크 추가
         NavigationLink(destination: Home_AddAssetView(newExpenseViewModel: newExpenseViewModel, tabBarVM: tabBarVM), isActive: $isNavigating) {

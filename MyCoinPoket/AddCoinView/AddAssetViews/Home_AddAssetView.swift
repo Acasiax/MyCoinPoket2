@@ -30,6 +30,8 @@ struct Home_AddAssetView: View {
     
     @Environment(\.dismiss) var dismiss // 뷰를 닫기 위한 dismiss
     
+
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -53,7 +55,7 @@ struct Home_AddAssetView: View {
                     
                     // 저장 버튼
                     SaveButtonView(
-                        remark: newExpenseViewModel.coinName,
+                        coinName: newExpenseViewModel.coinName,
                         selectedType: newExpenseViewModel.selectedType,
                         purchasePrice: newExpenseViewModel.numberOfCoins,
                         currentPrice: newExpenseViewModel.buyPrice) {
@@ -82,16 +84,27 @@ struct Home_AddAssetView: View {
             .background {
                 Color("BasicWhite").ignoresSafeArea()
             }
-            .navigationTitle("자산 추가하기")
-            .navigationBarTitleDisplayMode(.inline)
+//            .navigationTitle("자산 추가하기")
+//            .navigationBarTitleDisplayMode(.inline)
+           // .navigationBarItems(trailing: Text("Trailing"))
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .principal) {
+                            Text("자산 추가하기")
+                                .foregroundColor(.blue)
+                                .bold()
+                        }
+                    }
+                    .toolbarBackground(.clear, for: .navigationBar)
+                   // .toolbarBackground(.visible, for: .navigationBar)
             .onAppear {
                 print(Realm.Configuration.defaultConfiguration.fileURL)
             }
-            .contentShape(Rectangle()) // 전체 ScrollView를 터치 가능하게 설정
-            .onTapGesture {
-                // 탭 시 키보드 숨기기
-                hideKeyboard()
-            }
+           // .contentShape(Rectangle()) // 전체 ScrollView를 터치 가능하게 설정
+//            .onTapGesture {
+//                // 탭 시 키보드 숨기기
+//                hideKeyboard()
+//            }
         }
     }
 }

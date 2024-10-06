@@ -9,7 +9,7 @@ import SwiftUI
 
 // 저장 버튼을 위한 뷰 구조체 분리
 struct SaveButtonView: View {
-    var remark: String
+    var coinName: String
     var selectedType: ExpenseType
     var purchasePrice: String
     var currentPrice: String
@@ -37,8 +37,8 @@ struct SaveButtonView: View {
                 .foregroundStyle(.white)
                 .padding(.bottom, 10)
         }
-        .disabled(remark.isEmpty || purchasePrice.isEmpty || currentPrice.isEmpty)
-        .opacity(remark.isEmpty || purchasePrice.isEmpty || currentPrice.isEmpty ? 0.6 : 1)
+        .disabled(coinName.isEmpty || purchasePrice.isEmpty || currentPrice.isEmpty)
+        .opacity(coinName.isEmpty || purchasePrice.isEmpty || currentPrice.isEmpty ? 0.6 : 1)
         .padding(EdgeInsets(top: 0, leading: 20, bottom: 10, trailing: 20))
     }
 }
