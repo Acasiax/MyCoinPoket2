@@ -24,7 +24,7 @@ struct CoinDetailFieldsView: View {
                     .font(.system(size: 30))
                     .foregroundStyle(.primary)
                     .multilineTextAlignment(.center)
-                    .keyboardType(.numberPad)
+                    .keyboardType(.decimalPad)
                     .background {
                         Text(viewModel.numberOfCoins == "" ? "0" : viewModel.numberOfCoins)
                             .font(.system(size: 30))
@@ -59,7 +59,7 @@ struct CoinDetailFieldsView: View {
                         .font(.system(size: 30))
                         .foregroundStyle(.primary)
                         .multilineTextAlignment(.center)
-                        .keyboardType(.numberPad)
+                        .keyboardType(.decimalPad)
                 }
                 .background {
                     Text(viewModel.buyPrice == "" ? "0" : viewModel.buyPrice)

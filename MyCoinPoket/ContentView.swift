@@ -26,7 +26,13 @@ struct ContentView: View {
                     switch tabBarVM.currentTab {
                     case .Home:
                        // HomeTest333()
-                        Home_CoinSearchView(appModel: AppViewModel())
+                      //  Home_CoinSearchView(appModel: AppViewModel())
+                        Home_CoinSearchView(
+                            appModel: AppViewModel(),
+                            newExpenseViewModel: newExpenseViewModel,
+                            tabBarVM: tabBarVM
+                        )
+
                     case .Wallet:
                         ExpenseListView(viewModel: newExpenseViewModel)
                        // ExpenseListView()

@@ -17,6 +17,9 @@ struct Home_CoinSearchView: View {
     @State var selectedCategory: String = "KRW"
     @State private var isKeyboardVisible = false
     
+    @ObservedObject var newExpenseViewModel: NewExpenseViewModel
+       @ObservedObject var tabBarVM: TabBarViewModel
+    
     // 코인 필터링 로직: 선택한 카테고리에 따라 필터링
     var filterCoinName: [UpBitMarket] {
         let filteredByCategory = selectedCategory == "전체" ? market : market.filter { $0.market.hasPrefix(selectedCategory) }
@@ -56,8 +59,11 @@ struct Home_CoinSearchView: View {
                         filterCoinName: filterCoinName,
                         selectedItem: $selectedItem,
                         appModel: appModel,
-                        loadCoinPrice: loadCoinPrice
+                        loadCoinPrice: loadCoinPrice,
+                        newExpenseViewModel: newExpenseViewModel,
+                        tabBarVM: tabBarVM
                     )
+
                 }
                 .foregroundStyle(.primary)
                 .navigationBarTitleDisplayMode(.inline)
@@ -98,6 +104,6 @@ struct Home_CoinSearchView: View {
     }
 }
 
-#Preview {
-    Home_CoinSearchView(appModel: AppViewModel())
-}
+//#Preview {
+//    Home_CoinSearchView(appModel: AppViewModel())
+//}

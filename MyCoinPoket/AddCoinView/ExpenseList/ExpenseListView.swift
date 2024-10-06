@@ -100,6 +100,11 @@ struct ExpenseListView: View {
                     .background(Color.gray.opacity(0.15))
                     .cornerRadius(10)
                     .padding(.horizontal)
+                    .onTapGesture {
+                        withAnimation {
+                            isChartExpanded.toggle() // 차트 보임 여부 변경
+                        }
+                    }
 
                     if isChartExpanded {
                         ChartView(chartType: $chartType)

@@ -184,9 +184,9 @@ struct LineGraph2: View {
     }
 }
 
-#Preview {
-    Home_CoinSearchView(appModel: AppViewModel())
-        .preferredColorScheme(.dark)
-}
-
-
+//#Preview {
+//    Home_CoinSearchView(appModel: AppViewModel())
+//        .preferredColorScheme(.dark)
+//}
+//
+//

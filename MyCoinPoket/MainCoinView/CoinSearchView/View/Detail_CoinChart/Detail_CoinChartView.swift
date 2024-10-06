@@ -13,10 +13,12 @@ struct Detail_CoinChartView: View {
     @ObservedObject var socketViewModel: SocketViewModel
     
     @State var currentCoin: String = "BTC"
+    @State var isNavigating: Bool = false
 
     @Namespace var animation
     @StateObject var appModel: AppViewModel = AppViewModel()
-    
+    @ObservedObject var newExpenseViewModel: NewExpenseViewModel
+    @ObservedObject var tabBarVM: TabBarViewModel
     // @Environment(\.dismiss) 속성 추가
     @Environment(\.dismiss) private var dismiss
 
@@ -34,7 +36,7 @@ struct Detail_CoinChartView: View {
                 Spacer()
                 Text(coin88.koreanName)
                     .font(.headline)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.primary)
                 Spacer()
             }
 
@@ -49,8 +51,8 @@ struct Detail_CoinChartView: View {
             MainPriceInfoView(coin88: coin88, socketViewModel: socketViewModel)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 10)
-            // 라인 그래프
-            //GraphView(market: coin88.market, appModel: appModel)
+//            // 라인 그래프
+//            //GraphView(market: coin88.market, appModel: appModel)
             Home_Trading(coin88: coin88, socketViewModel: socketViewModel)
                 .frame(height: 500)
                 .edgesIgnoringSafeArea(.all)
@@ -62,16 +64,19 @@ struct Detail_CoinChartView: View {
         .onAppear {
             appModel.fetchWeeklyCandles(for: coin88.market)  // 화면이 나타날 때 주간 시세 데이터 가져오기
         }
-       // .background(Color.black.opacity(0.9))
-        
         .navigationBarHidden(true)  // 기본 네비게이션 바 숨기기
-    }
+                
+                // 네비게이션 링크 추가
+        NavigationLink(destination: Home_AddAssetView(newExpenseViewModel: newExpenseViewModel, tabBarVM: tabBarVM), isActive: $isNavigating) {
+                    EmptyView()
+                }
+            }
 
     @ViewBuilder
     func Controls() -> some View {
         HStack(spacing: 20) {
             Button {} label: {
-                Text("관심목록 추가")
+                Text("업비트로 이동")
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity)
@@ -82,22 +87,22 @@ struct Detail_CoinChartView: View {
                     }
             }
             
-            Button {} label: {
-                Text("포폴 추가")
-                    .fontWeight(.bold)
-                    .foregroundColor(.black)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical)
-                    .background {
-                        RoundedRectangle(cornerRadius: 12, style: .continuous)
-                            .fill(Color("LightGreen"))
-                    }
-            }
-        }
-    }
-}
-
-
+            Button {
+                           isNavigating = true  // "포폴 추가" 버튼을 누르면 네비게이션 상태 변경
+                       } label: {
+                           Text("포폴 추가")
+                               .fontWeight(.bold)
+                               .foregroundColor(.black)
+                               .frame(maxWidth: .infinity)
+                               .padding(.vertical)
+                               .background {
+                                   RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                       .fill(Color("LightGreen"))
+                               }
+                       }
+                   }
+               }
+           }
   
 
 
@@ -121,7 +126,7 @@ extension Double {
 
 
 
-#Preview {
-    Home_CoinSearchView(appModel: AppViewModel())
-}
-
+//#Preview {
+//    Home_CoinSearchView(appModel: AppViewModel())
+//}
+//

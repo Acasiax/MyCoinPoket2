@@ -17,12 +17,20 @@ struct CoinListView: View {
     @StateObject var socketViewModel = SocketViewModel()
     @State private var showBorder = false
     
+    @ObservedObject var newExpenseViewModel: NewExpenseViewModel
+       @ObservedObject var tabBarVM: TabBarViewModel
+    
     var body: some View {
         LazyVStack {
-            ForEach(filterCoinName, id: \.id) { item in
-                NavigationLink(destination: Detail_CoinChartView(coin88: item, socketViewModel: socketViewModel)) {
-                    rowView(item)
-                }
+                ForEach(filterCoinName, id: \.id) { item in
+                    NavigationLink(destination: Detail_CoinChartView(
+                        coin88: item,
+                        socketViewModel: socketViewModel,
+                        newExpenseViewModel: newExpenseViewModel,
+                        tabBarVM: tabBarVM
+                    )) {
+                        rowView(item)
+                    }
                 Divider()
                     .background(Color.gray)
             }
