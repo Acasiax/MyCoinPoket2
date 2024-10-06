@@ -13,7 +13,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>upbitex://</string>
+				<string>upbitex</string>
 			</array>
 		</dict>
 	</array>

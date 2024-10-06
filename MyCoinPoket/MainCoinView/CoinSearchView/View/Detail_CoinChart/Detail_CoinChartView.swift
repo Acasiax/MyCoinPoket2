@@ -114,7 +114,7 @@ struct Detail_CoinChartView: View {
     // 업비트 앱으로 이동하는 함수
     func openUpbitApp() {
         // 업비트 URL Scheme 사용 시
-        if let url = URL(string: "upbitex://") {
+        if let url = URL(string: UpbitAPI.upbitSchemeBaseURL) {
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             } else {
