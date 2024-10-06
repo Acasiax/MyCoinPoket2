@@ -6,9 +6,17 @@
 //
 
 import SwiftUI
+import WebKit
+
+class WebViewStore: ObservableObject {
+    @Published var webView = WKWebView()
+}
+
 
 struct Home_CoinSearchView: View {
 
+    @ObservedObject var webViewStore = WebViewStore()
+    
     @State private var text = ""
     @State var market: [UpBitMarket] = []
     @State var isStarred = false
@@ -61,7 +69,8 @@ struct Home_CoinSearchView: View {
                         appModel: appModel,
                         loadCoinPrice: loadCoinPrice,
                         newExpenseViewModel: newExpenseViewModel,
-                        tabBarVM: tabBarVM
+                        tabBarVM: tabBarVM,
+                        webViewStore: webViewStore
                     )
 
                 }

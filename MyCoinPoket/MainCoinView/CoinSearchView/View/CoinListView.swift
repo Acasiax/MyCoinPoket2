@@ -20,6 +20,8 @@ struct CoinListView: View {
     @ObservedObject var newExpenseViewModel: NewExpenseViewModel
        @ObservedObject var tabBarVM: TabBarViewModel
     
+    @ObservedObject var webViewStore: WebViewStore
+    
     var body: some View {
         LazyVStack {
                 ForEach(filterCoinName, id: \.id) { item in
