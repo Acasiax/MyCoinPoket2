@@ -20,6 +20,8 @@ struct SettingListView: View {
     @State private var showAlreadyPassword = false
     @State private var buttonText: String = "비밀번호 기본초기"
     
+    @Environment(\.openURL) var openURL
+    
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
@@ -57,12 +59,16 @@ struct SettingListView: View {
                             
                             Text("친구에게 공유하기")
                         }
-//                        Button(action: {
-//                            // 리뷰 작성하기 기능 구현
-//                        }) {
-//                            Text("리뷰 작성하기")
-//                        }
-//                        
+                        Button(action: {
+                            let appID = UpbitAPI.MyAppID
+                            let urlString = "https://apps.apple.com/app/id\(appID)?action=write-review"
+                            if let url = URL(string: urlString) {
+                                openURL(url)
+                            }
+                        }, label: {
+                            Text("코인생활 응원하기")
+                        })
+                        
 //                        Button(action: {
 //                            // 문의하기 기능 구현
 //                        }) {

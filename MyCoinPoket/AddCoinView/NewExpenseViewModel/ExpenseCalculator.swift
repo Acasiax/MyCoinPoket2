@@ -86,6 +86,7 @@ extension NewExpenseViewModel {
           let totalPurchaseAmount = calculateTotalPurchaseAmount(numberOfCoins: numberOfCoinsValue, purchasePrice: buyPriceValue)
         
           // KRW와 USD에 따른 결과값 계산
+            //%.0f 형식 지정자는 소수점 이하를 반올림합니다.
           if selectedCurrency == "KRW" {
               resultPrice = String(format: "%.0f", totalPurchaseAmount)
           } else if selectedCurrency == "USD" {
