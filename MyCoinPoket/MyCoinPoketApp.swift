@@ -12,19 +12,26 @@ import LocalAuthentication
 struct MyCoinPoketApp: App {
     @AppStorage("isBioAuthEnabled") private var isBioAuthEnabled: Bool = false // 생체인증 상태 저장
     @AppStorage("isDarkMode") private var isDarkMode = false // 앱 전체에 다크모드 상태를 저장
+    
+    @State private var isSplashActive: Bool = false // 스플래시 화면 전환 상태
 
     var body: some Scene {
-        WindowGroup {
-            SplashScreen() // 스플래쉬 화면을 먼저 표시
-                .preferredColorScheme(isDarkMode ? .dark : .light) // 다크 모드 여부에 따라 설정
-        }
-    }
-}
+         WindowGroup {
+             if isSplashActive {
+                 IntoMainScreen() // 스플래시 이후의 화면
+                     .preferredColorScheme(isDarkMode ? .dark : .light)
+             } else {
+                 SplashView(isActive: $isSplashActive) // 스플래쉬 화면 표시
+                     .preferredColorScheme(isDarkMode ? .dark : .light)
+             }
+         }
+     }
+ }
 
 import SwiftUI
 import LocalAuthentication
 
-struct SplashScreen: View {
+struct IntoMainScreen: View {
     @State private var isActive = false
     @State private var isAuthAttempted = false
     @AppStorage("isBioAuthEnabled") private var isBioAuthEnabled: Bool = false // 생체인증 상태 저장
@@ -139,6 +146,7 @@ struct PasswordInputView: View {
     var onPasswordCorrect: () -> Void
     @Environment(\.dismiss) var dismiss // 모달을 닫기 위한 환경 변수
     @State private var showAlert = false // 잘못된 비밀번호 입력 시 표시될 얼럿 여부
+    @State private var isKeyboardVisible = false // 키보드가 보이는지 여부
 
     var body: some View {
         VStack {
@@ -154,6 +162,10 @@ struct PasswordInputView: View {
                 .padding()
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.numberPad)
+                .onTapGesture {
+                                    isKeyboardVisible = true // 키보드가 올라오면 상태를 true로 설정
+                                }
+            
 
             Button(action: {
                             if enteredPassword == passwordViewModel.existingPassword {
@@ -193,6 +205,10 @@ struct PasswordInputView: View {
         .padding(.top, 70)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(Color.black.opacity(0.5).ignoresSafeArea())
+        .onTapGesture {
+                    hideKeyboard()
+                    isKeyboardVisible = false
+                }
         .onAppear {
             passwordViewModel.loadPassword()
             // 키체인에 비밀번호가 있는지 확인
@@ -201,4 +217,10 @@ struct PasswordInputView: View {
             }
         }
     }
+}
+
+extension PasswordInputView {
+    private func hideKeyboard() {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
 }
