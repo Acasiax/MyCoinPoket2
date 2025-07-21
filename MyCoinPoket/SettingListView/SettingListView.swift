@@ -69,12 +69,13 @@ struct SettingListView: View {
                             Text("코인생활 응원하기")
                         })
                         
-//                        Button(action: {
-//                            // 문의하기 기능 구현
-//                        }) {
-//                            Text("문의하기")
-//                        }
-//                        
+                        Button(action: {
+                            // 문의하기 기능 구현
+                            sendEmail()
+                        }) {
+                            Text("문의하기")
+                        }
+                        
                         NavigationLink(destination: AppInfoView()) {
                             Text("앱 정보")
                         }
@@ -144,6 +145,20 @@ struct SettingListView: View {
             }
         }
     }
+    
+    
+    func sendEmail() {
+           let email = "yunji9039@naver.com"
+           let subject = "문의드립니다"
+           let body = "안녕하세요. 앱 관련하여 문의드립니다."
+           
+           let emailURL = URL(string: "mailto:\(email)?subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&body=\(body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")")
+           
+           if let url = emailURL, UIApplication.shared.canOpenURL(url) {
+               UIApplication.shared.open(url)
+           }
+       }
+    
 }
 
 
